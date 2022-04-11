@@ -24,6 +24,17 @@ module.exports = function(
 
     })
 
+    router.get('/logout', function(request, response){
+        response.render('accounts-entry.hbs')
+    })
+
+    router.post('/logout', function(request, response){
+        delete request.session.accountId
+        request.session.isAdmin = false
+        request.session.isOrganization = false
+        response.redirect('/')
+    })
+
 
     return router
     

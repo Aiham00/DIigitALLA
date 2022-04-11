@@ -48,10 +48,11 @@ module.exports = function(
 
         app.get('/', function(req, res){
                 res.render('home.hbs')
-
-
         })
 
+        app.get('/about', function(req, res){
+            res.render('about.hbs')
+        })
 
         return app
 }

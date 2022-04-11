@@ -1,15 +1,46 @@
-<h3>Login</h3>
 
-<form action="/auth/login" method="post" id="loginForm" class="row gy-2 gx-3 align-items-center">
-  <div class="col-md-6">
-    <label for="inputEmail4" class="col-form-label">Email</label>
-    <input type="email" class="form-control" id="inputEmail4">
+{{#if session.accountId}}
+<div class="card" >
+  <div class="card-body">
+    <h3 class="card-title">Logout</h3>
+    <p class="card-text">Are you sure you want to logout?</p>
+    <div class="btn-group">
+     <a class="btn btn-secondary" href="/">No, go to home page!</a>
+
+     <form action="/auth/logout" method="POST">
+          <button type="submit" class="btn btn-primary">Logout</button>
+     </form>
+    </div>
+
   </div>
-  <div class="col-md-6">
-    <label for="inputPassword4" class="col-form-label">Password</label>
-    <input type="password" class="form-control" id="inputPassword4">
-  </div>
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary">Sign in</button>
-  </div>
-</form>
+</div>
+
+
+{{else}}
+
+    <h3>Login</h3>
+
+    {{#if errorsMessages.length}}
+        <ul>
+            {{#each errorsMessages}}
+            <div id="error-messages">
+                <li>{{this}}</li>  
+            </div>
+            {{/each}}
+        </ul>
+    {{/if}}
+
+    <form action="/auth/login" method="post" id="loginForm" class="row gy-2 gx-3 align-items-center">
+      <div class="col-md-6">
+        <label for="inputEmail4" class="col-form-label">Email</label>
+        <input type="email" class="form-control" id="inputEmail4">
+      </div>
+      <div class="col-md-6">
+        <label for="inputPassword4" class="col-form-label">Password</label>
+        <input type="password" class="form-control" id="inputPassword4">
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Sign in</button>
+      </div>
+    </form>
+{{/if}}
