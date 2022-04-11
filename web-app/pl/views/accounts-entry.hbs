@@ -1,13 +1,15 @@
-<form class="form-floating">
-<div class="form-floating mb-3">
-  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-  <label for="floatingInput">Email address</label>
-</div>
-<div class="form-floating">
-  <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-  <label for="floatingPassword">Password</label>
-</div>
-  <div class="col-auto">
-    <button type="submit" class="btn btn-primary mb-3">Confirm identity</button>
+<h3>Login</h3>
+
+<form action="/auth/login" method="post" id="loginForm" class="row gy-2 gx-3 align-items-center">
+  <div class="col-md-6">
+    <label for="inputEmail4" class="col-form-label">Email</label>
+    <input type="email" class="form-control" id="inputEmail4">
+  </div>
+  <div class="col-md-6">
+    <label for="inputPassword4" class="col-form-label">Password</label>
+    <input type="password" class="form-control" id="inputPassword4">
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Sign in</button>
   </div>
 </form>
