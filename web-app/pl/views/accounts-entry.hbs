@@ -30,17 +30,114 @@
         </ul>
     {{/if}}
 
-    <form action="/auth/login" method="post" id="loginForm" class="row gy-2 gx-3 align-items-center">
-      <div class="col-md-6">
-        <label for="inputEmail4" class="col-form-label">Email</label>
-        <input type="email" class="form-control" id="inputEmail4">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Har du kommit vilse? </h5>
+              <p class="card-text"> Om du har kommit vilse Tryck på knappen nedan för att komma tillbaka till startsidan eller Tryck på loggan DigitALLA uppe. </p>
+              <a href="/" class="btn btn-primary">Tillbaka till startsidan</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <form action="/auth/login" method="post" id="loginForm" class="row gy-2 gx-3 align-items-center">
+            <div class="col-md-12">
+              <label for="inputEmail4" class=" col-form-label-lg">
+                <i class="bi bi-person-fill"></i>
+                Email
+                </label>
+              <input type="email" class="form-control form-control-lg" id="inputEmail4">
+            </div>
+            <div class="col-md-12">
+              <label for="inputPassword4" class="col-form-label-lg">
+                <i class="bi bi-key-fill"></i>
+                Password
+              </label>
+              <input type="password" class="form-control form-control-lg" id="inputPassword4">
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary"> <i class="bi bi-unlock-fill"></i> Sign in</button>
+            </div>
+          </form>
+        </div>
+
       </div>
-      <div class="col-md-6">
-        <label for="inputPassword4" class="col-form-label">Password</label>
-        <input type="password" class="form-control" id="inputPassword4">
+      <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1">
+        <div  class="row justify-content-md-center ">
+          <div id="bli-medlem-login" class="card mb-3 justify-content-md-center" >
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img id = "bli-medlem-image" src="/images/login1.png" class="img-fluid" alt="Bli medlem image">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Bli medlem</h5>
+                  <p class="card-text">
+                    Vill du eller din organisation logga in eller bli medlem?
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-12">
-        <button type="submit" class="btn btn-primary">Sign in</button>
-      </div>
-    </form>
+      <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2">
+        <div class="col">
+          <div class="card text-dark bg-info mb-3" >
+            <div class="card-header"><h5>Vill du registrera dig?</h5> </div>
+            <div class="card-body">
+              <h6 class="card-title">Fördelar med att bli medlem: </h6>
+              <ul>
+                <li>Utbyte med andra organisationer</li>
+                <li>Möjlighet till kontakt listor på organisationer med samma intresse</li>
+                <li>Marknadsföring</li>
+                <li>Finansierings möjligheter</li>
+                <li>Möjlighet till utbyte av erfarenheter/ resultat. </li>                
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card text-dark bg-info mb-3" >
+            <div class="card-body">
+              <h6 class="card-title">Vad förväntas av er som medlem: </h6>
+              <ul>
+                <li>
+                  Att ni är en verksamhet som träffar eller stöttar 
+                  målgruppen digitalt utanför eller på annat sätt
+                   jobbar med att minska det digitala utanförskapet
+                </li>
+                <li>
+                  Att ni årligen rapporterar de arbete ni gör med digital inkludering
+                </li>
+                <li>Att ni delar med er av goda nyheter och exempel från er verksamhet. </li>             
+              </ul>
+            </div>
+            <div class="card-header"><a href="/auth/signup" class="btn btn-primary"><h5> Registrera dig</h5></a> </div>
+          </div>          
+        </div>
+      </div>         
+    </div>
+
+
 {{/if}}
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const buttonActiveClassName = "active"
+      const homeButtons = document.querySelectorAll("#log-link")
+      for(const button of homeButtons){
+        if (!button.classList.contains(buttonActiveClassName)){
+         
+            button.classList.add(buttonActiveClassName)
+        }
+      }
+
+
+
+    })
+
+</script>

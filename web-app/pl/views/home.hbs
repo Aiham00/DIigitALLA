@@ -1,1 +1,124 @@
-<h1>bjjh</h1>
+<h3>Home</h3>
+<div class="d-flex">
+    <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <select class="form-select me-2" aria-label=".form-select-lg example">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+        <button class="btn btn-primary" type="submit">
+            <i class="bi bi-search"></i>
+            Search
+        </button>
+    </form>
+</div>
+
+
+  <div id="map" class="container-fluid"></div>
+
+<script>
+    function initMap() {
+        // Map options
+        var options = {
+            zoom: 8,
+            
+            center: { lat: 57.7376924, lng: 14.1432979 }
+        }
+
+        // New map
+        var map = new google.maps.Map(document.getElementById('map'), options);
+        let lastclick 
+
+        // Listen for click on map
+        google.maps.event.addListener(map, 'click', function (event) {
+            if(lastclick){
+                lastclick.setMap(null)
+            }
+                lastclick = addMarker({ coords: event.latLng });
+        });
+
+        // Array of markers
+        var markers = [
+            {
+                coords: { lat: 57.7376924, lng: 14.1432979 },
+                iconImage: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+                content: '<h4>Lynn MA</h4>'
+            },
+            {
+                
+                coords: { lat: 57.7787537, lng: 14.2063449 },
+                iconImage: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+
+                content: `<h4> Arbetsförmedlingen Jönköping </h4>
+                <a target="_blank" jstcache="6" 
+                href="https://www.google.com/maps/place/Arbetsf%C3%B6rmedlingen+J%C3%B6nk%C3%B6ping/@57.7800685,14.1617021,18z/data=!4m12!1m6!3m5!1s0x465a6debe6522eb3:0x1691bc484bad3889!2zQXJiZXRzZsO2cm1lZGxpbmdlbiBKw7Zua8O2cGluZw!8m2!3d57.780539!4d14.161686!3m4!1s0x465a6debe6522eb3:0x1691bc484bad3889!8m2!3d57.780539!4d14.161686!5m1!1e1" tabindex="0">
+                 <span>
+                      View on Google Maps 
+                 </span> </a>`
+
+            },
+            {
+                coords: { lat: 42.7762, lng: -71.0773 },
+                content: '<h4> Arbetsförmedlingen Jönköping </h4>'
+
+            }
+        ];
+
+        // Loop through markers
+        for (const marker of markers) {
+            // Add marker
+            addMarker(marker);
+        }
+
+        // Add Marker Function
+        function addMarker(props) {
+            var marker = new google.maps.Marker({
+                position: props.coords,
+                map: map,
+                //icon:props.iconImage
+            });
+
+            // Check for customicon
+            if (props.iconImage) {
+                // Set icon image
+                marker.setIcon(props.iconImage);
+            }
+
+            // Check content
+            if (props.content) {
+                var infoWindow = new google.maps.InfoWindow({
+                    content: props.content
+                });
+
+                marker.addListener('click', function () {
+                    infoWindow.open(map, marker);
+                });
+            }
+            return marker
+        }
+    }
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxo16CX5NB--hlg-kAC4ObldVeUd0ibvQ&callback=initMap">
+</script>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const buttons = document.querySelectorAll(".nav-link")
+        const buttonActiveClassName = "active"
+        const homeButtons = document.querySelectorAll("#home-link")
+        for (const button of homeButtons) {
+            if (!button.classList.contains(buttonActiveClassName)) {
+
+                button.classList.add(buttonActiveClassName)
+            }
+        }
+
+
+
+    })
+
+</script>

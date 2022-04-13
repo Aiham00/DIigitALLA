@@ -28,6 +28,23 @@
   </div>
 </div>
 
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const buttonActiveClassName = "active"
+      const homeButtons = document.querySelectorAll("#om-link")
+      for(const button of homeButtons){
+        if (!button.classList.contains(buttonActiveClassName)){
+         
+            button.classList.add(buttonActiveClassName)
+        }
+      }
+
+
+
+    })
+
+</script>
 
 
 
