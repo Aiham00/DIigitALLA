@@ -1,0 +1,109 @@
+
+{{#if session.accountId}}
+<div class="card" >
+  <div class="card-body">
+    <h3 class="card-title">Registration</h3>
+    <p class="card-text">Du är redan Registrerad och inloggad</p>
+    <div class="btn-group">
+      <a href="/" class="btn btn-primary">Tillbaka till startsidan</a>
+      <a href="/auth/logout" class="btn btn-secondary">Logout</a>
+    </div>
+  </div>
+</div>
+
+{{else}}
+
+  <h3>Registration</h3>
+
+  {{#if errorsMessages.length}}
+    <ul>
+      {{#each errorsMessages}}
+        <div id="error-messages">
+          <li>{{this}}</li>  
+        </div>
+      {{/each}}
+    </ul>
+  {{/if}}
+
+  <div class="col">
+    <div class="row">
+      <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Har du kommit vilse? </h5>
+            <p class="card-text"> Om du har kommit vilse Tryck på knappen nedan för att komma tillbaka till startsidan eller Tryck på loggan DigitALLA uppe. </p>
+            <a href="/" class="btn btn-primary">Tillbaka till startsidan</a>
+        </div>
+      </div>        
+    </div>   
+    <div class="row">
+      <form action="/auth/login" method="post" id="loginForm" class="row gy-2 gx-3 align-items-center">
+        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2">
+          <div class="col">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control form-control-lg" id="signup-first-name" placeholder="e">
+                <label for="signup-first-name" class=" col-form-label-lg">
+                  Förnamn
+                </label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control form-control-lg" id="signup-last-name" placeholder="e">
+                <label for="signup-last-name" class=" col-form-label-lg">
+                  Efternamn
+                </label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control form-control-lg" id="signup-organisation" placeholder="e">
+                <label for="signup-organisation" class=" col-form-label-lg">
+                  Organisation
+                </label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control form-control-lg" id="signup-email" placeholder="e">
+                <label for="signup-email" class=" col-form-label-lg">
+                  E-post
+                </label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control form-control-lg" id="signup-password" placeholder="e">
+                <label for="signup-password" class=" col-form-label-lg">
+                  Lösenord
+                </label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control form-control-lg" id="signup-repassword" placeholder="e">
+                <label for="signup-repassword" class=" col-form-label-lg">
+                  Bekräfta lösenord
+                </label>
+            </div>
+              <div class="col-md-12">
+                <button type="submit" class="btn btn-primary"> <i class="bi bi-send"></i> Skicka in!</button>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-floating">
+              <textarea class="form-control" placeholder="Leave a comment here" id="signup-Textarea"></textarea>
+              <label for="signup-Textarea">Beskrivning av tidigare och planerade insatser</label>
+            </div>              
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{{/if}}
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const buttonActiveClassName = "active"
+    const homeButtons = document.querySelectorAll("#log-link")
+
+    for(const button of homeButtons){
+
+      if (!button.classList.contains(buttonActiveClassName)){
+        
+          button.classList.add(buttonActiveClassName)
+      }
+    }
+  })
+
+</script>

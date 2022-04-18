@@ -35,6 +35,15 @@ module.exports = function(
         response.redirect('/')
     })
 
+    router.get('/signup', function(request, response){
+        response.render('account-sign-up.hbs')
+    })
+
+    router.post('/signup', function(request, response){
+
+        response.redirect('/')
+    })
+
 
     return router
     
