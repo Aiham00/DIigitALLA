@@ -1,0 +1,57 @@
+<div class="row  g-4">
+{{#if posts.length}}
+  <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-4">
+  {{#each posts}}
+    <div class="col">
+      <div class="card border-info">
+        <div class="card-header">{{this.Title}}</div>
+        <div class="card-body">
+          <h5 class="card-title"> </h5>
+          <div class="row"><p class="text-sm-end fs-5"> Publicerat av: {{this.Organization}}</p></div>
+            <div class="row">
+              <p>
+                Ämnes taggar: 
+              {{#each this.tags}}
+                <span class="badge text-dark tag">#{{this.TagName}}</span>
+
+              {{/each}}
+              </p>
+
+            </div>
+          <div class="card-footer bg-transparent border-success">
+            <div class="row g-4 ">
+              <div class="col col-sm-6">
+                Publicerat: {{this.PostDateTime}}
+
+              </div>
+              <div class="col col-sm-3">
+                <a href="/" >Läs mer</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+{{/if}}
+</div>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const buttons = document.querySelectorAll(".nav-link")
+        const buttonActiveClassName = "active"
+        const homeButtons = document.querySelectorAll("#forum-link")
+        for (const button of homeButtons) {
+            if (!button.classList.contains(buttonActiveClassName)) {
+
+                button.classList.add(buttonActiveClassName)
+            }
+        }
+
+
+
+    })
+
+</script>

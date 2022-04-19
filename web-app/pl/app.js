@@ -6,10 +6,11 @@ const path = require('path')
 const session = require('express-session')
 const connectSqlite = require('connect-sqlite3')
 const SqliteSessionStore = connectSqlite(session)
-
+const layout = require('express-layout')
 module.exports = function(
     {
         accountRouter,
+        forumRouter
     }
     ){
         const app = express()
@@ -32,11 +33,13 @@ module.exports = function(
 
         }))
         app.use(express.static(path.join(__dirname, 'public')))
+
         
         app.engine('hbs', expressHandleBars.engine({
             defaultLayout: 'main.hbs',
             layoutsDir: path.join(__dirname, 'layouts')
         }))
+
         app.use(function (request, response, next) {
             response.locals.session = request.session
             next()
@@ -45,6 +48,8 @@ module.exports = function(
         
 
         app.use('/auth', accountRouter)
+
+        app.use('/forum', forumRouter)
 
         app.get('/', function(req, res){
                 res.render('home.hbs')

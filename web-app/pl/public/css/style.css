@@ -35,3 +35,11 @@
 #signup-Textarea{
     height: 20rem;
 }
+.card .card-body .row .col.col-md-4.hashtags{
+    background-color: rgb(249, 254, 255);
+
+}
+.card .card-body .row .badge.text-dark.tag{
+    background-color: rgb(163, 213, 223);
+
+}
