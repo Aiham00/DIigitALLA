@@ -35,6 +35,34 @@ module.exports = function(
 
     })
 
+    router.get('/create', function(request, response){
+
+      response.render('forum-post-create.hbs',getForumLayoutModel({}))
+
+    })
+    router.get('/:id', function(request, response){
+      const id = request.params.id
+      forumManager.getPost(id,function(error,post){
+        if(error){
+          const model ={
+            errorsMessages:[error]
+          }
+          response.render('forum-post-view.hbs',getForumLayoutModel(model))
+
+        }else{
+          console.log(post)
+          const model = {
+            errorsMessages:[],
+            post
+          }
+          response.render('forum-post-view.hbs',getForumLayoutModel(model))
+
+        }
+      })
+
+    })
+
+
 
     return router
     

@@ -1,0 +1,55 @@
+<h3>Skriv forums inlägg </h3>
+<form action="/auth/login" method="post" id="loginForm" class="row gy-2 gx-3 align-items-center">
+  <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-4">
+    <div class="col col-md-9">
+      <div class="card border-info">
+        <div class="card-header">
+          <div class="form-floating mb-3">
+              <input type="text" class="form-control form-control-lg" id="signup-first-name" placeholder="e">
+              <label for="signup-first-name" class=" col-form-label-lg">
+                Title
+              </label>
+          </div>              
+        </div>
+        <div class="card-body">
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="signup-Textarea"></textarea>
+            <label for="signup-Textarea">Beskrivning av tidigare och planerade insatser</label>
+          </div> 
+          <div class="card-footer bg-transparent border-success">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col col-md-3">
+      <p class="fs-4">Välj taggar :</p>
+      <div class="btn-group-vertical btn-group-lg" role="group" aria-label="Basic checkbox toggle button group">
+        <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btncheck1">#Studiecirkel</label>
+
+        <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btncheck2">#Aktiviteter</label>
+
+        <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btncheck3">#Digitala tips </label>
+
+        <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btncheck4">#Funkis</label>
+
+        <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btncheck5">#Utrikesfödda</label>
+
+        <input type="checkbox" class="btn-check" id="btncheck6" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btncheck6">#Seniorer </label>
+
+      </div>             
+    </div>
+    <div class="row g-4 ">
+      <div class="col-md-12">
+          <button type="submit" class="btn btn-primary"> <i class="bi bi-send"></i> Skicka in!</button>
+      </div>
+    </div>
+  </div>
+</form>
+

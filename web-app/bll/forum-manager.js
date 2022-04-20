@@ -38,7 +38,33 @@ module.exports = function({
               }
             })
 
+          },
+
+          getPost(postId,callback){
+            forumRepository.getPost(postId,function(error,post){
+
+              if ( error){
+                callback("database error")
+              }else if(post.length!=0){
+                forumRepository.getPostTags(post.Id,function(error,tags){
+                  if (error){
+                    post["tags"]=[]
+                  }else{
+                    post["tags"]=tags
+                  }
+                  callback(error,post)
+                        
+                })                
+     
+              }else{
+                callback(error,{})
+              
+              }
+            })
+
           }
       }
+
+
 
 }

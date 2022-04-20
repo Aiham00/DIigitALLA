@@ -1,0 +1,71 @@
+<h3>Forums inlägg </h3>
+<div class="row  g-4">
+{{#if post}}
+  <div class="row row-cols-1 row-cols-sm-1 row-cols-lg-2 g-4">
+    <div class="col">
+      <div class="card border-info">
+        <div class="card-header  bg-success text-white bg-opacity-75">{{post.Title}}</div>
+        <div class="card-body">
+          <h5 class="card-title"> </h5>
+          <div class="row"><p class="text-sm-end fs-5"> Publicerat av: {{post.Organization}}</p></div>
+            <div class="row">
+              <p>{{post.Body}}</p>
+              <p>
+                Ämnes taggar: 
+
+              {{#each post.tags}}
+                <span class="badge text-dark tag">#{{this.TagName}}</span>
+
+              {{/each}}
+              </p>
+            </div>
+          <div class="card-footer bg-transparent border-success">
+            <div class="row g-4 ">
+              <div class="col col-md-9 col-sm-8">
+                Publicerat: {{post.PostDateTime}}
+              </div>
+              <div class="col col-md-3 col-sm-4 text-sm-start ">
+                <a href="/" >Svar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row g-4">
+        <div class="card border-info">
+          <div class="card-header row">
+            <div class="col ">
+              Svar
+            </div >
+            <div class="col text-sm-start">
+              publicerat: 2022-04-18 19:59:15
+            </div>
+          </div> 
+          <div class="card-body">
+            <div class="row"><p class="text-sm-end "> Jag följer detta, undrar också om det finns bra tips till detta!  Jag lägger till taggen #digitala tips.  </p></div>
+            <div class="row"><p class="text-sm-end "> - Organisations namn </p></div>
+          </div>
+        </div>
+        
+        <div class="card border-info">
+          <div class="card-header row">
+            <div class="col">
+              Svar
+            </div >
+            <div class="col text-sm-start">
+              publicerat: 2022-04-18 19:59:15
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row"><p class="text-sm-end "> Jag följer detta, undrar också om det finns bra tips till detta!  Jag lägger till taggen #digitala tips.  </p></div>
+            <div class="row"><p class="text-sm-end "> - Organisations namn </p></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+{{/if}}
+</div>

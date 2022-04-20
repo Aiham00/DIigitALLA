@@ -19,6 +19,18 @@ module.exports = function({
                   callback(error,posts)
               })
           },
+
+          getPost(id,callback){
+            const query =  `SELECT Id,Title,PostDateTime,Post.AccountId,FirstName,LastName,Organization,Body
+            from Post
+            JOIN Account on Post.AccountId = Account.AccountId
+            WHERE post.Id = ?`
+            const values = [id]
+            db.get(query, values, function(error,post){
+                callback(error,post)
+            })
+        },
+
           getPostTags(postId, callback){
             const query =  `SELECT Tag.TagName from Post
             JOIN PostTag on PostTag .PostId = Post.Id
