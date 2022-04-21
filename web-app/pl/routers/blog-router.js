@@ -2,21 +2,21 @@ const express = require('express')
 const session = require('express-session')
 
 const getForumLayoutModel = function(model){
-model["layout"]='forum-layout.hbs'
+model["layout"]='main.hbs'
 return model
 
 }
 module.exports = function(
     {
         sessionHandler,
-        forumManager
+        blogManager
 
     }){
      
     const router = express.Router()
 
     router.get('/', function(request, response){
-      forumManager.getAllPosts(1,function(error,posts){
+      blogManager.getAllBlogs(1,function(error,blogs){
 
         if(error){
           const model ={
@@ -26,9 +26,9 @@ module.exports = function(
         }else{
           const model = {
             errorsMessages:[],
-            posts
+            blogs
           }
-          response.render('forum-posts.hbs',getForumLayoutModel(model))
+          response.render('blogs.hbs',getForumLayoutModel(model))
 
         }
       })
@@ -36,47 +36,41 @@ module.exports = function(
     })
 
     router.get('/create', function(request, response){
+      const accountId = 1
 
-      response.render('forum-post-create.hbs',getForumLayoutModel({}))
+      response.render('blog-create-view.hbs',getForumLayoutModel({accountId}))
 
     })
 
     router.post('/create', function(request, response){
-
-      response.redirect("/forum")
-
-    })
-
-    router.post('/answer', function(request, response){
-      postId = request.body.postId
-      forumManager.createAnswer(request.body,function(error){
+      const accountId = request.session.accountId
+      blogManager.createBlog(1,request.body,function(error){
         if(error){
-console.log(error)
-
         }else{
-          response.redirect("/forum/"+postId)
-        }
+          response.redirect("/forum")
 
+        }
       })
+
 
     })
 
     router.get('/:id', function(request, response){
       const id = request.params.id
-      forumManager.getPost(id,function(error,post){
+      blogManager.getBlog(id,function(error,blog){
         if(error){
           const model ={
             errorsMessages:[error]
           }
-          response.render('forum-post-view.hbs',getForumLayoutModel(model))
+          response.render('blog-view.hbs',getForumLayoutModel(model))
 
         }else{
           const model = {
             errorsMessages:[],
             accountId: request.session.accountId,
-            post
+            blog
           }
-          response.render('forum-post-view.hbs',getForumLayoutModel(model))
+          response.render('blog-view.hbs',getForumLayoutModel(model))
 
         }
       })

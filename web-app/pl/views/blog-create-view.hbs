@@ -1,0 +1,83 @@
+<h3>Skriv Blogg </h3>
+<form action="/blogs/create" method="post" id="loginForm" class="row gy-2 gx-3 align-items-center">
+  <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-4">
+    <div class="col col-md-9">
+      <div class="card border-info">
+        <div class="card-header">
+          <div class="form-floating mb-3">
+              <input type="text" class="form-control form-control-lg" id="signup-first-name" placeholder="e" name="title">
+              <label for="signup-first-name" class=" col-form-label-lg">
+                Title
+              </label>
+          </div>              
+        </div>
+        <div id="paragraphs-container" class="card-body">
+          <div class="col">
+            <div class="form-floating">
+              <textarea class="form-control" placeholder="Leave a comment here" id="signup-Textarea" name="paragraph"></textarea>
+              <label for="signup-Textarea">Paragraf</label>
+            </div> 
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control form-control-lg" id="link-title" placeholder="e" name="linkTitle">
+              <label for="link-title" class=" col-form-label-lg">
+                Länk titel
+              </label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control form-control-lg" id="link" placeholder="e" name="link">
+              <label for="link-title" class=" col-form-label-lg">
+                Länk 
+              </label>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="card-footer bg-transparent border-success">
+          <a id="add-paragraph-link" href="#" >Lägg till paragraf"</a>
+
+        </div>
+      </div>
+    </div>
+    <div class="row g-4 ">
+      <input type="hidden" value="{{accountId}}"  name="accountId">
+      <div class="col-md-12">
+          <button type="submit" class="btn btn-primary"> <i class="bi bi-send"></i> Skicka in!</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const paragraphscontainer = document.querySelector("#paragraphs-container")
+      const addParagraphLink = document.querySelector("#add-paragraph-link")
+
+        addParagraphLink.addEventListener('click', function (event) {
+          event.preventDefault()
+          const col = document.createElement('div')
+          col.classList.add("col")
+          col.innerHTML = `<div class="form-floating">
+              <textarea class="form-control" placeholder="Leave a comment here" id="signup-Textarea" name="paragraph"></textarea>
+              <label for="signup-Textarea">Paragraf</label>
+            </div> 
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control form-control-lg" id="link-title" placeholder="e" name="linkTitle">
+              <label for="link-title" class=" col-form-label-lg">
+                Länk titel
+              </label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control form-control-lg" id="link" placeholder="e" name="link">
+              <label for="link-title" class=" col-form-label-lg">
+                Länk 
+              </label>
+            </div>`
+          paragraphscontainer.appendChild(col)
+        }) 
+    
+
+    })
+
+</script>

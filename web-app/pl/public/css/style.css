@@ -43,3 +43,13 @@
     background-color: rgb(163, 213, 223);
 
 }
+
+#answer-Textarea{
+    height: 10rem;
+
+}
+#blog-card{
+    margin-top: 1rem;
+    background-color: rgb(181, 219, 228);
+    max-width: 600px;
+}

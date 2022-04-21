@@ -10,7 +10,8 @@ const layout = require('express-layout')
 module.exports = function(
     {
         accountRouter,
-        forumRouter
+        forumRouter,
+        blogRouter
     }
     ){
         const app = express()
@@ -50,6 +51,8 @@ module.exports = function(
         app.use('/auth', accountRouter)
 
         app.use('/forum', forumRouter)
+
+        app.use('/blogs', blogRouter)
 
         app.get('/', function(req, res){
                 res.render('home.hbs')

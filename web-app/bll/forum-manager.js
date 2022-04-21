@@ -45,15 +45,21 @@ module.exports = function({
 
               if ( error){
                 callback("database error")
-              }else if(post.length!=0){
+              }else if(post){
                 forumRepository.getPostTags(post.Id,function(error,tags){
                   if (error){
                     post["tags"]=[]
                   }else{
                     post["tags"]=tags
                   }
-                  callback(error,post)
-                        
+                  forumRepository.getPostAnswers(post.Id,function(error,answers){
+                    if(error){
+                      post["answers"]=[]
+                    }else{
+                      post["answers"]=answers
+                    }
+                    callback(error,post)
+                  })                        
                 })                
      
               }else{
@@ -62,6 +68,12 @@ module.exports = function({
               }
             })
 
+          },
+
+          createAnswer(answer,callback){
+            forumRepository.createAnswer(answer,function(error){
+              callback(error)
+            })
           }
       }
 

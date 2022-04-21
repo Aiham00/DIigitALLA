@@ -1,0 +1,57 @@
+<h3> Blogs </h3>
+<div class="row  g-4">
+  <div ><a href="/blogs/create" class="btn btn-primary"><h5> Skriv blogg!</h5></a> </div>
+{{#if blogs.length}}
+  <div class="row row-cols-1 row-cols-sm-1 row-cols-lg-2 g-4">
+  {{#each blogs}}
+
+    <div class="col">
+      <div id="blog-card" class="card mb-3 justify-content-md-center" >
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img id = "blog-image" src="{{this.BlogImageAddress}}" class="img-fluid" alt="Blog image or vedio">
+          </div>
+          <div class="col-md-8">
+            <div class="card-header">{{this.BlogTitle}}</div>
+            <div class="card-body">
+              <h5 class="card-title"> </h5>
+              <div class="row"><p class="text-sm-end fs-5"> Publicerat av: {{this.Organization}}</p></div>
+              <div class="card-footer bg-transparent border-success">
+                <div class="row g-5 ">
+                  <div class="col col-md-8 col-sm-8">
+                    Publicerat: {{this.BlogDateTime}}
+                  </div>
+                  <div class="col text-sm-start col-md-4 col-sm-4 ">
+                    <a href="/blogs/{{this.BlogId}}" >Läs mer</a>
+                  </div>
+                </div>
+              </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+{{/if}}
+</div>
+
+<script>
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const buttons = document.querySelectorAll(".nav-link")
+        const buttonActiveClassName = "active"
+        const homeButtons = document.querySelectorAll("#forum-link")
+        for (const button of homeButtons) {
+            if (!button.classList.contains(buttonActiveClassName)) {
+
+                button.classList.add(buttonActiveClassName)
+            }
+        }
+
+
+
+    })
+
+</script>
