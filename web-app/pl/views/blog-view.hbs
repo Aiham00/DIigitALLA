@@ -1,9 +1,6 @@
 <h3>BLog </h3>
 <div class="row  g-4">
-  <div >
-    <a href="/forum/create" class="btn btn-primary"><h5> Redigera</h5></a>
-    <a href="/forum/create" class="btn btn-primary"><h5> Tabort</h5></a>
-  </div>
+
 {{#if blog}}
   <div class="row row-cols-1 row-cols-sm-1 row-cols-lg-2 g-4">
     <div class="col">
@@ -30,7 +27,7 @@
                 Publicerat: {{blog.BlogDateTime}}
               </div>
             </div>
-            <form action="/forum/answer" method="post" id="loginForm" class="row gy-2 gx-3 align-items-center">
+            <form action="/blogs/comment" method="post" id="loginForm" class="row gy-2 gx-3 align-items-center">
               <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 g-4">
                 <div class="card border-info">
                   <div class="card-body">
@@ -59,23 +56,29 @@
     </div>
     <div class="col">
       <div class="row g-4">
-
-        {{#each blog.comments}}
-          <div class="card border-info">
-            <div class="card-header row">
-              <div class="col">
-                Kommentar
-              </div >
-              <div class="col text-sm-start">
-                publicerat: {{this.AnswerDateTime}}
+<h4>Kommentarer</h4>
+        {{#if blog.comments.length}}
+          {{#each blog.comments}}
+            <div class="card border-info">
+              <div class="card-header row">
+                <div class="col">
+                  Kommentar
+                </div >
+                <div class="col text-sm-start">
+                  publicerat: {{this.AnswerDateTime}}
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row"><p class="text-sm-end "> {{this.Answer}}  </p></div>
+                <div class="row"><p class="text-sm-end "> OrganisationNamn: {{this.Organization}} </p></div>
               </div>
             </div>
-            <div class="card-body">
-              <div class="row"><p class="text-sm-end "> {{this.Answer}}  </p></div>
-              <div class="row"><p class="text-sm-end "> OrganisationNamn: {{this.Organization}} </p></div>
-            </div>
-          </div>
-        {{/each}}
+          {{/each}}
+        {{else}}
+          <p>Inga kommentarer att visas</p>
+        {{/if}}
+
+
 
       </div>
     </div>

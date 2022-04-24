@@ -83,14 +83,22 @@ module.exports = function({
             }              
           })
         },
-        getPostAnswers(postId, callback){
-          const query =  `SELECT PostId,Account.AccountId,Answer,AnswerDateTime,Organization from Post
-          JOIN PostAnswer on PostAnswer.PostId = Post.Id
-		      JOIN Account on Account.AccountId = Post.AccountId
-          WHERE Post.Id = ?`
-          const values = [postId]
-          db.all(query, values, function(error,answers){
-              callback(error,answers)
+        createComment(comment,callback){
+          const query =  `INSERT INTO PostAnswer ( Answer,BlogId,AnswerDateTime) VALUES(?,?,datetime("now"))`
+          const values = [comment.comment,comment.blogId]
+          db.all(query, values, function(error){
+              callback(error)
+              
+          })
+        },
+        getBlogComments(blogId, callback){
+          const query =  `SELECT Blog.BlogId,Account.AccountId,Answer,AnswerDateTime,Organization from Blog
+          JOIN PostAnswer on PostAnswer.BlogId = Blog.BlogId
+		      JOIN Account on Account.AccountId = Blog.BlogAccountId
+          WHERE Blog.BlogId = ?`
+          const values = [blogId]
+          db.all(query, values, function(error,comments){
+              callback(error,comments)
               
           })
         },

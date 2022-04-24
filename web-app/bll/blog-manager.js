@@ -1,5 +1,6 @@
 module.exports = function({
-  blogRepository
+  blogRepository,
+  forumRepository
   
 }){
 
@@ -24,14 +25,29 @@ module.exports = function({
               if ( error){
                 callback("database error")
               }else {
+                blogRepository.getBlogComments(blogId,function(error,comments){
+                  if(error){
+console.log(error)
 
-                callback(error,blog)
+                  }else if(comments.length == 0){
+                    blog["comments"]=[]
+                  }else {
+                    blog["comments"]=comments
+                  }
+console.log(blog)
+                  callback(error,blog)
+                })
               
               }
             })
 
           },
 
+          createComment(accountId,comment,callback){
+            blogRepository.createComment(comment,function(error){
+              callback(error)
+            })
+          },
           createBlog(accountId,blog,callback){
             blogRepository.createBlog(blog,function(error){
               callback(error)

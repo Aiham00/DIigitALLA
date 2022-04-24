@@ -55,6 +55,20 @@ module.exports = function(
 
     })
 
+    router.post('/comment', function(request, response){
+      const blogId = request.body.blogId
+      blogManager.createComment(1,request.body,function(error){
+        if(error){
+console.log(error)
+
+        }else{
+          response.redirect("/blogs/"+blogId)
+        }
+
+      })
+
+    })
+
     router.get('/:id', function(request, response){
       const id = request.params.id
       blogManager.getBlog(id,function(error,blog){
