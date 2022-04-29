@@ -32,7 +32,7 @@ module.exports = function({
         },
 
         createAnswer(answer,callback){
-          const query =  `INSERT INTO PostAnswer ( Answer,PostId,AnswerDateTime) VALUES(?,?,datetime("now"))`
+          const query =  `INSERT INTO Answer ( Answer,PostId,AnswerDateTime) VALUES(?,?,datetime("now"))`
           const values = [answer.answer,answer.postId]
           db.all(query, values, function(error){
               callback(error)
@@ -40,8 +40,8 @@ module.exports = function({
           })
         },
         getPostAnswers(postId, callback){
-          const query =  `SELECT PostId,Account.AccountId,Answer,AnswerDateTime,Organization from Post
-          JOIN PostAnswer on PostAnswer.PostId = Post.Id
+          const query =  `SELECT PostId,Account.AccountId,AnswerId,Answer,AnswerDateTime,Organization from Post
+          JOIN Answer on Answer.PostId = Post.Id
 		      JOIN Account on Account.AccountId = Post.AccountId
           WHERE Post.Id = ?`
           const values = [postId]

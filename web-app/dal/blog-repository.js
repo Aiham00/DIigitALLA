@@ -68,7 +68,7 @@ module.exports = function({
               callback(error)
             }else{
 
-              for(let i = 0; i < blog.paragraph.length; i++ ){
+              for(let i = 1; i < blog.paragraph.length; i++ ){
                 const query =  `INSERT INTO BlogParagraph (BlogId,LinkTitle,Link,Body,OrderNr)
                 VALUES (?,?,?,?,?);`
                 const values = [this.lastID,blog.linkTitle[i],blog.link[i],blog.paragraph[i],i]
@@ -84,7 +84,7 @@ module.exports = function({
           })
         },
         createComment(comment,callback){
-          const query =  `INSERT INTO PostAnswer ( Answer,BlogId,AnswerDateTime) VALUES(?,?,datetime("now"))`
+          const query =  `INSERT INTO Answer ( Answer,BlogId,AnswerDateTime) VALUES(?,?,datetime("now"))`
           const values = [comment.comment,comment.blogId]
           db.all(query, values, function(error){
               callback(error)
@@ -92,8 +92,8 @@ module.exports = function({
           })
         },
         getBlogComments(blogId, callback){
-          const query =  `SELECT Blog.BlogId,Account.AccountId,Answer,AnswerDateTime,Organization from Blog
-          JOIN PostAnswer on PostAnswer.BlogId = Blog.BlogId
+          const query =  `SELECT Blog.BlogId,Account.AccountId,Answer,AnswerId,AnswerDateTime,Organization from Blog
+          JOIN Answer on Answer.BlogId = Blog.BlogId
 		      JOIN Account on Account.AccountId = Blog.BlogAccountId
           WHERE Blog.BlogId = ?`
           const values = [blogId]

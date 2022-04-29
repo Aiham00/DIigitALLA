@@ -34,7 +34,6 @@ console.log(error)
                   }else {
                     blog["comments"]=comments
                   }
-console.log(blog)
                   callback(error,blog)
                 })
               

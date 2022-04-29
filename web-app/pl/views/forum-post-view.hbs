@@ -59,6 +59,7 @@
     <div class="col">
       <div class="row g-4">
 
+
         {{#each post.answers}}
           <div class="card border-info">
             <div class="card-header row">
@@ -72,12 +73,83 @@
             <div class="card-body">
               <div class="row"><p class="text-sm-end "> {{this.Answer}}  </p></div>
               <div class="row"><p class="text-sm-end "> OrganisationNamn: {{this.Organization}} </p></div>
+              <small><a href="/" class="reply-link">reply</a></small>
+
             </div>
+
+            <div id="replys-card" class="card hidden">
+              <div class="list-group">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-1"> <a href="#">JohnDoe</a> says :</h6>
+                    <small>Dec 20, 2014</small>
+                  </div>
+                  <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam a sapien odio, sit amet</p>
+              </div>
+                <div class="list-group">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-1"> <a href="#">JohnDoe</a> says :</h6>
+                    <small>Dec 20, 2014</small>
+                  </div>
+                  <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam a sapien odio, sit amet</p>   
+              </div>
+              <div class="list-group">
+
+              <form action="/forum/answer" method="post" id="loginForm" class="row gy-2 gx-3 align-items-center">
+                <div class="card ">
+                  <div class="card-body">
+                    <div class="form-floating">
+                      <input type="hidden" value="{{Answer.Id}}" name="answerId">
+                      <input type="hidden" value="{{accountId}}" name="accountId">
+                      <textarea class="form-control" placeholder="Leave a comment here" id="reply-Textarea" name="reply"></textarea>
+                      <label for="answer-Textarea">Skriv reply!</label>
+                    </div> 
+                    <div class="card-footer bg-transparent border-success">
+                      <div class="row g-4 ">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary"> <i class="bi bi-send"></i> reply!</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </form> 
+              </div>
+
+            </div>
+           
           </div>
         {{/each}}
+
 
       </div>
     </div>
   </div>
 {{/if}}
 </div>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const cards = document.querySelectorAll("#replys-card")
+        const className = "hidden"
+        const links =document.querySelectorAll(".reply-link")
+
+        for (const link of links) {
+          link.addEventListener("click",function(e){
+            e.preventDefault()
+
+            for(const card of cards){
+              if (!card.classList.contains(className)) {
+
+                card.classList.add(className)
+              }
+            }
+          link.parentElement.parentElement.nextElementSibling.classList.remove(className)
+
+        })
+
+        }
+    })
+
+</script>

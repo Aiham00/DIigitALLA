@@ -53,3 +53,17 @@
     background-color: rgb(181, 219, 228);
     max-width: 600px;
 }
+
+#replys-card{
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+#replys-card.card.hidden{
+    display: none;
+
+}
+
+#reply-Textarea{
+    height: 4rem;
+}

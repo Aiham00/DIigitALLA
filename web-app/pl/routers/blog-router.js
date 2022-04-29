@@ -47,7 +47,7 @@ module.exports = function(
       blogManager.createBlog(1,request.body,function(error){
         if(error){
         }else{
-          response.redirect("/forum")
+          response.redirect("/blogs")
 
         }
       })
