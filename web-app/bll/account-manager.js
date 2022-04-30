@@ -63,8 +63,12 @@ console.log(error)
 
           },
 
-          createComment(accountId,comment,callback){
-            blogRepository.createComment(comment,function(error){
+          createAccount(account,callback){
+            account['hashedPassword'] = account.password
+            delete account.password
+
+            accountRepository.createAccount(account,function(error){
+
               callback(error)
             })
           },

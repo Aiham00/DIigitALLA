@@ -6,7 +6,8 @@ const session = require('express-session')
 
 module.exports = function(
     {
-        sessionHandler
+        sessionHandler,
+        accountManager
 
     }){
      
@@ -41,8 +42,15 @@ module.exports = function(
     })
 
     router.post('/signup', function(request, response){
+        accountManager.createAccount(request.body,function(error){
+            if(error){
+console.log(error)
+            }else{
+                response.redirect('/')
 
-        response.redirect('/')
+            }
+        })
+
     })
 
     return router

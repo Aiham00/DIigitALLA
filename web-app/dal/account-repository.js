@@ -31,9 +31,12 @@ module.exports = function({
             })
         },
 
-        createAnswer(answer,callback){
-          const query =  `INSERT INTO Answer ( Answer,PostId,AnswerDateTime) VALUES(?,?,datetime("now"))`
-          const values = [answer.answer,answer.postId]
+        createAccount(account,callback){
+          const query =  `INSERT INTO Account 
+          (FirstName,LastName,Organization,Email,Phone,Description,HashedPassowrd,CreationDateTime)
+          VALUES(?,?,?,?,?,?,?,datetime("now"))`
+          const values = [account.firstName,account.lastName,account.org,account.email,
+            account.phone,account.description,account.hashedPassword]
           db.all(query, values, function(error){
               callback(error)
               
