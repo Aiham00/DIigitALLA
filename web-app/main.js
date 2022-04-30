@@ -12,7 +12,9 @@ container.register({
     forumManager        : awilix.asFunction(require('./bll/forum-manager.js')),
     blogRouter          : awilix.asFunction(require('./pl/routers/blog-router.js')),
     blogManager         : awilix.asFunction(require('./bll/blog-manager.js')),
-    blogRepository      : awilix.asFunction(require('./dal/blog-repository.js'))
+    blogRepository      : awilix.asFunction(require('./dal/blog-repository.js')),
+    accountManager      : awilix.asFunction(require('./bll/account-manager.js')),
+    accountRepository   : awilix.asFunction(require('./dal/account-repository.js')),
 
 
 })

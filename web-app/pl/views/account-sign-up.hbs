@@ -36,41 +36,47 @@
       </div>        
     </div>   
     <div class="row">
-      <form action="/auth/login" method="post" id="loginForm" class="row gy-2 gx-3 align-items-center">
+      <form action="/auth/signup" method="post" id="signup-form" class="row gy-2 gx-3 align-items-center">
         <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2">
           <div class="col">
             <div class="form-floating mb-3">
-                <input type="text" class="form-control form-control-lg" id="signup-first-name" placeholder="e">
+                <input type="text" class="form-control form-control-lg" id="signup-first-name" placeholder="e" name="firstName">
                 <label for="signup-first-name" class=" col-form-label-lg">
                   Förnamn
                 </label>
             </div>
             <div class="form-floating mb-3">
-                <input type="text" class="form-control form-control-lg" id="signup-last-name" placeholder="e">
+                <input type="text" class="form-control form-control-lg" id="signup-last-name" placeholder="e" name="lastName">
                 <label for="signup-last-name" class=" col-form-label-lg">
                   Efternamn
                 </label>
             </div>
             <div class="form-floating mb-3">
-                <input type="text" class="form-control form-control-lg" id="signup-organisation" placeholder="e">
+                <input type="text" class="form-control form-control-lg" id="signup-organisation" placeholder="e" name="org">
                 <label for="signup-organisation" class=" col-form-label-lg">
                   Organisation
                 </label>
             </div>
             <div class="form-floating mb-3">
-                <input type="email" class="form-control form-control-lg" id="signup-email" placeholder="e">
+                <input type="email" class="form-control form-control-lg" id="signup-email" placeholder="e" name="email">
                 <label for="signup-email" class=" col-form-label-lg">
                   E-post
                 </label>
             </div>
             <div class="form-floating mb-3">
-                <input type="password" class="form-control form-control-lg" id="signup-password" placeholder="e">
+                <input type="phone" class="form-control form-control-lg" id="signup-phone" placeholder="e" name="phone">
+                <label for="signup-phone" class=" col-form-label-lg">
+                Tel
+                </label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control form-control-lg" id="signup-password" placeholder="e" name="password">
                 <label for="signup-password" class=" col-form-label-lg">
                   Lösenord
                 </label>
             </div>
             <div class="form-floating mb-3">
-                <input type="password" class="form-control form-control-lg" id="signup-repassword" placeholder="e">
+                <input type="password" class="form-control form-control-lg" id="signup-repassword" placeholder="e" name="re-password">
                 <label for="signup-repassword" class=" col-form-label-lg">
                   Bekräfta lösenord
                 </label>
@@ -81,7 +87,7 @@
           </div>
           <div class="col">
             <div class="form-floating">
-              <textarea class="form-control" placeholder="Leave a comment here" id="signup-Textarea"></textarea>
+              <textarea class="form-control" placeholder="Leave a comment here" id="signup-Textarea" name="description"></textarea>
               <label for="signup-Textarea">Beskrivning av tidigare och planerade insatser</label>
             </div>              
           </div>

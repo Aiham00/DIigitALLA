@@ -1,6 +1,6 @@
 module.exports = function({
   blogRepository,
-  forumRepository
+  accountRepository
   
 }){
 

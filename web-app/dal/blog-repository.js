@@ -103,5 +103,27 @@ module.exports = function({
           })
         },
 
+        getAnswerReplies(answerId, callback){
+          const query =  `SELECT  Answer.AnswerId,Reply.ReplyText,ReplyDateTime,Reply.ReplyiId,Organization from Answer
+          JOIN Reply on Answer.AnswerId = Reply.AnswerId
+		      JOIN Account on Account.AccountId = Reply.AccountId
+          WHERE Answer.AnswerId = ?`
+          const values = [answerId]
+          db.all(query, values, function(error,replies){
+              callback(error,replies)
+              
+          })
+        },
+
+        createRebly(reply,callback){
+          const query =  `INSERT INTO Reply ( ReplyText,AnswerId,AccountId,ReplyDateTime)
+           VALUES(?,?,?,datetime("now"))`
+          const values = [reply.reply,reply.answerId,reply.accountId]
+          db.all(query, values, function(error){
+              callback(error)
+              
+          })
+        }
+
       }
 }

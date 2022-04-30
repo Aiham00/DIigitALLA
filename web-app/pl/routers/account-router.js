@@ -18,7 +18,7 @@ module.exports = function(
 
     router.post('/login', function(request, response){
 
-        request.session.accountId = "12"
+        request.session.accountId = "1"
 
         sessionHandler.setSessionAuthentication(request.session,"organization")
         response.render('home.hbs')
@@ -44,7 +44,6 @@ module.exports = function(
 
         response.redirect('/')
     })
-
 
     return router
     

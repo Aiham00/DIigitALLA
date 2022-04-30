@@ -51,8 +51,6 @@ module.exports = function(
 
         }
       })
-
-
     })
 
     router.post('/comment', function(request, response){
@@ -64,9 +62,19 @@ console.log(error)
         }else{
           response.redirect("/blogs/"+blogId)
         }
-
       })
+    })
 
+    router.post('/rebly', function(request, response){
+      const accountId = request.session.accountId
+      blogManager.createRebly(1,request.body,function(error){
+        if(error){
+console.log(error)
+        }else{
+          response.redirect("/blogs/")
+
+        }
+      })
     })
 
     router.get('/:id', function(request, response){
