@@ -2,13 +2,13 @@
 {{#if session.accountId}}
 <div class="card" >
   <div class="card-body">
-    <h3 class="card-title">Logout</h3>
-    <p class="card-text">Are you sure you want to logout?</p>
+    <h3 class="card-title">Logga ut</h3>
+    <p class="card-text">Är du säker på att du vill logga ut?</p>
     <div class="btn-group">
-     <a class="btn btn-secondary" href="/">No, go to home page!</a>
+     <a class="btn btn-secondary" href="/">Nej, gå till startsidan</a>
 
      <form action="/auth/logout" method="POST">
-          <button type="submit" class="btn btn-primary">Logout</button>
+          <button type="submit" class="btn btn-primary">Logga ut</button>
      </form>
     </div>
 

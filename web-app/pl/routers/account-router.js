@@ -71,6 +71,30 @@ console.log(error)
     response.render('account-sign-up.hbs')
   })
 
+  router.get('/delete/:id', function (request, response) {
+    const id = request.params.id
+    const model={
+      id
+    }
+    response.render('account-delete.hbs',model)
+  })
+
+  router.get('/activate/:id', function (request, response) {
+    const id = request.params.id
+    const model={
+      id
+    }
+    response.render('account-activate.hbs',model)
+  })
+
+  router.get('/decactivate/:id', function (request, response) {
+    const id = request.params.id
+    const model={
+      id
+    }
+    response.render('account-decactivate.hbs',model)
+  })
+
   router.post('/signup', function (request, response) {
     accountManager.createAccount(request.body, function (error) {
       if (error) {

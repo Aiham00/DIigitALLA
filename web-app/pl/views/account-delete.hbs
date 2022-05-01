@@ -1,0 +1,21 @@
+
+{{#if session.isAdmin}}
+<div class="card" >
+  <div class="card-body">
+    <h3 class="card-title">Ta bort konto</h3>
+    <p class="card-text">Är du säker på att du vill ta bort det här kontot?</p>
+    <div class="btn-group">
+     <a class="btn btn-secondary" href="/">Nej, gå till startsidan</a>
+
+     <form action="/auth/delete/{{id}}" method="POST">
+          <button type="submit" class="btn btn-primary">Ta bort!</button>
+     </form>
+    </div>
+
+  </div>
+</div>
+
+
+{{else}}
+<p>ledsen, du är inte behörig för denna åtgärd</p>
+{{/if}}

@@ -19,9 +19,9 @@
         {{#if session.isAdmin}}
           <a href="/auth/delete/{{account.AccountId}}" class="btn btn-primary"><h5> Ta bort</h5></a> 
           {{#if account.IsActive}}
-            <a href="/auth/deactivate/{{account.AccountId}}" class="btn btn-primary"><h5> Avaktivera</h5></a> 
+            <a href="/auth/decactivate/{{account.AccountId}}" class="btn btn-primary"><h5> Avaktivera</h5></a> 
           {{else}}
-            <a href="/auth/active/{{account.AccountId}}" class="btn btn-primary"><h5> Aktivera</h5></a> 
+            <a href="/auth/activate/{{account.AccountId}}" class="btn btn-primary"><h5> Aktivera</h5></a> 
           {{/if}}
         {{/if}}
       {{/if}}
