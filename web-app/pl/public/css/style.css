@@ -32,8 +32,9 @@
 
     border-radius: 50%
 }
-#signup-Textarea{
+#signup-description, #signup-interest {
     height: 20rem;
+    margin-bottom: 2rem;
 }
 .card .card-body .row .col.col-md-4.hashtags{
     background-color: rgb(249, 254, 255);
@@ -43,7 +44,10 @@
     background-color: rgb(163, 213, 223);
 
 }
+.card .badge.text-dark.tag{
+    background-color: rgb(163, 213, 223);
 
+}
 #answer-Textarea{
     height: 10rem;
 
@@ -66,4 +70,10 @@
 
 #reply-Textarea{
     height: 4rem;
+}
+
+#account-contact{
+    margin-top: 1rem;
+    background-color: rgb(191, 222, 230);
+    max-width: 540px;
 }

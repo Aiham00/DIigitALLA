@@ -6,58 +6,29 @@ module.exports = function({
 
       return {
 
-        getAllBlogs(AccountId,callback){
-          blogRepository.getAllBlogs(function(error,blogs){
+        getAllAccounts(AccountId,callback){
+          accountRepository.getAllAccounts(function(error,accounts){
 
               if ( error){
                 callback("database error")
               }else{
-                callback(error,blogs)
+                callback(error,accounts)
               
               }
             })
 
           },
 
-          getBlog(blogId,callback){
-            blogRepository.getBlog(blogId,function(error,blog){
+          getAccount(id,accountId,callback){
+            accountRepository.getAccount(id,function(error,account){
 
               if ( error){
                 callback("database error")
-              }else {
-                blogRepository.getBlogComments(blogId,function(error,comments){
-                  if(error){
-console.log(error)
-                  }else if(comments.length == 0){
-                    blog["comments"]=[]
-                    callback(error,blog)
-
-                  }else {
-                    blog["comments"]=comments
-
-                    function getAnswersReplies (comments,length){
-                      if (length == 0){
-                        callback(error,blog)
-                        return 
-                      }
-                      
-                      blogRepository.getAnswerReplies(comments[length-1].AnswerId,function(error,replies){
-                        if (error){
-                          comments[length-1]["replies"]=[]
-                        }else{
-                          comments[length-1]["replies"]=replies
-                          
-                        }
-                  
-                        getAnswersReplies(comments,length-1)
-                  
-                      })
-                    }
-                    getAnswersReplies(comments,comments.length)
-
-                  }
-                })
-              
+              }else if (accountId == id){
+                account["isMin"]="true"
+                callback(error,account)
+              }else{
+                callback(error,account)
               }
             })
 

@@ -9,35 +9,36 @@ module.exports = function({
   const db = new sqlite.Database('././db/digitAlla.db')
       return {
 
-          getAllPosts( callback){
-              const query =  `SELECT id,Title,PostDateTime,Post.AccountId,FirstName,LastName,Organization
-              from Post
-              JOIN Account on Post.AccountId = Account.AccountId
-              ORDER by PostDateTime desc`
-              const values = []
-              db.all(query, values, function(error,posts){
-                  callback(error,posts)
-              })
-          },
+        getAllAccounts( callback){
+          const query =  `SELECT AccountId,FirstName,LastName,Organization,Phone,TypeName,Email,CreationDateTime,IsActive
+          from Account
+          JOIN AccountType on Account.TypeId = AccountType.TypeId
+		      WHERE IsActive = 1
+          ORDER by Organization `
+          const values = []
+          db.all(query, values, function(error,accounts){
+              callback(error,accounts)
+          })
+        },
 
-          getPost(id,callback){
-            const query =  `SELECT Id,Title,PostDateTime,Post.AccountId,FirstName,LastName,Organization,Body
-            from Post
-            JOIN Account on Post.AccountId = Account.AccountId
-            WHERE post.Id = ?`
+          getAccount(id,callback){
+            const query =  `SELECT AccountId,FirstName,LastName,Organization,Phone,TypeName,Email,CreationDateTime,IsActive,Description,Interest
+            from Account
+            JOIN AccountType on AccountType.TypeId = Account.TypeId
+            WHERE Account.AccountId = ?`
             const values = [id]
-            db.get(query, values, function(error,post){
-                callback(error,post)
+            db.get(query, values, function(error,account){
+                callback(error,account)
             })
         },
 
         createAccount(account,callback){
           const query =  `INSERT INTO Account 
-          (FirstName,LastName,Organization,Email,Phone,Description,HashedPassowrd,CreationDateTime)
-          VALUES(?,?,?,?,?,?,?,datetime("now"))`
+          (FirstName,LastName,Organization,Email,Phone,Description,HashedPassowrd,TypeId,Interest,CreationDateTime)
+          VALUES(?,?,?,?,?,?,?,?,?,datetime("now"))`
           const values = [account.firstName,account.lastName,account.org,account.email,
-            account.phone,account.description,account.hashedPassword]
-          db.all(query, values, function(error){
+            account.phone,account.description,account.hashedPassword,account.accountType,account.interest]
+          db.run(query, values, function(error){
               callback(error)
               
           })

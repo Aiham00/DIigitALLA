@@ -1,0 +1,51 @@
+
+{{#if errorsMessages.length}}
+<h3>Organisationer </h3>
+<div class="row  g-4">
+  <ul>
+    {{#each errorsMessages}}
+      <li>{{this}}</li>
+    {{/each}}
+  </ul>
+
+{{else}}
+  {{#if session.isOrganization}}
+    <h3>{{account.Organization}} </h3>
+    <div class="row  g-4">
+      {{#if account.isMin}}
+      <div ><a href="/auth/update/{{account.AccountId}}" class="btn btn-primary"><h5> Uppdatera</h5></a> </div>
+      {{/if}}
+      <div class="row row-cols-1 row-cols-sm-1 row-cols-lg-1 g-4">
+
+          <div class="col">
+            <div class="card mb-3 justify-content-md-center" >
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <a href="/auth/{{account.AccountId}}"><img id = "bli-medlem-image" src="/images/account.png" class="img-fluid" alt="Bli medlem image"></a>
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <ul>
+                      <li><b>Organisation: </b>{{account.Organization}}</li>
+                      <li><b>Namn: </b> {{account.FirstName}} {{account.LastName}}</li>
+                      <li><b>Mail: </b><a href="mailto:{{account.Email}}">{{account.Email}}</a></li>
+                      <li><b>Telefonnummer: </b>{{account.Phone}}</li>
+                      <li><b>Ämnes tagg: </b><span class="badge text-dark tag">#{{account.TypeName}}</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="row g-4">
+                    <h5>Verksamhets beskrivning: </h5>
+                    <p>{{account.Description}}</p>
+                    <h5>Tidigare projekt och intresse för samverkan:  </h5>
+                    <p>{{account.Interest}}</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+  {{/if}}
+{{/if}}
