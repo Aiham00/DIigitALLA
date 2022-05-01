@@ -135,6 +135,14 @@
                 Mitt konto
               </a>
             </li>
+            {{#if session.isAdmin}}
+            <li class="nav-item">
+              <a id="inactive-accounts-link" class="nav-link" aria-current="page" href="/auth/inactive-accounts">
+                <i class="bi bi-person-circle"></i>
+                Inaktiva Konton
+              </a>
+            </li>
+            {{/if}}
             <li class="nav-item">
               <a id="log-link" class="nav-link " aria-current="page" href="/auth/logout">
                 <i class="bi bi-box-arrow-right"></i>

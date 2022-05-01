@@ -12,9 +12,21 @@
   {{#if session.isOrganization}}
     <h3>{{account.Organization}} </h3>
     <div class="row  g-4">
+      <div >
       {{#if account.isMin}}
-      <div ><a href="/auth/update/{{account.AccountId}}" class="btn btn-primary"><h5> Uppdatera</h5></a> </div>
+      <a href="/auth/update/{{account.AccountId}}" class="btn btn-primary"><h5> Uppdatera</h5></a> 
+      {{else}}
+        {{#if session.isAdmin}}
+          <a href="/auth/delete/{{account.AccountId}}" class="btn btn-primary"><h5> Ta bort</h5></a> 
+          {{#if account.IsActive}}
+            <a href="/auth/deactivate/{{account.AccountId}}" class="btn btn-primary"><h5> Avaktivera</h5></a> 
+          {{else}}
+            <a href="/auth/active/{{account.AccountId}}" class="btn btn-primary"><h5> Aktivera</h5></a> 
+          {{/if}}
+        {{/if}}
       {{/if}}
+
+      </div>
       <div class="row row-cols-1 row-cols-sm-1 row-cols-lg-1 g-4">
 
           <div class="col">

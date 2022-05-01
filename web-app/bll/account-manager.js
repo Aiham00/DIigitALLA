@@ -19,16 +19,33 @@ module.exports = function({
 
           },
 
-          getAccount(id,accountId,callback){
-            accountRepository.getAccount(id,function(error,account){
+          getAllInactiveAccounts(AccountType,callback){
+          accountRepository.getAllInactiveAccounts(function(error,accounts){
 
               if ( error){
                 callback("database error")
-              }else if (accountId == id){
-                account["isMin"]="true"
-                callback(error,account)
               }else{
-                callback(error,account)
+                callback(error,accounts)
+              
+              }
+            })
+
+          },
+
+          getAccount(id,accountId,isActive,callback){
+            accountRepository.getAccount(id,isActive,function(error,account){
+
+              if ( error){
+                callback("database error")
+              }else if(account){
+                if (accountId == id){
+                  account["isMin"]="true"
+                  callback(error,account)
+                }else{
+                  callback(error,account)
+                }
+              }else{
+                callback("no account")
               }
             })
 

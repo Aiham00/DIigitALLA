@@ -13,20 +13,33 @@ module.exports = function({
           const query =  `SELECT AccountId,FirstName,LastName,Organization,Phone,TypeName,Email,CreationDateTime,IsActive
           from Account
           JOIN AccountType on Account.TypeId = AccountType.TypeId
-		      WHERE IsActive = 1
+		      WHERE IsActive = ?
           ORDER by Organization `
-          const values = []
+          const values = [1]
           db.all(query, values, function(error,accounts){
               callback(error,accounts)
           })
         },
 
-          getAccount(id,callback){
+        getAllInactiveAccounts( callback){
+          const query =  `SELECT AccountId,FirstName,LastName,Organization,Phone,TypeName,Email,CreationDateTime,IsActive
+          from Account
+          JOIN AccountType on Account.TypeId = AccountType.TypeId
+		      WHERE IsActive = ?
+          ORDER by Organization `
+          const values = [0]
+          db.all(query, values, function(error,accounts){
+              callback(error,accounts)
+          })
+        },
+
+          getAccount(id,isActive,callback){
             const query =  `SELECT AccountId,FirstName,LastName,Organization,Phone,TypeName,Email,CreationDateTime,IsActive,Description,Interest
             from Account
             JOIN AccountType on AccountType.TypeId = Account.TypeId
-            WHERE Account.AccountId = ?`
-            const values = [id]
+            WHERE Account.AccountId = ?
+            AND IsActive = ? `
+            const values = [id,isActive]
             db.get(query, values, function(error,account){
                 callback(error,account)
             })
@@ -34,10 +47,10 @@ module.exports = function({
 
         createAccount(account,callback){
           const query =  `INSERT INTO Account 
-          (FirstName,LastName,Organization,Email,Phone,Description,HashedPassowrd,TypeId,Interest,CreationDateTime)
-          VALUES(?,?,?,?,?,?,?,?,?,datetime("now"))`
-          const values = [account.firstName,account.lastName,account.org,account.email,
-            account.phone,account.description,account.hashedPassword,account.accountType,account.interest]
+          (FirstName,LastName,Organization,Email,Phone,Description,HashedPassowrd,TypeId,Interest,IsActive,CreationDateTime)
+          VALUES(?,?,?,?,?,?,?,?,?,?,datetime("now"))`
+          const values = [account.firstName,account.lastName,account.org,account.email,account.phone,
+            account.description,account.hashedPassword,account.accountType,account.interest,0]
           db.run(query, values, function(error){
               callback(error)
               

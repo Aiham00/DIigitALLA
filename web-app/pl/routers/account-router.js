@@ -39,11 +39,20 @@ console.log(error)
   })
 
   router.post('/login', function (request, response) {
+    if(request.body.email="aiham682@hotmail.com"){
+      request.session.accountId = "2"
 
-    request.session.accountId = "1"
+      sessionHandler.setSessionAuthentication(request.session, "admin")
+      sessionHandler.setSessionAuthentication(request.session, "organization")
+      response.render('home.hbs')
+    }else{
+      request.session.accountId = "1"
 
-    sessionHandler.setSessionAuthentication(request.session, "organization")
-    response.render('home.hbs')
+      sessionHandler.setSessionAuthentication(request.session, "organization")
+      response.render('home.hbs')
+    }
+
+ 
 
   })
 
@@ -75,7 +84,53 @@ console.log(error)
 
   router.get('/my-account', function(request, response){
     const accountId = request.session.accountId 
-    accountManager.getAccount(accountId,accountId,function(error,account){
+    const isActive = 1
+    accountManager.getAccount(accountId,accountId,isActive,function(error,account){
+      if(error){
+        const model ={
+          errorsMessages:[error]
+        }
+        response.render('account-view.hbs',model)
+
+      }else{
+        const model = {
+          errorsMessages:[],
+          account
+        }
+        response.render('account-view.hbs',model)
+
+      }
+    })
+
+  })
+
+  router.get('/inactive-accounts', function(request, response){
+    const accountType = sessionHandler.getSessionAuthentication(request.session) 
+    accountManager.getAllInactiveAccounts(accountType, function (error,accounts) {
+
+      if (error) {
+console.log(error)
+
+      }else if (!accounts.length){
+console.log(error)
+
+      } else {
+        const model ={
+          errorsMessages:[],
+          accounts
+        }
+        response.render('inactive-accounts.hbs',model)
+
+      }
+    })
+
+  })
+
+  router.get('/inactive-accounts/:id', function(request, response){
+    const id = request.params.id
+    const accountId = request.session.accountId 
+    const isActive = 0
+    accountManager.getAccount(id,accountId,isActive,function(error,account){
       if(error){
         const model ={
           errorsMessages:[error]
@@ -97,7 +152,8 @@ console.log(error)
   router.get('/:id', function(request, response){
     const id = request.params.id
     const accountId = request.session.accountId 
-    accountManager.getAccount(id,accountId,function(error,account){
+    const isActive = 1
+    accountManager.getAccount(id,accountId,isActive,function(error,account){
       if(error){
         const model ={
           errorsMessages:[error]
