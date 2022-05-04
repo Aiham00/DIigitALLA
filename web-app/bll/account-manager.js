@@ -1,5 +1,4 @@
 module.exports = function({
-  blogRepository,
   accountRepository
   
 }){
@@ -18,6 +17,19 @@ module.exports = function({
             })
 
           },
+
+          getAllAccountsByType(AccountId,typeId,callback){
+            accountRepository.getAllAccountsByType(typeId,function(error,accounts){
+  
+                if ( error){
+                  callback("database error")
+                }else{
+                  callback(error,accounts)
+                
+                }
+              })
+  
+            },
 
           getAllInactiveAccounts(AccountType,callback){
           accountRepository.getAllInactiveAccounts(function(error,accounts){
@@ -60,14 +72,21 @@ module.exports = function({
               callback(error)
             })
           },
-          createBlog(accountId,blog,callback){
-            blogRepository.createBlog(blog,function(error){
+
+          deleteAccount(accountId,accountType,callback){
+            accountRepository.deleteAccount(accountId,function(error){
               callback(error)
             })
           },
 
-          createRebly(accountId,rebly,callback){
-            blogRepository.createRebly(rebly,function(error){
+          activateAccount(accountId,accountType,callback){
+            accountRepository.activateAccount(accountId,function(error){
+              callback(error)
+            })
+          },
+
+          decactivateAccount(accountId,accountType,callback){
+            accountRepository.decactivateAccount(accountId,function(error){
               callback(error)
             })
           }

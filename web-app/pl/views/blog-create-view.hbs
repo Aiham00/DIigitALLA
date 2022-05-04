@@ -13,10 +13,19 @@
         </div>
         <div id="paragraphs-container" class="card-body">
           <div class="col">
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg " name="type">
+              <option selected >Välj blogg kategori</option>
+              <option value="1">Evenemang</option>
+              <option value="2">Finansieringsmöjligheter</option>
+              <option value="3">Forskning/rapporte</option>
+              <option value="4">Projektansökningar</option>
+              <option value="5">Projektresultat</option>
+              <option value="6">Övrigt</option>
+            </select>
             <div class="form-floating">
               <input type="hidden" name="paragraph"></input>
-              <textarea class="form-control" placeholder="Leave a comment here" id="signup-Textarea" name="paragraph"></textarea>
-              <label for="signup-Textarea">Paragraf</label>
+              <textarea class="form-control" placeholder="Leave a comment here" id="signup-description" name="paragraph"></textarea>
+              <label for="signup-description">Paragraf</label>
             </div> 
             <div class="form-floating mb-3">
               <input type="hidden" name="linkTitle">
@@ -33,7 +42,6 @@
               </label>
             </div>
           </div>
-
 
         </div>
         <div class="card-footer bg-transparent border-success">

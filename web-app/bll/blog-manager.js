@@ -1,6 +1,6 @@
 module.exports = function({
   blogRepository,
-  forumRepository
+  
   
 }){
 
@@ -8,6 +8,20 @@ module.exports = function({
 
         getAllBlogs(AccountId,callback){
           blogRepository.getAllBlogs(function(error,blogs){
+
+              if ( error){
+                callback("database error")
+              }else{
+                callback(error,blogs)
+              
+              }
+            })
+
+          },
+
+          
+          getAllBlogsByType(AccountId,typeId,callback){
+          blogRepository.getAllBlogsByType(typeId,function(error,blogs){
 
               if ( error){
                 callback("database error")

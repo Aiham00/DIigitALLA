@@ -11,6 +11,7 @@
     "express-layout": "^0.1.0",
     "express-middelware": "^1.0.1",
     "express-session": "^1.17.2",
+    "now": "^21.0.1",
     "sqlit": "^2.0.0",
     "sqlite": "^4.0.25",
     "sqlite3": "^5.0.4"

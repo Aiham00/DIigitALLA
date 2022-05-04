@@ -1,39 +1,67 @@
 <h3> Blogs </h3>
-<div class="row  g-4">
-  <div ><a href="/blogs/create" class="btn btn-primary"><h5> Skriv blogg!</h5></a> </div>
-{{#if blogs.length}}
-  <div class="row row-cols-1 row-cols-sm-1 row-cols-lg-2 g-4">
-  {{#each blogs}}
 
-    <div class="col">
-      <div id="blog-card" class="card mb-3 justify-content-md-center" >
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img id = "blog-image" src="{{this.BlogImageAddress}}" class="img-fluid" alt="Blog image or vedio">
-          </div>
-          <div class="col-md-8">
-            <div class="card-header">{{this.BlogTitle}}</div>
-            <div class="card-body">
-              <h5 class="card-title"> </h5>
-              <div class="row"><p class="text-sm-end fs-5"> Publicerat av: {{this.Organization}}</p></div>
-              <div class="card-footer bg-transparent border-success">
-                <div class="row g-5 ">
-                  <div class="col col-md-8 col-sm-8">
-                    Publicerat: {{this.BlogDateTime}}
-                  </div>
-                  <div class="col text-sm-start col-md-4 col-sm-4 ">
-                    <a href="/blogs/{{this.BlogId}}" >Läs mer</a>
-                  </div>
-                </div>
+  <nav class="navbar sticky-top navbar-light bg-light">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="row g-4">
+
+          <div class="col ">
+            <div class="row">
+
+                <div class="btn-group">
+                  <a href="/blogs" class="btn btn-primary" aria-current="page">Senaste inlägg</a>
+                  <a href="/blogs/cat/1" class="btn btn-primary" >#Evenemang</a>
+                  <a href="/blogs/cat/2" class="btn btn-primary">#Finansieringsmöjligheter</a>
+                  <a href="/blogs/cat/3" class="btn btn-primary">#Forskning/rapporte </a>
+
+                  <a href="/blogs/cat/4" class="btn btn-primary" >#Projektansökningar</a>
+                  <a href="/blogs/cat/5" class="btn btn-primary">#Projektresultat</a>
+                  <a href="/blogs/cat/6" class="btn btn-primary">#Övrigt</a>
               </div>
-              </div>
-          </div>
+
+            </div>
+
+
         </div>
       </div>
     </div>
-    {{/each}}
-  </div>
-{{/if}}
+  </nav>  
+  <div class="row  g-4">
+    <div ><a href="/blogs/create" class="btn btn-primary"><h5> Skriv blogg!</h5></a> </div>
+    {{#if blogs.length}}
+      <div class="row row-cols-1 row-cols-sm-1 row-cols-lg-2 g-4">
+      {{#each blogs}}
+
+        <div class="col">
+          <div id="blog-card" class="card mb-3 justify-content-md-center" >
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img id = "blog-image" src="{{this.BlogImageAddress}}" class="img-fluid" alt="Blog image">
+              </div>
+              <div class="col-md-8">
+                <div class="card-header">{{this.BlogTitle}}</div>
+                <div class="card-body">
+                  <h5 class="card-title"> </h5>
+                  <div class="row"><p class="text-sm-end fs-5"> Publicerat av: {{this.Organization}}</p></div>
+                  <span class="badge-Dark text-light tag">#{{this.BlogTypeName}}</span>
+                  <div class="card-footer bg-transparent border-success">
+                    <div class="row g-5 ">
+                      <div class="col col-md-8 col-sm-8">
+                        Publicerat: {{this.BlogDateTime}}
+                      </div>
+                      <div class="col text-sm-start col-md-4 col-sm-4 ">
+                        <a href="/blogs/{{this.BlogId}}" >Läs mer</a>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
 </div>
 
 <script>

@@ -1,32 +1,64 @@
 <h3>Organisationer </h3>
+  <nav class="navbar sticky-top navbar-light bg-light">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="row g-4">
+
+          <div class="col ">
+            <div class="row">
+
+                <div class="btn-group">
+                  <a href="/auth/accounts" class="btn btn-primary" aria-current="page">Alla</a>
+                  <a href="/auth/accounts/cat/1" class="btn btn-primary" >#Bibliotek</a>
+                  <a href="/auth/accounts/cat/2" class="btn btn-primary">#Förening</a>
+                  <a href="/auth/accounts/cat/3" class="btn btn-primary">#Offentlig sektor </a>
+
+                  <a href="/auth/accounts/cat/4" class="btn btn-primary" >#Privat företag</a>
+                  <a href="/auth/accounts/cat/5" class="btn btn-primary">#Socialt företag</a>
+                  <a href="/auth/accounts/cat/6" class="btn btn-primary">#Studieförbund </a>
+                  <a href="/auth/accounts/cat/7" class="btn btn-primary">#Övrigt</a>
+              </div>
+
+            </div>
+
+
+        </div>
+      </div>
+    </div>
+  </nav>
 <div class="row  g-4">
 {{#if errorsMessages.length}}
 {{/if}}
 
 {{#if session.isOrganization}}
   <div class="row row-cols-1 row-cols-sm-1 row-cols-lg-2 g-4">
-  {{#each accounts}}
-    <div class="col">
-      <div id="account-contact" class="card mb-3 justify-content-md-center" >
-        <div class="row g-0">
-          <div class="col-md-4">
-            <a href="/auth/{{this.AccountId}}"><img id = "bli-medlem-image" src="/images/account.png" class="img-fluid" alt="Bli medlem image"></a>
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <ul>
-                <li><a href="/auth/{{this.AccountId}}">{{this.Organization}}</a></li>
-                <li>{{this.FirstName}} {{this.LastName}}</li>
-                <li><a href="mailto:{{this.Email}}">{{this.Email}}</a></li>
-                <li>{{this.Phone}}</li>
-                <li>#{{this.TypeName}}</li>
-              </ul>
+    {{#if accounts.length}}
+      {{#each accounts}}
+        <div class="col">
+          <div id="account-contact" class="card mb-3 justify-content-md-center" >
+            <div class="row g-0">
+              <div class="col-md-4">
+                <a href="/auth/{{this.AccountId}}"><img id = "bli-medlem-image" src="/images/account.png" class="img-fluid" alt="Bli medlem image"></a>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <ul>
+                    <li><a href="/auth/{{this.AccountId}}">{{this.Organization}}</a></li>
+                    <li>{{this.FirstName}} {{this.LastName}}</li>
+                    <li><a href="mailto:{{this.Email}}">{{this.Email}}</a></li>
+                    <li>{{this.Phone}}</li>
+                    <li>#{{this.TypeName}}</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    {{/each}}
+      {{/each}}
+    {{else}}
+      <p>Inga konto</p>
+    {{/if}}
+
   </div>
 {{/if}}
 </div>

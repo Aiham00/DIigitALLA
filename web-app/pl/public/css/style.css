@@ -45,8 +45,11 @@
 
 }
 .card .badge.text-dark.tag{
-    background-color: rgb(163, 213, 223);
+    background-color: rgb(163, 169, 223);
 
+}
+.card .badge-Dark.text-light.tag{
+    background-color: rgb(10, 15, 88);   
 }
 #answer-Textarea{
     height: 10rem;
@@ -75,5 +78,11 @@
 #account-contact{
     margin-top: 1rem;
     background-color: rgb(191, 222, 230);
+    max-width: 540px;
+}
+
+#account-contact-inactiv{
+    margin-top: 1rem;
+    background-color: rgb(241, 138, 202);
     max-width: 540px;
 }

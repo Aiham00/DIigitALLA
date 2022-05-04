@@ -3,6 +3,7 @@ const container = awilix.createContainer()
 
 container.register({
     app                 : awilix.asFunction(require('./pl/app.js')),
+    errorCodes           : awilix.asFunction(require('./error-codes.js')),
     accountRouter       : awilix.asFunction(require('./pl/routers/account-router.js')),
     sessionHandler      : awilix.asFunction(require('./pl/session-handler.js')),
     constants           : awilix.asFunction(require('./constants.js')),
@@ -15,7 +16,10 @@ container.register({
     blogRepository      : awilix.asFunction(require('./dal/blog-repository.js')),
     accountManager      : awilix.asFunction(require('./bll/account-manager.js')),
     accountRepository   : awilix.asFunction(require('./dal/account-repository.js')),
-
+    placeRouter         : awilix.asFunction(require('./pl/routers/place-router.js')),
+    placeManager        : awilix.asFunction(require('./bll/place-manager.js')),
+    placeRepository     : awilix.asFunction(require('./dal/place-repository.js')),
+    apiRouter           : awilix.asFunction(require('./pl/routers/api-router.js')),
 
 })
 

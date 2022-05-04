@@ -5,11 +5,12 @@
     <h3 class="card-title">Ta bort konto</h3>
     <p class="card-text">Är du säker på att du vill ta bort det här kontot?</p>
     <div class="btn-group">
-     <a class="btn btn-secondary" href="/">Nej, gå till startsidan</a>
+      <a class="btn btn-secondary" href="/">Nej, gå till startsidan</a>
 
-     <form action="/auth/delete/{{id}}" method="POST">
-          <button type="submit" class="btn btn-primary">Ta bort!</button>
-     </form>
+      <form action="/auth/delete" method="POST">
+        <input type="hidden" value="{{id}}" name="accountId">
+        <button type="submit" class="btn btn-primary">Ta bort!</button>
+      </form>
     </div>
 
   </div>

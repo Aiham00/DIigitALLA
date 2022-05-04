@@ -11,6 +11,8 @@
         <div class="card-body">
           <h5 class="card-title"> </h5>
           <div class="row"><p class="text-sm-end fs-5"> Publicerat av: {{blog.Organization}}</p></div>
+          <p>Blogg kategori: <span class="badge-Dark text-light tag">#{{blog.BlogTypeName}}</span></p>
+
             <div class="row">
              
 
@@ -80,7 +82,7 @@
                   {{#each replies}}
                     <div class="list-group">
                         <div class="d-flex w-100 justify-content-between">
-                          <h6 class="mb-1"> <a href="#">{{this.Organization}}</a> says :</h6>
+                          <h6 class="mb-1"> <a href="/auth/{{this.AccountId}}">{{this.Organization}}</a> says :</h6>
                           <small>{{this.ReplyDateTime}}</small>
                         </div>
                         <p class="mb-1">{{this.ReplyText}}</p>
@@ -89,12 +91,10 @@
                 {{/if}}
 
 
-                <div class="list-group">
-
                   <form action="/blogs/rebly" method="post" id="loginForm" class="row gy-2 gx-3 align-items-center">
                     <div class="card ">
                       <div class="card-body">
-                        <div class="form-floating">
+                        <div id="reply-form" class="form-floating">
                           <input type="hidden" value="{{../blog.BlogId}}" name="blogId">
                           <input type="hidden" value="{{this.AnswerId}}" name="answerId">
                           <input type="hidden" value="{{../accountId}}" name="accountId">
@@ -104,15 +104,13 @@
                         <div class="card-footer bg-transparent border-success">
                           <div class="row g-4 ">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary"> <i class="bi bi-send"></i> reply!</button>
+                                <button type="submit" class="btn btn-primary" id="reply-button"> <i class="bi bi-send"></i> reply!</button>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </form>
-
-                </div>
               </div>
             </div>
           {{/each}}
@@ -134,6 +132,7 @@
         const cards = document.querySelectorAll("#replys-card")
         const className = "hidden"
         const links =document.querySelectorAll(".reply-link")
+        const reblyButtons =document.querySelectorAll("#reply-button")
 
         for (const link of links) {
           link.addEventListener("click",function(e){
@@ -150,6 +149,67 @@
         })
 
         }
+
+        for (const button of reblyButtons) {
+          button.addEventListener("click",function(e){
+            e.preventDefault()
+            const form = button.parentElement.parentElement.parentElement.parentElement.
+            parentElement.parentElement
+            const formInfo = form.firstElementChild.firstElementChild.firstElementChild
+
+            const blogId = formInfo.firstElementChild
+            const answerId = blogId.nextElementSibling
+            const accountId = answerId.nextElementSibling
+            const reply = accountId.nextElementSibling
+            
+            async function postReplay(){
+	
+              const response = await fetch("http://localhost:8080/api/reply",{
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(
+                  {answerId:answerId.value,
+                  accountId:answerId.value,
+                  reply:reply.value
+                  })
+              }).then (function(response){
+
+                  return response.json()
+                
+                  .then(function(reply){
+                    const replyCard = form.parentElement
+                    const lastReply = document.createElement("div")
+                    lastReply.classList.add("list-group")
+                    let current_datetime =new Date().now()
+                    let formatted_date = current_datetime.getFullYear() + "-" + 
+                    (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + 
+                    " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" +
+                     current_datetime.getSeconds() 
+
+                    lastReply.innerHTML = `
+                        <div class="d-flex w-100 justify-content-between">
+                          <h6 class="mb-1"> <a href="/auth/`+reply.accountId+`">Me</a> says :</h6>
+                          <small>`+formatted_date+`</small>
+                        </div>
+                        <p class="mb-1">`+reply.reply+`</p>
+                    `
+                    replyCard.firstElementChild.appendChild(lastReply)
+                  })
+                  
+                }).catch (function(error){
+
+                })
+              }
+
+              postReplay()
+            
+
+
+        })
+
+        }
+
+
     })
 
 </script>

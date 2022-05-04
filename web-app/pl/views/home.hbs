@@ -1,6 +1,6 @@
 <h3>Home</h3>
 <div class="d-flex">
-    <form class="d-flex">
+    <form action="/" method="GET" class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <select class="form-select me-2" aria-label=".form-select-lg example">
             <option selected>Open this select menu</option>
@@ -41,63 +41,139 @@
 
         // Array of markers
         var markers = [
-            {
-                coords: { lat: 57.7376924, lng: 14.1432979 },
-                iconImage: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-                content: '<h4>Lynn MA</h4>'
-            },
-            {
-                
-                coords: { lat: 57.7787537, lng: 14.2063449 },
-                iconImage: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+  {
+    PlaceId: 1,
+    PlaceName: 'ffg',
+    Lat: '57',
+    Lng: '14',
+    Link: 'https://www.google.se/maps/@57.7787406,14.1550185,16z?hl=en',
+    Address: 'Fabriksgatan 13A, 553 18 Jönköping',
+    Kommun: 'Jönköping',
+    Phone: 735081923,
+    OpenTimeId: 3,
+    AccountId: 2,
+    FirstName: 'Ayham',
+    LastName: 'Hanna',
+    Organization: 'Organization',
+    Email: 'aiham@fgggg.com',
+    CreationDateTime: '2022-04-30 10:37:16',
+    HashedPassowrd: '123',
+    Description: 'gghgh',
+    Interest: null,
+    IsActive: 1,
+    TypeId: 1,
+    isAdmin: null,
+    MonFrom: '05:23',
+    MonTo: '09:27',
+    TueFrom: '',
+    TueTo: '',
+    WedFrom: '',
+    WedTo: '',
+    ThuFrom: '',
+    ThuTo: '',
+    FriFrom: '',
+    FriTo: '',
+    SatFrom: '',
+    SatTo: '',
+    SunFrom: '',
+    SunTo: ''
+  },
+  {
+    PlaceId: 2,
+    PlaceName: 'ffggf ffgfg',
+    Lat: '57.7804036',
+    Lng: '14.1591483',
+    Link: 'https://www.google.se/maps/dir/57.7804036,14.1591483//@57.7787561,14.1576355,16z/data=!4m2!4m1!3e3?hl=en',
+    Address: 'Kärrhöksgatan 84',
+    Kommun: 'Jönköping',
+    Phone: 735081923,
+    OpenTimeId: 4,
+    AccountId: 2,
+    FirstName: 'Ayham',
+    LastName: 'Hanna',
+    Organization: 'Organization',
+    Email: 'aiham@fgggg.com',
+    CreationDateTime: '2022-04-30 10:37:16',
+    HashedPassowrd: '123',
+    Description: 'gghgh',
+    Interest: null,
+    IsActive: 1,
+    TypeId: 1,
+    isAdmin: null,
+    MonFrom: '',
+    MonTo: '',
+    TueFrom: '03:31',
+    TueTo: '04:30',
+    WedFrom: '',
+    WedTo: '',
+    ThuFrom: '',
+    ThuTo: '',
+    FriFrom: '',
+    FriTo: '',
+    SatFrom: '',
+    SatTo: '',
+    SunFrom: '',
+    SunTo: ''
+  }
+]
 
-                content: `<h4> Arbetsförmedlingen Jönköping </h4>
-                <a target="_blank" jstcache="6" 
-                href="https://www.google.com/maps/place/Arbetsf%C3%B6rmedlingen+J%C3%B6nk%C3%B6ping/@57.7800685,14.1617021,18z/data=!4m12!1m6!3m5!1s0x465a6debe6522eb3:0x1691bc484bad3889!2zQXJiZXRzZsO2cm1lZGxpbmdlbiBKw7Zua8O2cGluZw!8m2!3d57.780539!4d14.161686!3m4!1s0x465a6debe6522eb3:0x1691bc484bad3889!8m2!3d57.780539!4d14.161686!5m1!1e1" tabindex="0">
-                 <span>
-                      View on Google Maps 
-                 </span> </a>`
-
-            },
-            {
-                coords: { lat: 42.7762, lng: -71.0773 },
-                content: '<h4> Arbetsförmedlingen Jönköping </h4>'
-
-            }
-        ];
 
         // Loop through markers
         for (const marker of markers) {
             // Add marker
             addMarker(marker);
         }
+                let infoWindow = null
 
         // Add Marker Function
         function addMarker(props) {
+            const lat = parseFloat(props.Lat)
+            const lng = parseFloat(props.Lng)
             var marker = new google.maps.Marker({
-                position: props.coords,
+                position: {lat,lng},
                 map: map,
                 //icon:props.iconImage
             });
 
-            // Check for customicon
-            if (props.iconImage) {
                 // Set icon image
-                marker.setIcon(props.iconImage);
-            }
-
+                marker.setIcon(`https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png`);
+                let mon = "<li>Måndag: stängt </li>" 
+                if(props.MonFrom.length != 0){mon =  "<li>Måndag: "+props.MonFrom + " - "+ props.MonTo +"</li>"}
+                let tue = "<li>Tisdag: closed </li>" 
+                if(props.TueFrom.length != 0){tue =  "<li>Tisdag: "+props.TueFrom + " - "+ props.TueTo +"</li>"}
+                let wed = "<li>Onsdag: closed </li>" 
+                if(props.WedFrom.length != 0){wed =  "<li>Onsdag: "+props.WedFrom + " - "+ props.WedTo +"</li>"}
+                let thu = "<li>Torsdag: closed </li>" 
+                if(props.ThuFrom.length != 0){thu =  "<li>Torsdag: "+props.ThuFrom + " - "+ props.ThuTo +"</li>"}
+                let fri = "<li>Fredag: closed </li>" 
+                if(props.FriFrom.length != 0){fri =  "<li>Fredag: "+props.FriFrom + " - "+ props.FriTo +"</li>"}
+                let sat = "<li>Lördag: closed </li>" 
+                if(props.SatFrom.length != 0){sat =  "<li>Lördag: "+props.SatFrom + " - "+ props.SatTo +"</li>"}
+                let sun = "<li>Söndag: closed </li>" 
+                if(props.SunFrom.length != 0){sun =  "<li>Söndag: "+props.SunFrom + " - "+ props.SunTo +"</li>"}
             // Check content
-            if (props.content) {
-                var infoWindow = new google.maps.InfoWindow({
-                    content: props.content
+
+                let lastInfoWindow
+                let isOpen = false
+                
+                marker.addListener('click', function () {
+                    if(infoWindow){
+                        infoWindow.close()
+
+                    }
+                infoWindow = new google.maps.InfoWindow({
+                    content: "<h6>"+props.PlaceName+"</h6> <p> Typ av hjälp</p> <ul> Öppettidder" + mon +
+                        tue + wed + thu + fri + sat + sun + "</ul> <p>Telefonnummer: " + props.Phone + "</p><p> Adress: " +
+                            props.Address + "</p> <p>" + props.Kommun + '</p> <p><a href ="' + props.Link + '">Gå till maps</a></p>'
                 });
 
-                marker.addListener('click', function () {
-                    infoWindow.open(map, marker);
+                 infoWindow.open(map, marker);
+
                 });
-            }
             return marker
         }
+
+
     }
 </script>
 <script async defer

@@ -24,20 +24,34 @@ module.exports = function({
       return {
 
         getAllBlogs( callback){
-              const query =  `SELECT BlogId,BlogTitle,BlogDateTime,Blog.BlogAccountId,BlogImageAddress,Organization
+              const query =  `SELECT BlogId,BlogTitle,BlogDateTime,Blog.BlogAccountId,BlogImageAddress,Organization,BlogTypeName
               from Blog
               JOIN Account on Blog.BlogAccountId = Account.AccountId
-              ORDER by BlogDateTime desc`
+			        JOIN BlogType on BlogType.BlogTypeId = Blog.BlogTypeId
+              ORDER by BlogDateTime desc `
               const values = []
               db.all(query, values, function(error,blogs){
                   callback(error,blogs)
               })
           },
-
-          getBlog(blogId,callback){
-            const query =  `SELECT BlogId,BlogTitle,BlogDateTime,Blog.BlogAccountId,BlogImageAddress,Organization
+          getAllBlogsByType(typeId, callback){
+            const query =  `SELECT BlogId,BlogTitle,BlogDateTime,Blog.BlogAccountId,BlogImageAddress,Organization,BlogTypeName
             from Blog
             JOIN Account on Blog.BlogAccountId = Account.AccountId
+            JOIN BlogType on BlogType.BlogTypeId = Blog.BlogTypeId
+            WHERE BlogType.BlogTypeId =? 
+            ORDER by BlogDateTime desc   `
+            const values = [typeId]
+            db.all(query, values, function(error,blogs){
+                callback(error,blogs)
+            })
+        },
+
+          getBlog(blogId,callback){
+            const query =  `SELECT BlogId,BlogTitle,BlogDateTime,Blog.BlogAccountId,BlogImageAddress,Organization,BlogTypeName
+            from Blog
+            JOIN Account on Blog.BlogAccountId = Account.AccountId
+            JOIN BlogType on BlogType.BlogTypeId = Blog.BlogTypeId
             WHERE BLog.BlogId = ?`
             const values = [blogId]
             db.get(query, values, function(error,blog){
@@ -60,9 +74,9 @@ module.exports = function({
         },
 
         createBlog(blog,callback){
-          const query =  `INSERT INTO Blog (BlogTitle,BlogAccountId,BlogDateTime)
-          VALUES (?,?,datetime("now"));`
-          const values = [blog.title,blog.accountId]
+          const query =  `INSERT INTO Blog (BlogTitle,BlogAccountId,BlogTypeId,BlogDateTime)
+          VALUES (?,?,?,datetime("now"));`
+          const values = [blog.title,blog.accountId,blog.type]
           db.run(query, values, function(error){
             if(error){
               callback(error)
@@ -104,7 +118,8 @@ module.exports = function({
         },
 
         getAnswerReplies(answerId, callback){
-          const query =  `SELECT  Answer.AnswerId,Reply.ReplyText,ReplyDateTime,Reply.ReplyiId,Organization from Answer
+          const query =  `SELECT  Answer.AnswerId,Reply.ReplyText,ReplyDateTime,Reply.ReplyiId,Organization,Account.AccountId
+           from Answer
           JOIN Reply on Answer.AnswerId = Reply.AnswerId
 		      JOIN Account on Account.AccountId = Reply.AccountId
           WHERE Answer.AnswerId = ?`

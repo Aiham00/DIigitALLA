@@ -1,4 +1,4 @@
-<h3>Organisationer </h3>
+<h3>Inactiva Konton </h3>
 <div class="row  g-4">
 {{#if errorsMessages.length}}
 {{/if}}
@@ -7,7 +7,7 @@
   <div class="row row-cols-1 row-cols-sm-1 row-cols-lg-2 g-4">
   {{#each accounts}}
     <div class="col">
-      <div id="account-contact" class="card mb-3 justify-content-md-center" >
+      <div id="account-contact-inactiv" class="card mb-3 justify-content-md-center" >
         <div class="row g-0">
           <div class="col-md-4">
             <a href="/auth/inactive-accounts/{{this.AccountId}}"><img id = "bli-medlem-image" src="/images/account.png" class="img-fluid" alt="Bli medlem image"></a>

@@ -1,0 +1,196 @@
+
+{{#if session.accountId}}
+
+  <h3>Lägga till ett ställe</h3>
+
+  {{#if errorsMessages.length}}
+    <ul>
+      {{#each errorsMessages}}
+        <div id="error-messages">
+          <li>{{this}}</li>  
+        </div>
+      {{/each}}
+    </ul>
+  {{/if}}
+
+  <div class="col">  
+    <div class="row">
+      <form action="/place/create" method="post" id="place-form" class="row gy-2 gx-3 align-items-center">
+        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2">
+          <div class="col">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control form-control-lg" id="place-create-name" placeholder="e" name="name">
+              <label for="place-create-name" class=" col-form-label-lg">
+                StälleNamn
+              </label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control form-control-lg" id="place-create-lat" placeholder="e" name="lat">
+              <label for="place-create-lat" class=" col-form-label-lg">
+                Latitud
+              </label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control form-control-lg" id="place-create-lng" placeholder="e" name="lng">
+              <label for="place-create-lng" class=" col-form-label-lg">
+                Longitud
+              </label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control form-control-lg" id="place-create-Type" placeholder="e" name="type">
+              <label for="place-create-Type" class=" col-form-label-lg">
+                Typ av hjälp
+              </label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control form-control-lg" id="place-create-link" placeholder="e" name="link">
+              <label for="place-create-link" class=" col-form-label-lg">
+                Länk
+              </label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control form-control-lg" id="place-create-address" placeholder="e" name="address">
+              <label for="place-create-address" class=" col-form-label-lg">
+                Adress
+              </label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control form-control-lg" id="place-create-kommun" placeholder="e" name="kommun">
+              <label for="place-create-kommun" class=" col-form-label-lg">
+                Kommun
+              </label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control form-control-lg" id="place-create-phone" placeholder="e" name="phone">
+              <label for="place-create-phone" class=" col-form-label-lg">
+                Telefonnummer
+              </label>
+            </div>
+            <div class="col-md-12">
+                <input type="hidden" value="{{accountId}}" name="accountId">
+                <button type="submit" class="btn btn-primary"> <i class="bi bi-send"></i> Lägg till!</button>
+            </div>
+          </div>
+          <div class="col">
+            <h5>Öppettider</h5>
+            <div class="row">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control form-control-lg" id="place-create-note" placeholder="e" name="note">
+                <label for="place-create-note" class=" col-form-label-lg">
+                  Anteckning
+                </label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div class="form-floating mb-3">
+                  <input id="mon-from" type="time" class="form-control form-control-lg" name="monFrom">
+                  <label for="mon-from" class=" col-form-label-lg">Måndag från</label>
+                </div> 
+              </div>
+              <div class="col">
+                <div class="form-floating mb-3">
+                  <input id="mon-to" type="time" class="form-control form-control-lg" name="monTo">
+                  <label for="mon-to" class=" col-form-label-lg">Måndag till</label>
+                </div> 
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div class="form-floating mb-3">
+                  <input id="tue-from" type="time" class="form-control form-control-lg" name="tueFrom">
+                  <label for="tue-from" class=" col-form-label-lg">Tisdag från</label>
+                </div> 
+              </div>
+              <div class="col">
+                <div class="form-floating mb-3">
+                  <input id="tue-to" type="time" class="form-control form-control-lg" name="tueTo">
+                  <label for="tue-to" class=" col-form-label-lg">Tisdag till</label>
+                </div> 
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div class="form-floating mb-3">
+                  <input id="wed-from" type="time" class="form-control form-control-lg" name="wedFrom">
+                  <label for="wed-from" class=" col-form-label-lg">Onsdag från</label>
+                </div> 
+              </div>
+              <div class="col">
+                <div class="form-floating mb-3">
+                  <input id="wed-to" type="time" class="form-control form-control-lg" name="wedTo">
+                  <label for="wed-to" class=" col-form-label-lg">Onsdag till</label>
+                </div> 
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div class="form-floating mb-3">
+                  <input id="thu-from" type="time" class="form-control form-control-lg" name="thuFrom">
+                  <label for="thu-from" class=" col-form-label-lg">Torsdag från</label>
+                </div> 
+              </div>
+              <div class="col">
+                <div class="form-floating mb-3">
+                  <input id="thu-to" type="time" class="form-control form-control-lg" name="thuTo">
+                  <label for="thu-to" class=" col-form-label-lg">Torsdag till</label>
+                </div> 
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div class="form-floating mb-3">
+                  <input id="fri-from" type="time" class="form-control form-control-lg" name="friFrom">
+                  <label for="fri-from" class=" col-form-label-lg">Fredag från</label>
+                </div> 
+              </div>
+              <div class="col">
+                <div class="form-floating mb-3">
+                  <input id="fri-to" type="time" class="form-control form-control-lg" name="friTo">
+                  <label for="fri-to" class=" col-form-label-lg">Fredag till</label>
+                </div> 
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div class="form-floating mb-3">
+                  <input id="sat-from" type="time" class="form-control form-control-lg" name="satFrom">
+                  <label for="sat-from" class=" col-form-label-lg">Lördag från</label>
+                </div> 
+              </div>
+              <div class="col">
+                <div class="form-floating mb-3">
+                  <input id="sat-to" type="time" class="form-control form-control-lg" name="satTo">
+                  <label for="sat-to" class=" col-form-label-lg">Lördag till</label>
+                </div> 
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div class="form-floating mb-3">
+                  <input id="sun-from" type="time" class="form-control form-control-lg" name="sunFrom">
+                  <label for="sun-from" class=" col-form-label-lg">Söndag från</label>
+                </div> 
+              </div>
+              <div class="col">
+                <div class="form-floating mb-3">
+                  <input id="sun-to" type="time" class="form-control form-control-lg" name="sunTo">
+                  <label for="sun-to" class=" col-form-label-lg">Söndag till</label>
+                </div> 
+              </div>
+            </div>
+           
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{{/if}}
+

@@ -34,6 +34,25 @@ console.log(error)
     })
   })
 
+  router.get('/accounts/cat/:id', function (request, response) {
+    const accountId = 1
+    const typeId = request.params.id
+    accountManager.getAllAccountsByType(accountId,typeId, function (error,accounts) {
+
+      if (error) {
+console.log(error)
+
+      } else {
+        const model ={
+          errorsMessages:[],
+          accounts
+        }
+        response.render('accounts.hbs',model)
+
+      }
+    })
+  })
+
   router.get('/loggin', function (request, response) {
     response.render('accounts-entry.hbs')
   })
@@ -95,10 +114,52 @@ console.log(error)
     response.render('account-decactivate.hbs',model)
   })
 
+  router.post('/delete', function (request, response) {
+    const accountId = request.body.accountId
+    const accountType = sessionHandler.getSessionAuthentication(request.session) 
+    accountManager.deleteAccount(accountId,accountType, function (error) {
+      if (error) {
+console.log(error)
+
+      } else {
+        response.redirect('/auth/inactive-accounts')
+
+      }
+    })
+  })
+
+  router.post('/activate', function (request, response) {
+    const accountId = request.body.accountId
+    const accountType = sessionHandler.getSessionAuthentication(request.session) 
+    accountManager.activateAccount(accountId,accountType, function (error) {
+      if (error) {
+console.log(error)
+
+      } else {
+        response.redirect('/auth/'+accountId)
+
+      }
+    })
+  })
+
+  router.post('/decactivate', function (request, response) {
+    const accountId = request.body.accountId
+    const accountType = sessionHandler.getSessionAuthentication(request.session) 
+    accountManager.decactivateAccount(accountId,accountType, function (error) {
+      if (error) {
+console.log(error)
+
+      } else {
+        response.redirect('/auth/inactive-accounts/'+accountId)
+
+      }
+    })
+  })
+
   router.post('/signup', function (request, response) {
     accountManager.createAccount(request.body, function (error) {
       if (error) {
-        console.log(error)
+console.log(error)
       } else {
         response.redirect('/')
 

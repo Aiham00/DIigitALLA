@@ -9,12 +9,17 @@ return model
 module.exports = function(
     {
         sessionHandler,
-        blogManager
+        blogManager,
+        errorCodes
 
     }){
      
     const router = express.Router()
 
+    router.use(express.json())
+    router.use(express.urlencoded({
+      extended: false,
+    }))
     router.get('/', function(request, response){
       blogManager.getAllBlogs(1,function(error,blogs){
 
@@ -56,14 +61,25 @@ module.exports = function(
 
     })
 
-    router.get('/create', function(request, response){
-      const accountId = 1
-
-      response.render('blog-create-view.hbs',getForumLayoutModel({accountId}))
+    router.post('/reply', function(request, response){
+      const accountId = request.session.accountId
+      const rebly = {
+        accountId:request.body.accountId,
+        answerId:request.body.answerId,
+        reply:request.body.reply
+      }
+      blogManager.createRebly(accountId,rebly,function(error){
+        if(error){
+          response.status(400).json([error])
+        }else{
+          response.setHeader("Location", "/answer/replays/"+rebly.answerId)
+          response.status(201).json(rebly)
+        }
+      })  
 
     })
 
-    router.post('/create', function(request, response){
+    router.post('/repnnly', function(request, response){
       const accountId = request.session.accountId
       blogManager.createBlog(1,request.body,function(error){
         if(error){
@@ -86,7 +102,7 @@ console.log(error)
       })
     })
 
-    router.post('/rebly', function(request, response){
+    router.post('/j', function(request, response){
       const accountId = request.session.accountId
       const blogId = request.body.blogId
       blogManager.createRebly(1,request.body,function(error){

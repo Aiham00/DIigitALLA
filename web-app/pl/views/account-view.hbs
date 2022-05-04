@@ -14,7 +14,8 @@
     <div class="row  g-4">
       <div >
       {{#if account.isMin}}
-      <a href="/auth/update/{{account.AccountId}}" class="btn btn-primary"><h5> Uppdatera</h5></a> 
+      <a href="/auth/update/{{account.AccountId}}" id="apdate-account" class="btn btn-primary"><h5> Uppdatera</h5></a> 
+      <a href="/place/create" class="btn btn-primary"><h5> Lägg till ett ställe</h5></a> 
       {{else}}
         {{#if session.isAdmin}}
           <a href="/auth/delete/{{account.AccountId}}" class="btn btn-primary"><h5> Ta bort</h5></a> 
@@ -61,3 +62,31 @@
     </div>
   {{/if}}
 {{/if}}
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+      async function loadHumanPage(){
+        
+        const response = await fetch("http://localhost:8080/api/ff")
+        
+        // TODO: Check status code and act accordingly!
+        
+        const human = await response.json()
+        
+      console.log(human)
+        
+      }
+      const buttonActiveClassName = "active"
+      const homeButton = document.querySelector("#apdate-account")
+      homeButton.addEventListener("click",function(event){
+        event.preventDefault()
+        loadHumanPage()
+      })
+
+
+
+
+    })
+
+</script>

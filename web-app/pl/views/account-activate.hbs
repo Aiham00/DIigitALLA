@@ -6,9 +6,10 @@
     <div class="btn-group">
      <a class="btn btn-secondary" href="/">Nej, gå till startsidan</a>
 
-     <form action="/auth/sctivate/{{id}}" method="POST">
-          <button type="submit" class="btn btn-primary">Aktivera!</button>
-     </form>
+      <form action="/auth/activate" method="POST">
+        <input type="hidden" value="{{id}}" name="accountId">
+        <button type="submit" class="btn btn-primary">Aktivera!</button>
+      </form>
     </div>
 
   </div>

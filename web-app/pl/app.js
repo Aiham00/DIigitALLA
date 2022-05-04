@@ -7,11 +7,15 @@ const session = require('express-session')
 const connectSqlite = require('connect-sqlite3')
 const SqliteSessionStore = connectSqlite(session)
 const layout = require('express-layout')
+
+
 module.exports = function(
     {
         accountRouter,
         forumRouter,
-        blogRouter
+        blogRouter,
+        placeRouter,
+        apiRouter
     }
     ){
         const app = express()
@@ -53,6 +57,10 @@ module.exports = function(
         app.use('/forum', forumRouter)
 
         app.use('/blogs', blogRouter)
+
+        app.use('/place', placeRouter)
+
+        app.use('/api', apiRouter)
 
         app.get('/', function(req, res){
                 res.render('home.hbs')
