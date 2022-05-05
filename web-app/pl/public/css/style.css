@@ -32,7 +32,7 @@
 
     border-radius: 50%
 }
-#signup-description, #signup-interest {
+#signup-description, #signup-interest, #forum-textarea{
     height: 20rem;
     margin-bottom: 2rem;
 }

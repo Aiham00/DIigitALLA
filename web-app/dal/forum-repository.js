@@ -34,7 +34,7 @@ module.exports = function({
         createAnswer(answer,callback){
           const query =  `INSERT INTO Answer ( Answer,PostId,AnswerDateTime) VALUES(?,?,datetime("now"))`
           const values = [answer.answer,answer.postId]
-          db.all(query, values, function(error){
+          db.run(query, values, function(error){
               callback(error)
               
           })
@@ -60,6 +60,32 @@ module.exports = function({
                 callback(error,tags)
                 
             })
+        },
+        createPost(post,callback){
+          const query =  `INSERT INTO Post (AccountId,Body,Title,PostDateTime) VALUES(?,?,?,datetime("now"))`
+          const values = [post.accountId,post.body,post.title]
+          db.run(query, values, function(error){
+
+            if(error){
+              callback(error)
+
+            }else{
+              const postId = this.lastID 
+              for(let i = 1; i < post.tag.length; i++ ){
+                const query =  `INSERT INTO PostTag (PostId,TagId) VALUES(?,?)`
+                const values = [postId,post.tag[i]]
+
+                db.run(query, values, function(error){
+                  
+                  if(error){
+                    callback(error)
+                  }
+                })
+              }
+              callback(error)
+
+            }
+          })
         }
       }
 }

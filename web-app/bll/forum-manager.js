@@ -1,5 +1,7 @@
 module.exports = function({
-  forumRepository
+  forumRepository,
+  constants,
+  errorCodes
   
 }){
 
@@ -74,6 +76,23 @@ module.exports = function({
             forumRepository.createAnswer(answer,function(error){
               callback(error)
             })
+          },
+          createPost(accountId,accountType,post,callback){
+
+            if(accountType == constants.ORGANIZATION && accountId== post.accountId){
+              forumRepository.createPost(post,function(error){
+
+                if (error){
+                  callback([error])
+                  
+                }else {
+                  callback([])
+                }
+              })
+            }else{
+              callback([errorCodes.UNAUTHORIZED_USER])
+            }
+
           }
       }
 

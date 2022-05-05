@@ -77,18 +77,20 @@
               </div>
 
               <div id="replys-card" class="card hidden" aria-current="false">
-
-                {{#if this.replies.length}}
-                  {{#each replies}}
-                    <div class="list-group">
-                        <div class="d-flex w-100 justify-content-between">
-                          <h6 class="mb-1"> <a href="/auth/{{this.AccountId}}">{{this.Organization}}</a> says :</h6>
-                          <small>{{this.ReplyDateTime}}</small>
-                        </div>
-                        <p class="mb-1">{{this.ReplyText}}</p>
-                    </div>
-                  {{/each}}
-                {{/if}}
+                <div class="card">
+                  
+                  {{#if this.replies.length}}
+                    {{#each replies}}
+                      <div class="list-group">
+                          <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1"> <a href="/auth/{{this.AccountId}}">{{this.Organization}}</a> says :</h6>
+                            <small>{{this.ReplyDateTime}}</small>
+                          </div>
+                          <p class="mb-1">{{this.ReplyText}}</p>
+                      </div>
+                    {{/each}}
+                  {{/if}}
+                </div>
 
 
                   <form action="/blogs/rebly" method="post" id="loginForm" class="row gy-2 gx-3 align-items-center">
@@ -176,11 +178,11 @@
 
                   return response.json()
                 
-                  .then(function(reply){
+                  .then(function(result){
                     const replyCard = form.parentElement
                     const lastReply = document.createElement("div")
                     lastReply.classList.add("list-group")
-                    let current_datetime =new Date().now()
+                    let current_datetime =new Date()
                     let formatted_date = current_datetime.getFullYear() + "-" + 
                     (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + 
                     " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" +
@@ -188,17 +190,21 @@
 
                     lastReply.innerHTML = `
                         <div class="d-flex w-100 justify-content-between">
-                          <h6 class="mb-1"> <a href="/auth/`+reply.accountId+`">Me</a> says :</h6>
+                          <h6 class="mb-1"> <a href="/auth/`+result.accountId+`">Me</a> says :</h6>
                           <small>`+formatted_date+`</small>
                         </div>
-                        <p class="mb-1">`+reply.reply+`</p>
+                        <p class="mb-1">`+result.reply+`</p>
                     `
-                    replyCard.firstElementChild.appendChild(lastReply)
+                    //replyCard.firstElementChild.appendChild(lastReply)
+                    //replyCard.firstElementChild.prepend(lastReply)
+                    reply.value=""
+
                   })
                   
                 }).catch (function(error){
 
                 })
+
               }
 
               postReplay()

@@ -58,7 +58,7 @@ console.log(error)
   })
 
   router.post('/login', function (request, response) {
-    if(request.body.email="aiham682@hotmail.com"){
+    if(request.body.email=="aiham682@hotmail.com"){
       request.session.accountId = "2"
 
       sessionHandler.setSessionAuthentication(request.session, "admin")

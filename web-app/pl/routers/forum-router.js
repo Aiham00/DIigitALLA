@@ -9,7 +9,8 @@ return model
 module.exports = function(
     {
         sessionHandler,
-        forumManager
+        forumManager,
+        errorsTranslator
 
     }){
      
@@ -36,14 +37,29 @@ module.exports = function(
     })
 
     router.get('/create', function(request, response){
+      const accountId = request.session.accountId
 
-      response.render('forum-post-create.hbs',getForumLayoutModel({}))
+      response.render('forum-post-create.hbs',getForumLayoutModel({accountId}))
 
     })
 
     router.post('/create', function(request, response){
+      const accountId = request.session.accountId
+      const accountType = sessionHandler.setSessionAuthentication(request.session)
+      forumManager.createPost(accountId,accountType,request.body,function(errors){
+        if(errors.length !=0){
+console.log(errors)
 
-      response.redirect("/forum")
+          const errorsMessages = errorsTranslator.getErrorsFromTranslater(errors)
+          const model = request.body
+          model["errorsMessages"] = errorsMessages
+          response.render('forum-post-create.hbs',getForumLayoutModel({model}))
+
+        }else{
+          response.redirect("/forum")
+
+        }
+      })
 
     })
 
