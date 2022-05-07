@@ -89,7 +89,7 @@ console.log(error)
     router.post('/rebly', function(request, response){
       const accountId = request.session.accountId
       const blogId = request.body.blogId
-      blogManager.createRebly(1,request.body,function(error){
+      blogManager.createReply(1,request.body,function(error){
         if(error){
 console.log(error)
         }else{

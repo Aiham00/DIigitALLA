@@ -171,47 +171,43 @@
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(
                   {answerId:answerId.value,
-                  accountId:answerId.value,
+                  accountId:accountId.value,
                   reply:reply.value
                   })
               }).then (function(response){
 
-                  return response.json()
-                
-                  .then(function(result){
-                    const replyCard = form.parentElement
-                    const lastReply = document.createElement("div")
-                    lastReply.classList.add("list-group")
-                    let current_datetime =new Date()
-                    let formatted_date = current_datetime.getFullYear() + "-" + 
-                    (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + 
-                    " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" +
-                     current_datetime.getSeconds() 
+                return response.json()
+              
+                .then(function(result){
+                  const replyCard = form.parentElement
+                  const lastReply = document.createElement("div")
+                  lastReply.classList.add("list-group")
+                  let current_datetime =new Date()
+                  let formatted_date = current_datetime.getFullYear() + "-" + 
+                  (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + 
+                  " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" +
+                    current_datetime.getSeconds() 
 
-                    lastReply.innerHTML = `
-                        <div class="d-flex w-100 justify-content-between">
-                          <h6 class="mb-1"> <a href="/auth/`+result.accountId+`">Me</a> says :</h6>
-                          <small>`+formatted_date+`</small>
-                        </div>
-                        <p class="mb-1">`+result.reply+`</p>
-                    `
-                    //replyCard.firstElementChild.appendChild(lastReply)
-                    //replyCard.firstElementChild.prepend(lastReply)
-                    reply.value=""
-
-                  })
-                  
-                }).catch (function(error){
+                  lastReply.innerHTML = `
+                      <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1"> <a href="/auth/`+result.accountId+`">Me</a> says :</h6>
+                        <small>`+formatted_date+`</small>
+                      </div>
+                      <p class="mb-1">`+result.reply+`</p>
+                  `
+                  replyCard.firstElementChild.appendChild(lastReply)
+                  //replyCard.firstElementChild.prepend(lastReply)
+                  reply.value=""
 
                 })
+                
+              }).catch (function(error){
 
-              }
+              })
 
+            }
               postReplay()
-            
-
-
-        })
+          })
 
         }
 

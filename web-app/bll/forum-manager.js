@@ -1,5 +1,6 @@
 module.exports = function({
   forumRepository,
+  blogRepository,
   constants,
   errorCodes
   
@@ -84,9 +85,25 @@ module.exports = function({
 
                 if (error){
                   callback([error])
-                  
+
                 }else {
                   callback([])
+                }
+              })
+            }else{
+              callback([errorCodes.UNAUTHORIZED_USER])
+            }
+
+          },
+          getAnswerReplies(accountType,answerId,callback){
+            if(accountType == constants.ORGANIZATION ){
+              blogRepository.getAnswerReplies(answerId,function(error,replies){
+
+                if (error){
+                  callback([error])
+
+                }else {
+                  callback(error,replies)                
                 }
               })
             }else{

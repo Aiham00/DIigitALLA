@@ -1,14 +1,14 @@
 <h3>Home</h3>
 <div class="d-flex">
-    <form action="/" method="GET" class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <select class="form-select me-2" aria-label=".form-select-lg example">
-            <option selected>Open this select menu</option>
+    <form action="/" method="GET" class="d-flex" id="place-search-form">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="place-search-bar">
+        <select class="form-select me-2" aria-label=".form-select-lg example" id="place-search-select">
+            <option value="" selected>Open this select menu</option>
             <option value="1">one</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
         </select>
-        <button class="btn btn-primary" type="submit">
+        <button class="btn btn-primary" type="submit" id="place-search-btn">
             <i class="bi bi-search"></i>
             Search
         </button>
@@ -18,8 +18,20 @@
 
   <div id="map" class="container-fluid"></div>
 
+<div id="list-places" class="list-group">
+  <a class="list-group-item list-group-item-action" href="#">Item 1</a>
+
+</div>
 <script>
+    const searchButton = document.querySelector("#place-search-btn")
+    const searchBarInput = document.querySelector("#place-search-bar")
+    const searchSelect = document.querySelector("#place-search-select")
+    const searchForm = document.querySelector("#place-search-form")
+
+    let mapMarkers =[]
+    const appUrl = document.querySelector("#digit-alla").getAttribute("href")
     function initMap() {
+
         // Map options
         var options = {
             zoom: 8,
@@ -30,100 +42,43 @@
         // New map
         var map = new google.maps.Map(document.getElementById('map'), options);
         let lastclick 
+        let infoWindow = null
 
         // Listen for click on map
         google.maps.event.addListener(map, 'click', function (event) {
             if(lastclick){
                 lastclick.setMap(null)
             }
-                lastclick = addMarker({ coords: event.latLng });
+            if(infoWindow){
+               infoWindow.close() 
+            }
+            lastclick = new google.maps.Marker({
+                position: event.latLng,
+                map: map,
+            }); 
         });
-
-        // Array of markers
-        var markers = [
-  {
-    PlaceId: 1,
-    PlaceName: 'ffg',
-    Lat: '57',
-    Lng: '14',
-    Link: 'https://www.google.se/maps/@57.7787406,14.1550185,16z?hl=en',
-    Address: 'Fabriksgatan 13A, 553 18 Jönköping',
-    Kommun: 'Jönköping',
-    Phone: 735081923,
-    OpenTimeId: 3,
-    AccountId: 2,
-    FirstName: 'Ayham',
-    LastName: 'Hanna',
-    Organization: 'Organization',
-    Email: 'aiham@fgggg.com',
-    CreationDateTime: '2022-04-30 10:37:16',
-    HashedPassowrd: '123',
-    Description: 'gghgh',
-    Interest: null,
-    IsActive: 1,
-    TypeId: 1,
-    isAdmin: null,
-    MonFrom: '05:23',
-    MonTo: '09:27',
-    TueFrom: '',
-    TueTo: '',
-    WedFrom: '',
-    WedTo: '',
-    ThuFrom: '',
-    ThuTo: '',
-    FriFrom: '',
-    FriTo: '',
-    SatFrom: '',
-    SatTo: '',
-    SunFrom: '',
-    SunTo: ''
-  },
-  {
-    PlaceId: 2,
-    PlaceName: 'ffggf ffgfg',
-    Lat: '57.7804036',
-    Lng: '14.1591483',
-    Link: 'https://www.google.se/maps/dir/57.7804036,14.1591483//@57.7787561,14.1576355,16z/data=!4m2!4m1!3e3?hl=en',
-    Address: 'Kärrhöksgatan 84',
-    Kommun: 'Jönköping',
-    Phone: 735081923,
-    OpenTimeId: 4,
-    AccountId: 2,
-    FirstName: 'Ayham',
-    LastName: 'Hanna',
-    Organization: 'Organization',
-    Email: 'aiham@fgggg.com',
-    CreationDateTime: '2022-04-30 10:37:16',
-    HashedPassowrd: '123',
-    Description: 'gghgh',
-    Interest: null,
-    IsActive: 1,
-    TypeId: 1,
-    isAdmin: null,
-    MonFrom: '',
-    MonTo: '',
-    TueFrom: '03:31',
-    TueTo: '04:30',
-    WedFrom: '',
-    WedTo: '',
-    ThuFrom: '',
-    ThuTo: '',
-    FriFrom: '',
-    FriTo: '',
-    SatFrom: '',
-    SatTo: '',
-    SunFrom: '',
-    SunTo: ''
-  }
-]
 
 
         // Loop through markers
-        for (const marker of markers) {
-            // Add marker
-            addMarker(marker);
+        function addAllmarkers(markers){
+            const mapMarkers = []
+
+            if(markers.length){
+                for (const marker of markers) {
+                // Add marker
+                    const mapMarker = addMarker(marker);
+                    mapMarkers.push(mapMarker)
+                }
+            }
+
+            return mapMarkers
         }
-                let infoWindow = null
+        function removeAllMarkers(){
+            for(const mapMarker of mapMarkers){
+                mapMarker.setMap(null)
+            }
+            mapMarkers = []
+        }
 
         // Add Marker Function
         function addMarker(props) {
@@ -153,14 +108,12 @@
                 if(props.SunFrom.length != 0){sun =  "<li>Söndag: "+props.SunFrom + " - "+ props.SunTo +"</li>"}
             // Check content
 
-                let lastInfoWindow
-                let isOpen = false
                 
                 marker.addListener('click', function () {
                     if(infoWindow){
                         infoWindow.close()
-
                     }
+
                 infoWindow = new google.maps.InfoWindow({
                     content: "<h6>"+props.PlaceName+"</h6> <p> Typ av hjälp</p> <ul> Öppettidder" + mon +
                         tue + wed + thu + fri + sat + sun + "</ul> <p>Telefonnummer: " + props.Phone + "</p><p> Adress: " +
@@ -170,8 +123,23 @@
                  infoWindow.open(map, marker);
 
                 });
+
             return marker
         }
+        async function getAnswerReplies(){
+            const response = await fetch(appUrl+"/api/places/search?q="+searchBarInput.value.trim()+"+"+searchSelect.value)
+console.log(appUrl)
+            const places = await response.json()
+            mapMarkers = addAllmarkers(places)
+
+            }
+        searchButton.addEventListener("click",function(event){
+            event.preventDefault()
+             removeAllMarkers()
+                getAnswerReplies()
+
+        })
+
 
 
     }

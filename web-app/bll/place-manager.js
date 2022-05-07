@@ -1,60 +1,46 @@
 module.exports = function({
-  forumRepository,
-  placeRepository
+  placeRepository,
+  constants,
+  errorCodes
   
 }){
 
-      return {
+  return {
 
-        getAllPlaces(callback){
-          placeRepository.getAllPlaces(function(error,places){
+    getAllPlaces(callback){
+      placeRepository.getAllPlaces(function(error,places){
 
-            if ( error){
-              callback("database error")
-            }else {
-              callback(error,places)
+        if ( error){
+          callback("database error")
+        }else {
+          callback(error,places)
 
-            }
-          })
+        }
+      })
 
-        },
+    },
 
-          getPost(postId,callback){
-            forumRepository.getPost(postId,function(error,post){
+    getPlacesSearchResult(query,callback){
+      const searchWords = query.q.split(' ')
+console.log(searchWords)
+      placeRepository.getPlacesSearchResult(searchWords,function(error,places){
 
-              if ( error){
-                callback("database error")
-              }else if(post){
-                forumRepository.getPostTags(post.Id,function(error,tags){
-                  if (error){
-                    post["tags"]=[]
-                  }else{
-                    post["tags"]=tags
-                  }
-                  forumRepository.getPostAnswers(post.Id,function(error,answers){
-                    if(error){
-                      post["answers"]=[]
-                    }else{
-                      post["answers"]=answers
-                    }
-                    callback(error,post)
-                  })                        
-                })                
-     
-              }else{
-                callback(error,{})
-              
-              }
-            })
+        if ( error){
+          callback(errorCodes.DATABASE_ERROR)
+        }else {
+          callback(error,places)
 
-          },
+        }
+      })
 
-          createPlace(accountId,place,callback){
-            placeRepository.createPlace(place,function(error){
-              callback(error)
-            })
-          }
-      }
+    },
+
+    createPlace(accountId,place,callback){
+      placeRepository.createPlace(place,function(error){
+        callback(error)
+      })
+    }
+  }
 
 
 

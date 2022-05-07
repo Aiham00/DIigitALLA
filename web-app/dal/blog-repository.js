@@ -130,7 +130,7 @@ module.exports = function({
           })
         },
 
-        createRebly(reply,callback){
+        createReply(reply,callback){
           const query =  `INSERT INTO Reply ( ReplyText,AnswerId,AccountId,ReplyDateTime)
            VALUES(?,?,?,datetime("now"))`
           const values = [reply.reply,reply.answerId,reply.accountId]

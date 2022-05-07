@@ -88,8 +88,8 @@ console.log(error)
             })
           },
 
-          createRebly(accountId,rebly,callback){
-            blogRepository.createRebly(rebly,function(error){
+          createReply(accountId,accountType,reply,callback){
+            blogRepository.createReply(reply,function(error){
               callback(error)
             })
           }

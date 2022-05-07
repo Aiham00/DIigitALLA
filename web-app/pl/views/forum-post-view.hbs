@@ -74,39 +74,29 @@
               <div class="row"><p class="text-sm-end "> {{this.Answer}}  </p></div>
               <div class="row"><p class="text-sm-end "> OrganisationNamn: {{this.Organization}} </p></div>
               <small><a href="/" class="reply-link">reply</a></small>
+              <input type="hidden" value="{{this.AnswerId}}">
 
             </div>
 
             <div id="replys-card" class="card hidden">
-              <div class="list-group">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h6 class="mb-1"> <a href="#">JohnDoe</a> says :</h6>
-                    <small>Dec 20, 2014</small>
-                  </div>
-                  <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam a sapien odio, sit amet</p>
+              <div class="card">
+
+                
               </div>
-                <div class="list-group">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h6 class="mb-1"> <a href="#">JohnDoe</a> says :</h6>
-                    <small>Dec 20, 2014</small>
-                  </div>
-                  <p class="mb-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam a sapien odio, sit amet</p>   
-              </div>
-              <div class="list-group">
 
               <form action="/forum/answer" method="post" id="loginForm" class="row gy-2 gx-3 align-items-center">
                 <div class="card ">
                   <div class="card-body">
                     <div class="form-floating">
-                      <input type="hidden" value="{{Answer.Id}}" name="answerId">
-                      <input type="hidden" value="{{accountId}}" name="accountId">
-                      <textarea class="form-control" placeholder="Leave a comment here" id="reply-Textarea" name="reply"></textarea>
+                      <input type="hidden" value="{{this.AnswerId}}" name="answerId">
+                      <input type="hidden" value="{{../accountId}}" name="accountId">
+                      <textarea class="form-control" placeholder="Leave a reply here" id="reply-Textarea" name="reply"></textarea>
                       <label for="answer-Textarea">Skriv reply!</label>
                     </div> 
                     <div class="card-footer bg-transparent border-success">
                       <div class="row g-4 ">
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary"> <i class="bi bi-send"></i> reply!</button>
+                            <button type="submit" class="btn btn-primary" id="reply-button"> <i class="bi bi-send"></i> reply!</button>
                         </div>
                       </div>
                     </div>
@@ -114,7 +104,7 @@
                 </div>
 
               </form> 
-              </div>
+
 
             </div>
            
@@ -130,26 +120,121 @@
 
 <script>
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const cards = document.querySelectorAll("#replys-card")
-        const className = "hidden"
-        const links =document.querySelectorAll(".reply-link")
+  document.addEventListener("DOMContentLoaded", function () {
+    const cards = document.querySelectorAll("#replys-card")
+    const className = "hidden"
+    const links =document.querySelectorAll(".reply-link")
+    const replyButtons =document.querySelectorAll("#reply-button")
+    const classNameIsClicked= "clicked"
 
-        for (const link of links) {
-          link.addEventListener("click",function(e){
-            e.preventDefault()
+    function hideAllReplies(){
+      for(const card of cards){
+        if (!card.classList.contains(className)) {
 
-            for(const card of cards){
-              if (!card.classList.contains(className)) {
+          card.classList.add(className)
+        }
+      }
+    }
+    
+    for (const link of links) {
+      link.addEventListener("click",function(e){
+        e.preventDefault()
+        hideAllReplies()
+        const answerId = link.parentElement.nextElementSibling.value
 
-                card.classList.add(className)
-              }
-            }
-          link.parentElement.parentElement.nextElementSibling.classList.remove(className)
+        link.parentElement.parentElement.nextElementSibling.classList.remove(className)
 
-        })
+        async function getAnswerReplies(){
+
+          const response = await fetch("http://localhost:8080/api/answer/reply/"+answerId)
+
+          const replies = await response.json()
+          
+          const replyCard = link.parentElement.parentElement.nextElementSibling.firstElementChild
+          for(reply of replies){
+            const newReply = document.createElement("div")
+            newReply.classList.add("list-group")
+            newReply.innerHTML = `
+                <div class="d-flex w-100 justify-content-between">
+                  <h6 class="mb-1"> <a href="/auth/`+reply.AccountId+`">`+reply.Organization +`</a> says :</h6>
+                  <small>`+reply.ReplyDateTime+`</small>
+                </div>
+                <p class="mb-1">`+reply.ReplyText+`</p>`
+                replyCard.prepend(newReply)  
+          }
+
+              //replyCard.firstElementChild.appendChild(lastReply)
+              //replyCard.firstElementChild.prepend(lastReply)     
 
         }
-    })
+        
+        if(!link.classList.contains(classNameIsClicked)){
+          getAnswerReplies()
+          link.classList.add(classNameIsClicked)
+
+        }
+
+      })
+
+    }
+
+    for (const button of replyButtons) {
+      button.addEventListener("click",function(e){
+        e.preventDefault()
+        const form = button.parentElement.parentElement.parentElement.parentElement.
+        parentElement.parentElement
+        const formInfo = form.firstElementChild.firstElementChild.firstElementChild
+
+        const answerId = formInfo.firstElementChild
+        const accountId = answerId.nextElementSibling
+        const reply = accountId.nextElementSibling
+    
+        async function postReplay(){
+          const response = await fetch("http://localhost:8080/api/reply",{
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(
+              {answerId:answerId.value,
+              accountId:accountId.value,
+              reply:reply.value
+              })
+          }).then (function(response){
+
+            return response.json()
+          
+            .then(function(result){
+
+              const replyCard = form.parentElement
+              const lastReply = document.createElement("div")
+              lastReply.classList.add("list-group")
+              let current_datetime =new Date()
+              let formatted_date = current_datetime.getFullYear() + "-" + 
+              (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + 
+              " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" +
+                current_datetime.getSeconds() 
+
+              lastReply.innerHTML = `
+                  <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-1"> <a href="/auth/`+result.accountId+`">Me</a> says :</h6>
+                    <small>`+formatted_date+`</small>
+                  </div>
+                  <p class="mb-1">`+result.reply+`</p>
+              `              
+              replyCard.firstElementChild.appendChild(lastReply)
+              reply.value=""
+
+            })
+            
+          }).catch (function(error){
+
+          })
+
+        }
+        
+          postReplay()
+      })
+
+    }
+  })
 
 </script>
