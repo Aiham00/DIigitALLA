@@ -22,7 +22,6 @@ module.exports = function({
 
     getPlacesSearchResult(query,callback){
       const searchWords = query.q.split(' ')
-console.log(searchWords)
       placeRepository.getPlacesSearchResult(searchWords,function(error,places){
 
         if ( error){

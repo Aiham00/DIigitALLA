@@ -2,20 +2,22 @@ const sqlite = require('sqlite3')
 
 
 module.exports = function ({
-  dbConnection
+  databasePath
 }) {
   const sqlite = require('sqlite3')
 
-  const db = new sqlite.Database('././db/digitAlla.db')
+  const db = new sqlite.Database(databasePath)
   return {
 
     getAllAccounts(callback) {
+      const activeAccountId = 1
       const query = `SELECT AccountId,FirstName,LastName,Organization,Phone,TypeName,Email,CreationDateTime,IsActive
           from Account
           JOIN AccountType on Account.TypeId = AccountType.TypeId
 		      WHERE IsActive = ?
           ORDER by Organization `
-      const values = [1]
+
+      const values = [activeAccountId]
       db.all(query, values, function (error, accounts) {
         callback(error, accounts)
       })
@@ -23,11 +25,12 @@ module.exports = function ({
 
     getAllAccountsByType(type,callback) {
       const query = `SELECT AccountId,FirstName,LastName,Organization,Phone,TypeName,Email,CreationDateTime,IsActive
-      from Account
-      JOIN AccountType on Account.TypeId = AccountType.TypeId
-      WHERE IsActive = ?
-      AND AccountType.TypeId= ?
-      ORDER by Organization `
+          from Account
+          JOIN AccountType on Account.TypeId = AccountType.TypeId
+          WHERE IsActive = ?
+          AND AccountType.TypeId= ?
+          ORDER by Organization `
+          
       const values = [1,type]
       db.all(query, values, function (error, accounts) {
         callback(error, accounts)
@@ -65,8 +68,15 @@ module.exports = function ({
       const values = [account.firstName, account.lastName, account.org, account.email, account.phone,
       account.description, account.hashedPassword, account.accountType, account.interest, 0]
       db.run(query, values, function (error) {
-        callback(error)
+        callback(error,this.lastID)
 
+      })
+    },
+    getAccoutByEmail(loginModel, callback){
+      const query = 'SELECT accountId,Email,HashedPassowrd,isAdmin FROM Account WHERE Email = ?'
+      const values = [loginModel.email]
+      db.get(query, values, function(error, account){
+          callback(error, account)
       })
     },
 

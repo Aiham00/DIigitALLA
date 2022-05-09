@@ -40,53 +40,62 @@
         <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2">
           <div class="col">
             <div class="form-floating mb-3">
-                <input type="text" class="form-control form-control-lg" id="signup-first-name" placeholder="e" name="firstName">
+                <input type="text" class="form-control form-control-lg" id="signup-first-name"
+                  placeholder="fylla i Förnamn" name="firstName" value="{{account.firstName}}">
                 <label for="signup-first-name" class=" col-form-label-lg">
                   Förnamn
                 </label>
             </div>
             <div class="form-floating mb-3">
-                <input type="text" class="form-control form-control-lg" id="signup-last-name" placeholder="e" name="lastName">
+                <input type="text" class="form-control form-control-lg"
+                  id="signup-last-name" placeholder="fylla i Efternamn" name="lastName" value="{{account.lastName}}">
                 <label for="signup-last-name" class=" col-form-label-lg">
                   Efternamn
                 </label>
             </div>
             <div class="form-floating mb-3">
-                <input type="text" class="form-control form-control-lg" id="signup-organisation" placeholder="e" name="org">
+                <input type="text" class="form-control form-control-lg"
+                  id="signup-organisation" placeholder="fylla i Organisationnamn" name="org"  value="{{account.org}}">
                 <label for="signup-organisation" class=" col-form-label-lg">
-                  Organisation
+                  Organisationnamn
                 </label>
             </div>
-            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg " name="accountType">
-                <option selected >Välj konto tag</option>
-                <option value="1">Bibliotek</option>
-                <option value="2">Förening</option>
-                <option value="3">Offentlig sektor</option>
-                <option value="4">Privat företag</option>
-                <option value="5">Socialt företag</option>
-                <option value="6">Studieförbund</option>
-                <option value="7">Övrigt</option>
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg " aria-placeholder="Välj konto tag"
+             name="accountType"  value="{{account.accountType}}">
+
+                <option aria-placeholder="Välj konto tag" value="{{account.accountType}}" selected >Välj konto tag</option>
+                <option aria-placeholder=" val Bibliotek" value="1">Bibliotek</option>
+                <option aria-placeholder="val Förening" value="2">Förening</option>
+                <option aria-placeholder="val Offentlig sektor" value="3">Offentlig sektor</option>
+                <option aria-placeholder="val Privat företag" value="4">Privat företag</option>
+                <option aria-placeholder="val Socialt företag" value="5">Socialt företag</option>
+                <option aria-placeholder="val Studieförbund" value="6">Studieförbund</option>
+                <option aria-placeholder="val Övrigt" value="7">Övrigt</option>
             </select>
             <div class="form-floating mb-3">
-                <input type="email" class="form-control form-control-lg" id="signup-email" placeholder="e" name="email">
+                <input type="email" class="form-control form-control-lg"
+                  id="signup-email" placeholder="fylla i E-post" name="email"  value="{{account.email}}">
                 <label for="signup-email" class=" col-form-label-lg">
                   E-post
                 </label>
             </div>
             <div class="form-floating mb-3">
-                <input type="phone" class="form-control form-control-lg" id="signup-phone" placeholder="e" name="phone">
+                <input type="phone" class="form-control form-control-lg"
+                  id="signup-phone" placeholder="fylla i telefonnummer" name="phone" value="{{account.phone}}">
                 <label for="signup-phone" class=" col-form-label-lg">
-                Tel
+                Telefonnummer
                 </label>
             </div>
             <div class="form-floating mb-3">
-                <input type="password" class="form-control form-control-lg" id="signup-password" placeholder="e" name="password">
+                <input type="password" class="form-control form-control-lg"
+                  id="signup-password" placeholder="fylla i Lösenord" name="password" >
                 <label for="signup-password" class=" col-form-label-lg">
                   Lösenord
                 </label>
             </div>
             <div class="form-floating mb-3">
-                <input type="password" class="form-control form-control-lg" id="signup-repassword" placeholder="e" name="re-password">
+                <input type="password" class="form-control form-control-lg"
+                 id="signup-repassword" placeholder="fylla i Bekräfta lösenord" name="rePassword">
                 <label for="signup-repassword" class=" col-form-label-lg">
                   Bekräfta lösenord
                 </label>
@@ -97,11 +106,13 @@
           </div>
           <div class="col">
             <div class="form-floating">
-              <textarea class="form-control" placeholder="Leave a comment here" id="signup-description" name="description"></textarea>
+              <textarea class="form-control" placeholder="fylla i Beskrivning av tidigare och planerade insatser"
+               id="signup-description" name="description" >{{account.description}}</textarea>
               <label for="signup-description">Beskrivning av tidigare och planerade insatser</label>
             </div>   
             <div class="form-floating">
-              <textarea class="form-control" placeholder="Leave a comment here" id="signup-interest" name="interest"></textarea>
+              <textarea class="form-control" placeholder="fylla i Verksamhets beskrivning "
+                id="signup-interest" name="interest"  >{{account.interest}}</textarea>
               <label for="signup-interest">Verksamhets beskrivning</label>
             </div>            
           </div>

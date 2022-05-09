@@ -7,25 +7,29 @@ const session = require('express-session')
 module.exports = function (
   {
     sessionHandler,
-    accountManager
+    accountManager,
+    errorsTranslator
+
 
   }) {
 
   const router = express.Router()
 
   router.get('/accounts', function (request, response) {
-    const accountId = 1
-    accountManager.getAllAccounts(accountId, function (error,accounts) {
+    const accountId = request.session.accountId
+    const accountTyoe = sessionHandler.getSessionAuthentication(request.session)
+
+    accountManager.getAllAccounts(accountId, accountTyoe, function (error,accounts) {
 
       if (error) {
-console.log(error)
-
-      }else if (!accounts.length){
-console.log(error)
+        const model = {
+          errorsMessages: errorsTranslator.getErrorsFromTranslater([error])
+        }
+        response.render('accounts.hbs',model)
 
       } else {
         const model ={
-          errorsMessages:[],
+          errorsMessages: [],
           accounts
         }
         response.render('accounts.hbs',model)
@@ -35,12 +39,15 @@ console.log(error)
   })
 
   router.get('/accounts/cat/:id', function (request, response) {
-    const accountId = 1
-    const typeId = request.params.id
-    accountManager.getAllAccountsByType(accountId,typeId, function (error,accounts) {
+    const accountType = sessionHandler.getSessionAuthentication(request.session)
+    const catId = request.params.id
+    accountManager.getAllAccountsByType(accountType,catId, function (error,accounts) {
 
       if (error) {
-console.log(error)
+        const model = {
+          errorsMessages: errorsTranslator.getErrorsFromTranslater([error])
+        }
+        response.render('accounts.hbs',model)
 
       } else {
         const model ={
@@ -48,7 +55,6 @@ console.log(error)
           accounts
         }
         response.render('accounts.hbs',model)
-
       }
     })
   })
@@ -58,19 +64,39 @@ console.log(error)
   })
 
   router.post('/login', function (request, response) {
-    if(request.body.email=="aiham682@hotmail.com"){
-      request.session.accountId = "2"
+    /*if(request.body.email=="aiham682@hotmail.com"){
+      request.session.accountId = "1"
 
       sessionHandler.setSessionAuthentication(request.session, "admin")
       sessionHandler.setSessionAuthentication(request.session, "organization")
       response.render('home.hbs')
     }else{
-      request.session.accountId = "1"
+      request.session.accountId = "2"
 
       sessionHandler.setSessionAuthentication(request.session, "organization")
       response.render('home.hbs')
+    }*/
+    const loginModel = {
+      email: request.body.email,
+      password: request.body.password
     }
 
+    accountManager.authorizeLogIn(loginModel ,function(errors, id,accountType){
+
+      if(errors.length){
+        const errorsMessages = errorsTranslator.getErrorsFromTranslater(errors)
+        const model = {
+            errorsMessages
+        }
+        response.render('accounts-entry.hbs', model)
+          
+      }else{
+        request.session.accountId = id
+        sessionHandler.setSessionAuthentication(request.session,accountType)
+        response.redirect('/')
+    }
+        
+    })
  
 
   })
@@ -84,10 +110,28 @@ console.log(error)
     request.session.isAdmin = false
     request.session.isOrganization = false
     response.redirect('/')
+
   })
 
   router.get('/signup', function (request, response) {
     response.render('account-sign-up.hbs')
+  })
+
+  router.post('/signup', function (request, response) {
+    accountManager.createAccount(request.body, function (errors) {
+
+      if (errors.length) {
+        const model={
+          errorsMessages:errorsTranslator.getErrorsFromTranslater(errors),
+          account:request.body
+
+        }
+        response.render('account-sign-up.hbs',model)
+      } else {
+        response.redirect('/')
+
+      }
+    })
   })
 
   router.get('/delete/:id', function (request, response) {
@@ -156,16 +200,7 @@ console.log(error)
     })
   })
 
-  router.post('/signup', function (request, response) {
-    accountManager.createAccount(request.body, function (error) {
-      if (error) {
-console.log(error)
-      } else {
-        response.redirect('/')
 
-      }
-    })
-  })
 
   router.get('/my-account', function(request, response){
     const accountId = request.session.accountId 
@@ -194,9 +229,6 @@ console.log(error)
     accountManager.getAllInactiveAccounts(accountType, function (error,accounts) {
 
       if (error) {
-console.log(error)
-
-      }else if (!accounts.length){
 console.log(error)
 
       } else {

@@ -7,6 +7,8 @@ module.exports = function({constants}){
                 return constants.accountType.ADMIN
             }else if (session.isOrganization){
                 return constants.accountType.ORGANIZATION
+            }else{
+                return false
             }
         },
 

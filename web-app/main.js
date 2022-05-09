@@ -8,9 +8,10 @@ container.register({
     accountRouter       : awilix.asFunction(require('./pl/routers/account-router.js')),
     sessionHandler      : awilix.asFunction(require('./pl/session-handler.js')),
     constants           : awilix.asFunction(require('./constants.js')),
+    validator           : awilix.asFunction(require('./bll/validator.js')),
     forumRouter         : awilix.asFunction(require('./pl/routers/forum-router.js')),
     forumRepository     : awilix.asFunction(require('./dal/forum-repository.js')),
-    dbConnection        : awilix.asFunction(require('./dal/db-connection.js')),
+    databasePath        : awilix.asValue('././db/digitAlla.db') ,
     forumManager        : awilix.asFunction(require('./bll/forum-manager.js')),
     blogRouter          : awilix.asFunction(require('./pl/routers/blog-router.js')),
     blogManager         : awilix.asFunction(require('./bll/blog-manager.js')),
@@ -20,7 +21,7 @@ container.register({
     placeRouter         : awilix.asFunction(require('./pl/routers/place-router.js')),
     placeManager        : awilix.asFunction(require('./bll/place-manager.js')),
     placeRepository     : awilix.asFunction(require('./dal/place-repository.js')),
-    apiRouter           : awilix.asFunction(require('./pl/routers/api-router.js')),
+    apiRouter           : awilix.asFunction(require('./pl/routers/api-router.js'))
     
 })
 

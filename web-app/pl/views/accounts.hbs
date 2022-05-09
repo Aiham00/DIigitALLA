@@ -28,6 +28,13 @@
   </nav>
 <div class="row  g-4">
 {{#if errorsMessages.length}}
+  <ul>
+    {{#each errorsMessages}}
+      <div id="error-messages">
+        <li>{{this}}</li>  
+      </div>
+    {{/each}}
+  </ul>
 {{/if}}
 
 {{#if session.isOrganization}}

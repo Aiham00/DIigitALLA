@@ -2,11 +2,11 @@ const sqlite = require('sqlite3')
 
 
 module.exports = function({
-  dbConnection
+  databasePath
 }){
   const sqlite = require('sqlite3')
 
-  const db = new sqlite.Database('././db/digitAlla.db')
+  const db = new sqlite.Database(databasePath)
       return {
 
           getAllPosts( callback){

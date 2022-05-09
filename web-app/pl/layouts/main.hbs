@@ -65,7 +65,7 @@
               Om DigitALLA
             </a>
           </li>
-          {{#if session.isOrganization}}
+          {{#if session.accountId}}
           <li class="nav-item">
             <a id="log-link" class="nav-link" href="/auth/logout">
               <i class="bi bi-box-arrow-right"></i>
@@ -85,7 +85,7 @@
     </div>
   </nav>
 
-  {{#if session.isOrganization}}
+  {{#if session.accountId}}
   <nav class="navbar navbar-light bg-light left">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
