@@ -20,6 +20,20 @@ module.exports = function({
                   callback(error,posts)
               })
           },
+          getAllPostsBelongToTag(tagId, callback){
+
+            const query =  `SELECT id,Title,PostDateTime,Post.AccountId,FirstName,LastName,Organization
+            from Post
+            JOIN Account on Post.AccountId = Account.AccountId
+            JOIN PostTag on PostTag.PostId = Post.Id
+            JOIN Tag on Tag.TagId = PostTag.TagId
+            WHERE Tag.TagId = ?
+            ORDER by PostDateTime desc`
+            const values = [tagId]
+            db.all(query, values, function(error,posts){
+                callback(error,posts)
+            })
+        },
 
           getPost(id,callback){
             const query =  `SELECT Id,Title,PostDateTime,Post.AccountId,FirstName,LastName,Organization,Body

@@ -79,14 +79,13 @@ console.log(error)
     })
 
     router.get('/tags/:id', function(request, response){
-      const tagIg = request.params.id
-      const accountId = request.session.accountId
+      const tagId = request.params.id
       const accountType = sessionHandler.getSessionAuthentication(request.session) 
-      forumManager.getAllPostsBelongToTag(accountId,accountType,tagIg,function(error,posts){
+      forumManager.getAllPostsBelongToTag(accountType,tagId,function(error,posts){
 
         if(error){
           const model ={
-            errorsMessages:[error]
+            errorsMessages:errorsTranslator.getErrorsFromTranslater([error])
           }
           response.render('accounts-entry.hbs',getForumLayoutModel(model))
         }else{
