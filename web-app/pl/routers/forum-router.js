@@ -17,7 +17,8 @@ module.exports = function(
     const router = express.Router()
 
     router.get('/', function(request, response){
-      forumManager.getAllPosts(1,function(error,posts){
+      const accountId = request.session.accountId
+      forumManager.getAllPosts(accountId,function(error,posts){
 
         if(error){
           const model ={

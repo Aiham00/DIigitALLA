@@ -64,18 +64,6 @@ module.exports = function (
   })
 
   router.post('/login', function (request, response) {
-    /*if(request.body.email=="aiham682@hotmail.com"){
-      request.session.accountId = "1"
-
-      sessionHandler.setSessionAuthentication(request.session, "admin")
-      sessionHandler.setSessionAuthentication(request.session, "organization")
-      response.render('home.hbs')
-    }else{
-      request.session.accountId = "2"
-
-      sessionHandler.setSessionAuthentication(request.session, "organization")
-      response.render('home.hbs')
-    }*/
     const loginModel = {
       email: request.body.email,
       password: request.body.password
@@ -94,11 +82,8 @@ module.exports = function (
         request.session.accountId = id
         sessionHandler.setSessionAuthentication(request.session,accountType)
         response.redirect('/')
-    }
-        
+      }  
     })
- 
-
   })
 
   router.get('/logout', function (request, response) {
@@ -137,7 +122,7 @@ module.exports = function (
   router.get('/delete/:id', function (request, response) {
     const id = request.params.id
     const model={
-      id
+      id,
     }
     response.render('account-delete.hbs',model)
   })
@@ -159,12 +144,17 @@ module.exports = function (
   })
 
   router.post('/delete', function (request, response) {
-    const accountId = request.body.accountId
-    const accountType = sessionHandler.getSessionAuthentication(request.session) 
-    accountManager.deleteAccount(accountId,accountType, function (error) {
-      if (error) {
-console.log(error)
+    const accountId = request.session.accountId
+    const accountType = sessionHandler.getSessionAuthentication(request.session)
+    const account = request.body 
+    accountManager.deleteAccount(accountId,accountType, account, function (error) {
 
+      if (error) {
+        const model={
+          errorsMessages:errorsTranslator.getErrorsFromTranslater([error]),
+          account:request.body
+        }
+        response.render('account-delete.hbs',model)
       } else {
         response.redirect('/auth/inactive-accounts')
 

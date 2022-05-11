@@ -44,9 +44,15 @@
 
 <body>
 
+  <div class="row" id="digit-alla-mob">
+    
+          <a class="navbar-brand" href="/" >DigitALLA</a>
+
+  </div>
   <nav class="navbar navbar-expand navbar-light " style="background-color: #c5d4df;">
+
     <div class="container-fluid">
-      <a class="navbar-brand" href="http://35.228.104.69:8080" id="digit-alla">DigitALLA</a>
+      <a class="navbar-brand" href="http://localhost:8080" id="digit-alla">DigitALLA</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -173,36 +179,37 @@
               </div>
             </form>
           </div>
-          <div class="col col-md-12">
-            <div class="row">
-              <div class="col">
-                <div class="btn-group">
-                  <a href="#" class="btn btn-primary" aria-current="page">Senaste inlägg </a>
-                  <a href="#" class="btn btn-primary" >#Aktiviteter /evenemang </a>
-                  <a href="#" class="btn btn-primary">#Digitala tips </a>
-                  <a href="#" class="btn btn-primary">#Digital hjälp </a>
-                  <a href="#" class="btn btn-primary">#Funktionsvariationer</a>
-                  <a href="#" class="btn btn-primary">#Samverkan</a>
-                  <a href="#" class="btn btn-primary">#Seniorer</a>
-                  <a href="#" class="btn btn-primary">#Studiecirklar </a>
-                  <a href="#" class="btn btn-primary">#Utbildning</a>
-                  <a href="#" class="btn btn-primary">#Utrikesfödda</a>
-                  <a href="#" class="btn btn-primary">#Övrigt</a>
-                </div>            
-              </div>
- 
-            </div>
-          </div>
 
         </div>
       </div>
     </div>
-    
   </nav>
   <main>
-    <div class="container ">
-      {{{body}}}
+
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-4">
+      <div class=" col col-md-2" >
+        <div class="list-group" id="v-list-forum">
+          <a href="/forum" class="list-group-item list-group-item-action" aria-current="page">Senaste inlägg </a>
+          <a href="/forum/tags/1" class="list-group-item list-group-item-action" >#Aktiviteter /evenemang </a>
+          <a href="/forum/tags/2" class="list-group-item list-group-item-action">#Digitala tips </a>
+          <a href="/forum/tags/3" class="list-group-item list-group-item-action">#Digital hjälp </a>
+          <a href="/forum/tags/4" class="list-group-item list-group-item-action">#Funktionsvariationer</a>
+          <a href="/forum/tags/5" class="list-group-item list-group-item-action">#Samverkan</a>
+          <a href="/forum/tags/6" class="list-group-item list-group-item-action">#Seniorer</a>
+          <a href="/forum/tags/7" class="list-group-item list-group-item-action">#Studiecirklar </a>
+          <a href="/forum/tags/8" class="list-group-item list-group-item-action">#Utbildning</a>
+          <a href="/forum/tags/9" class="list-group-item list-group-item-action">#Utrikesfödda</a>
+          <a href="/forum/tags/10" class="list-group-item list-group-item-action">#Övrigt</a>
+        </div>            
+      </div>
+
+      <div class=" col col-md-10">
+        <div class="container ">
+          {{{body}}}
+        </div>
+      </div>
     </div>
+
   </main>
   {{else}}
   <main>

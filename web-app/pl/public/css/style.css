@@ -4,6 +4,10 @@
     #show-places-list-bar{
         display: none;
     }
+    #digit-alla-mob{
+        display: none;
+
+    }
 }
 @media (max-width: 599px){
     #show-places-list-btn.hidden{
@@ -14,6 +18,14 @@
     }
     #list-places.hidden{
         display: none;
+    }
+    #digit-alla{
+        display: none;
+    }
+    #digit-alla-mob{
+        display: block;
+        background-color: azure;
+        text-align: center;
     }
 }
 #map{
@@ -95,4 +107,8 @@
     margin-top: 1rem;
     background-color: rgb(241, 138, 202);
     max-width: 540px;
+}
+#v-list-forum{
+    margin-left: 1rem;
+    margin-top: 6rem;
 }

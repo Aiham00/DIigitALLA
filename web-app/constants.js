@@ -16,7 +16,7 @@ module.exports = function(){
             MAX_PASSWORD_LENGTH    : 64
 
 
-        }
+        },
     } 
      
 }

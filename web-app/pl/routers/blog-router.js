@@ -16,7 +16,8 @@ module.exports = function(
     const router = express.Router()
 
     router.get('/', function(request, response){
-      blogManager.getAllBlogs(1,function(error,blogs){
+      const accountId = request.session.accountId
+      blogManager.getAllBlogs(accountId,function(error,blogs){
 
         if(error){
           const model ={

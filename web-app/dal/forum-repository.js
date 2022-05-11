@@ -10,6 +10,7 @@ module.exports = function({
       return {
 
           getAllPosts( callback){
+
               const query =  `SELECT id,Title,PostDateTime,Post.AccountId,FirstName,LastName,Organization
               from Post
               JOIN Account on Post.AccountId = Account.AccountId

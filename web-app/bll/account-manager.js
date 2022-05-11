@@ -125,7 +125,6 @@ module.exports = function({
 
               }else{
                 const accountId = account.AccountId
-console.log(accountId)
                 if(account.isAdmin == "1"){
                     callback(errors,accountId,constants.accountType.ADMIN)
 
@@ -138,10 +137,14 @@ console.log(accountId)
           })
         },
 
-          deleteAccount(accountId,accountType,callback){
-            accountRepository.deleteAccount(accountId,function(error){
-              callback(error)
-            })
+          deleteAccount(accountId,accountType,account,callback){
+            if(accountId ==account.accountId || accountType == constants.accountType.ADMIN){
+              accountRepository.deleteAccount(accountId,function(error){
+                callback(error)
+              })
+            }else{
+              callback(errorCodes.UNAUTHORIZED_USER)
+            }
           },
 
           activateAccount(accountId,accountType,callback){

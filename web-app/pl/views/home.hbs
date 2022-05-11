@@ -1,19 +1,32 @@
 <h3>Home</h3>
-<div class="d-flex">
-    <form action="/" method="GET" class="d-flex" id="place-search-form">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="place-search-bar">
-        <select class="form-select me-2" aria-label=".form-select-lg example" id="place-search-select">
-            <option value="" selected>Open this select menu</option>
-            <option value="1">one</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select>
-        <button class="btn btn-primary" type="submit" id="place-search-btn">
-            <i class="bi bi-search"></i>
-            Search
-        </button>
-    </form>
-</div>
+<form action="/" method="GET" id="place-search-form">
+    <div class="row">
+        <div class="col">
+            <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2">
+                <div class="col">
+                    <input class="form-control md-6" type="search" placeholder="Search" aria-label="Search" id="place-search-bar">
+
+                </div>
+
+                <div class="col col-sm-8">
+                    <select class="form-select md-6" aria-label=".form-select-lg example" id="place-search-select">
+                        <option value="" selected>Open this select menu</option>
+                        <option value="1">one</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+        <div class="col col-sm-4">
+            <button class="btn btn-primary" type="submit" id="place-search-btn">
+                <i class="bi bi-search"></i>
+                Search
+            </button>      
+        </div>
+    </div>
+</form>
 <nav class="navbar fixed-bottom navbar-light bg-light"  id="show-places-list-bar">
   <div class="container-fluid">
     <a class="btn btn-primary hidden" id="show-places-list-btn" href="#">Hide</a>
