@@ -17,8 +17,8 @@ module.exports = function(
     const router = express.Router()
 
     router.get('/', function(request, response){
-      const accountId = request.session.accountId
-      forumManager.getAllPosts(accountId,function(error,posts){
+      const accountType = sessionHandler.getSessionAuthentication(request.session) 
+      forumManager.getAllPosts(accountType,function(error,posts){
 
         if(error){
           const model ={
@@ -78,22 +78,43 @@ console.log(error)
 
     })
 
-    router.get('/:id', function(request, response){
-      const id = request.params.id
-      forumManager.getPost(id,function(error,post){
+    router.get('/tags/:id', function(request, response){
+      const tagIg = request.params.id
+      const accountId = request.session.accountId
+      const accountType = sessionHandler.getSessionAuthentication(request.session) 
+      forumManager.getAllPostsBelongToTag(accountId,accountType,tagIg,function(error,posts){
+
         if(error){
           const model ={
             errorsMessages:[error]
           }
-          response.render('forum-post-view.hbs',getForumLayoutModel(model))
-
+          response.render('accounts-entry.hbs',getForumLayoutModel(model))
         }else{
           const model = {
             errorsMessages:[],
-            accountId: request.session.accountId,
-            post
+            posts
           }
-          response.render('forum-post-view.hbs',getForumLayoutModel(model))
+          response.render('forum-posts.hbs',getForumLayoutModel(model))
+
+        }
+      })
+    })
+
+    router.get('/:id', function(request, response){
+      const accountId = request.session.accountId
+      forumManager.getAllPosts(accountId,function(error,posts){
+
+        if(error){
+          const model ={
+            errorsMessages:[error]
+          }
+          response.render('accounts-entry.hbs',getForumLayoutModel(model))
+        }else{
+          const model = {
+            errorsMessages:[],
+            posts
+          }
+          response.render('forum-posts.hbs',getForumLayoutModel(model))
 
         }
       })
