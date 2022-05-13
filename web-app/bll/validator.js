@@ -2,7 +2,6 @@ module.exports = function ({ errorCodes,constants }) {
 
     return {
         validateAccountInformation(accountSignupModel) {
-console.log("fffffg")
 
             const validationErrors = []
             if (accountSignupModel.firstName.length < constants.validationValues.MIN_NAME_LENGTH) {
@@ -36,9 +35,7 @@ console.log("fffffg")
                 validationErrors.push(errorCodes.EMAIL_SHORT)
             }
             if (!parseInt(accountSignupModel.accountType)) {
-                validationErrors.push(errorCodes.ACCOUNT_TYPE_OUT_OF_RANGE)
-console.log("ct")
-
+                validationErrors.push(errorCodes.TYPE_OUT_OF_RANGE)
             }
             if (accountSignupModel.description.length > constants.validationValues.MAX_PARAGRAPH_LENGTH) {
                 validationErrors.push(errorCodes.DESCRIPTON_LONG)
@@ -79,13 +76,19 @@ console.log("ct")
             }else if(blog.title.length >100){
                 validationErrors.push(errorCodes.LONG_TITLE)
             }
-   /*         for(let i = 1; i < blog.paragraph.length; i++ ){
+            if (!parseInt(blog.type)) {
+                validationErrors.push(errorCodes.TYPE_OUT_OF_RANGE)
             }
-            const validStartDate = validateEventInputDate(blog.startDate)
-            const validateEndDate = validateEventInputDate(blog.endDate)
-            if (!(validStartDate && validateEndDate)) {
-                validationErrors.push(errorCodes.INVALID_DATE)
-            }*/
+            for(let i = 1; i < blog.paragraph.length; i++ ){
+                if (blog.paragraph[i].length > constants.validationValues.MAX_PARAGRAPH_LENGTH){
+                    validationErrors.push(errorCodes.PARAGRAPH_LONG)
+                }
+                if(blog.paragraph[i].length == 0){
+                    if(blog.linkTitle[i] == 0 || blog.link[i].length == 0){
+                        validationErrors.push(errorCodes.PARAGRAPH_EMPTY)
+                    }
+                }
+            }
             return validationErrors
         },
 

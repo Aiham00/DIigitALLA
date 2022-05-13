@@ -25,7 +25,10 @@ module.exports = function(){
     NO_ACCOUNT                    : "NO_ACCOUNT",
     UNAUTHORIZED_USER_POST        : "UNAUTHORIZED_USER_POST",
     MISSED_TITLE                  : "MISSED_TITLE",
-    LONG_TITLE                    : "LONG_TITLE"
+    LONG_TITLE                    : "LONG_TITLE",
+    TYPE_OUT_OF_RANGE             : "TYPE_OUT_OF_RANGE",
+    PARAGRAPH_LONG                : "PARAGRAPH_LONG",
+    PARAGRAPH_EMPTY               : "PARAGRAPH_EMPTY"
 
   }
   return errorCodes

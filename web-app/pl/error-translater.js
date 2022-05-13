@@ -74,11 +74,23 @@ module.exports = function({errorCodes,constants}){
                     case errorCodes.NO_ACCOUNT:
                         errors.push("Inget konto har hitats")
                             break   
-                    case errorCodes.ACCOUNT_TYPE_OUT_OF_RANGE:
-                        errors.push("Välj KontoTyp")
+                    case errorCodes.TYPE_OUT_OF_RANGE:
+                        errors.push("Välj tag")
                             break
                     case errorCodes.UNAUTHORIZED_USER_POST:
                         errors.push("Du behöver att logga in för at förtsätta")
+                            break    
+                    case errorCodes.MISSED_TITLE:
+                        errors.push("Titeln är töm")
+                            break
+                    case errorCodes.LONG_TITLE:
+                        errors.push("Titeln är förlång")
+                            break 
+                    case errorCodes.PARAGRAPH_LONG:
+                        errors.push("Paragraf är förlång")
+                            break
+                    case errorCodes.PARAGRAPH_EMPTY:
+                        errors.push("Paragraf är töm")
                             break    
                     default:
                     errors.push("Oväntat fel, snälla försök igen senare")
