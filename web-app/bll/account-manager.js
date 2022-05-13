@@ -42,33 +42,56 @@ module.exports = function({
           }
         },
 
-        getAllInactiveAccounts(AccountType,callback){
-        accountRepository.getAllInactiveAccounts(function(error,accounts){
+        getAllInactiveAccounts(accountType,callback){
 
-            if ( error){
-              callback("database error")
-            }else{
-              callback(error,accounts)
-            
-            }
-          })
+          if(accountType == constants.accountType.ADMIN){
+            accountRepository.getAllInactiveAccounts(function(error,accounts){
+
+              if ( error){
+                callback(errorCodes.DATABASE_ERROR)
+              }else{
+                callback(error,accounts)
+              
+              }
+            })
+          }else{
+            callback(errorCodes.ADMIN_NEEDED)
+          }
 
         },
 
-        getAccount(id,accountId,isActive,callback){
-          accountRepository.getAccount(id,isActive,function(error,account){
+        getAccount(id,accountId,accountType,callback){
+
+          accountRepository.getAccount(id,function(error,account){
 
             if ( error){
-              callback("database error")
+              callback(errorCodes.DATABASE_ERROR)
+
             }else if(account){
-              if (accountId == id){
-                account["isMin"]="true"
+              
+              if(accountType == constants.accountType.ADMIN){
                 callback(error,account)
+
+              }else if(accountType == constants.accountType.ORGANIZATION ){
+                if ( account.isActive){
+                  if (accountId == id){
+                    account["isMin"]="true"
+                    callback(error,account)
+
+                  }else{
+                    callback(error,account)
+                  }
+
+                }else{
+                  callback(errorCodes.INACTVE_ACCOUNT)
+                }
+
               }else{
-                callback(error,account)
+                callback(errorCodes.UNAUTHORIZED_USER)
               }
+
             }else{
-              callback("no account")
+              callback(errorCodes.NO_ACCOUNT)
             }
           })
 

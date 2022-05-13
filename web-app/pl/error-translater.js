@@ -65,7 +65,15 @@ module.exports = function({errorCodes,constants}){
                     case errorCodes.WRONG_PASSWORD:
                         errors.push("Fel lösenord. Försök igen")
                             break
-                            
+                    case errorCodes.ADMIN_NEEDED:
+                        errors.push("Du är inte behörig att se den här komponenten, vänligen logga in som Admin")
+                            break
+                    case errorCodes.INACTVE_ACCOUNT:
+                        errors.push("Kontot har inte activerats ännu")
+                            break
+                    case errorCodes.NO_ACCOUNT:
+                        errors.push("Inget konto har hitats")
+                            break       
                     default:
                     errors.push("Oväntat fel, snälla försök igen senare")
 

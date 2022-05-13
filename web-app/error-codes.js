@@ -19,7 +19,10 @@ module.exports = function(){
     PASSWORDS_CLASH               : 'PASSWORDS_CLASH',
     EXISTED_EMAIL                 : 'EXISTED_EMAIL',
     UNEXISTED_USER                : 'UNEXISTED_USER',
-    WRONG_PASSWORD                : 'WRONG_PASSWORD'
+    WRONG_PASSWORD                : 'WRONG_PASSWORD',
+    ADMIN_NEEDED                  : "ADMIN_NEEDED",
+    INACTVE_ACCOUNT               : "INACTVE_ACCOUNT",
+    NO_ACCOUNT                    : "NO_ACCOUNT"
 
 
   }

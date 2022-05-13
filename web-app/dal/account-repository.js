@@ -49,13 +49,13 @@ module.exports = function ({
       })
     },
 
-    getAccount(id, isActive, callback) {
+    getAccount(id, callback) {
       const query = `SELECT AccountId,FirstName,LastName,Organization,Phone,TypeName,Email,CreationDateTime,IsActive,Description,Interest
             from Account
             JOIN AccountType on AccountType.TypeId = Account.TypeId
             WHERE Account.AccountId = ?
-            AND IsActive = ? `
-      const values = [id, isActive]
+             `
+      const values = [id]
       db.get(query, values, function (error, account) {
         callback(error, account)
       })

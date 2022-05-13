@@ -234,8 +234,11 @@ module.exports = function (
     accountManager.getAllInactiveAccounts(accountType, function (error,accounts) {
 
       if (error) {
-console.log(error)
-
+        const model ={
+          errorsMessages: errorsTranslator.getErrorsFromTranslater([error])
+        }
+        response.render('account-view.hbs',model)
+        
       } else {
         const model ={
           errorsMessages:[],
@@ -251,8 +254,8 @@ console.log(error)
   router.get('/inactive-accounts/:id', function(request, response){
     const id = request.params.id
     const accountId = request.session.accountId 
-    const isActive = 0
-    accountManager.getAccount(id,accountId,isActive,function(error,account){
+    const accountType = sessionHandler.getSessionAuthentication(request.session) 
+    accountManager.getAccount(id,accountId,accountType,function(error,account){
       if(error){
         const model ={
           errorsMessages:[error]
@@ -274,11 +277,11 @@ console.log(error)
   router.get('/:id', function(request, response){
     const id = request.params.id
     const accountId = request.session.accountId 
-    const isActive = 1
-    accountManager.getAccount(id,accountId,isActive,function(error,account){
+    const accountType = sessionHandler.getSessionAuthentication(request.session) 
+    accountManager.getAccount(id,accountId,accountType,function(error,account){
       if(error){
         const model ={
-          errorsMessages:[error]
+          errorsMessages: errorsTranslator.getErrorsFromTranslater([error])
         }
         response.render('account-view.hbs',model)
 
