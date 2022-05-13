@@ -22,10 +22,10 @@ module.exports = function(
 
         if(error){
           const model ={
-            errorsMessages:[error]
+            errorsMessages: errorsTranslator.getErrorsFromTranslater([error]),
           }
-          response.render('accounts-entry.hbs',getForumLayoutModel(model))
-          
+          response.render('forum-posts.hbs',getForumLayoutModel(model))
+
         }else{
           const model = {
             errorsMessages:[],
@@ -50,12 +50,11 @@ module.exports = function(
       const accountType = sessionHandler.setSessionAuthentication(request.session)
       forumManager.createPost(accountId,accountType,request.body,function(errors){
         if(errors.length !=0){
-console.log(errors)
 
           const errorsMessages = errorsTranslator.getErrorsFromTranslater(errors)
           const model = request.body
           model["errorsMessages"] = errorsMessages
-          response.render('forum-post-create.hbs',getForumLayoutModel({model}))
+          response.render('forum-post-create.hbs',getForumLayoutModel(model))
 
         }else{
           response.redirect("/forum")
@@ -66,12 +65,40 @@ console.log(errors)
     })
 
     router.post('/answer', function(request, response){
-      postId = request.body.postId
-      forumManager.createAnswer(request.body,function(error){
-        if(error){
-console.log(error)
+
+      const postId = request.body.postId
+      const accountType = sessionHandler.getSessionAuthentication(request.session)
+
+      forumManager.createAnswer(accountType,request.body,function(errors){
+        
+        if(errors.length !=0){
+          console.log(errors)
+
+          const accountId = request.session.accountId
+          forumManager.getPost(accountId,postId,function(error,post){
+
+            if(error){
+
+              const model ={
+                errorsMessages: errorsTranslator.getErrorsFromTranslater([error]),
+                accountId,
+                post: request.body
+              }
+              response.render('forum-post-view.hbs',getForumLayoutModel(model))
+            }else{
+
+              const model = {
+                errorsMessages: errorsTranslator.getErrorsFromTranslater(errors),
+                accountId,
+                post
+              }
+              response.render('forum-post-view.hbs',getForumLayoutModel(model))
+    
+            }
+          })
 
         }else{
+
           response.redirect("/forum/"+postId)
         }
 
@@ -102,19 +129,20 @@ console.log(error)
 
     router.get('/:id', function(request, response){
       const accountId = request.session.accountId
-      forumManager.getAllPosts(accountId,function(error,posts){
+      const postId = request.params.id
+      forumManager.getPost(accountId,postId,function(error,post){
 
         if(error){
           const model ={
-            errorsMessages:[error]
+            errorsMessages: errorsTranslator.getErrorsFromTranslater([error])
           }
-          response.render('accounts-entry.hbs',getForumLayoutModel(model))
+          response.render('forum-post-view.hbs',getForumLayoutModel(model))
         }else{
           const model = {
             errorsMessages:[],
-            posts
+            post
           }
-          response.render('forum-posts.hbs',getForumLayoutModel(model))
+          response.render('forum-post-view.hbs',getForumLayoutModel(model))
 
         }
       })

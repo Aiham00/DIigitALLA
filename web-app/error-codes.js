@@ -28,8 +28,11 @@ module.exports = function(){
     LONG_TITLE                    : "LONG_TITLE",
     TYPE_OUT_OF_RANGE             : "TYPE_OUT_OF_RANGE",
     PARAGRAPH_LONG                : "PARAGRAPH_LONG",
-    PARAGRAPH_EMPTY               : "PARAGRAPH_EMPTY"
-
+    PARAGRAPH_EMPTY               : "PARAGRAPH_EMPTY",
+    LONG_BODY                     : "LONG_BODY",
+    MISSED_BODY                   : "MISSED_BODY",
+    LONG_ANSWER                   : "LONG_ANSWER",
+    MISSED_ANSWER                 : "MISSED_ANSWER"
   }
   return errorCodes
 }

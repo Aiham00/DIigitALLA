@@ -56,24 +56,47 @@ module.exports = function ({ errorCodes,constants }) {
 
         },
 
-        validateOrganizerInformation(organizerInformationModel) {
+        getforumPostValidationErrors(post) {
             const validationErrors = []
 
+            if (post.title.length == 0) {
+                validationErrors.push(errorCodes.MISSED_TITLE)
+            }else if(post.title.length > constants.validationValues.MAX_TITLE_LENGTH){
+                validationErrors.push(errorCodes.LONG_TITLE)
+            }
+            if (post.body.length == 0){
+                validationErrors.push(errorCodes.MISSED_BODY)
 
+            }else if (post.body.length > constants.validationValues.MAX_BODY_LENGTH){
+                validationErrors.push(errorCodes.LONG_BODY)
+            }
+            if (!parseInt(post.type)) {
+                validationErrors.push(errorCodes.TYPE_OUT_OF_RANGE)
+            }
 
-            const accountvalidation = validateAccount(organizerInformationModel)
-            const allErrors = validationErrors.concat(accountvalidation)
-            return allErrors
+            return validationErrors
 
         },
 
+        gettAnswerValidationErrors(answer) {
+            const validationErrors = []
+
+            if (answer.answer.length == 0) {
+                validationErrors.push(errorCodes.MISSED_ANSWER)
+            }else if(answer.answer.length > constants.validationValues.MAX_ANSWER_LENGTH){
+                validationErrors.push(errorCodes.LONG_ANSWER)
+            }
+
+            return validationErrors
+
+        },
 
         getBlogValidationErrors(blog) {
             const validationErrors = []
 
             if (blog.title.length == 0) {
                 validationErrors.push(errorCodes.MISSED_TITLE)
-            }else if(blog.title.length >100){
+            }else if(blog.title.length >constants.validationValues.MAX_TITLE_LENGTH){
                 validationErrors.push(errorCodes.LONG_TITLE)
             }
             if (!parseInt(blog.type)) {
@@ -92,51 +115,7 @@ module.exports = function ({ errorCodes,constants }) {
             return validationErrors
         },
 
-        validatereatApplication(application) {
-            const validationerrors = []
-            if (application.note.length > 255) {
-                validationerrors.push(errorCodes.LONG_NOTE_ERROR)
-            }
-            return validationerrors
-        }
-
 
     }
-
-    function validateAccount(informationModel) {
-        const errors = []
-        if (informationModel.mobile.length < 10) {
-            errors.push(errorCodes.MISSED_MOBILE)
-        }
-        if (informationModel.email.length < 10) {
-            errors.push(errorCodes.EMAIL)
-        }
-        if (informationModel.password.length < 8) {
-            errors.push(errorCodes.PASSWORD)
-        } else if (informationModel.passwordRepeat != informationModel.password) {
-            errors.push(errorCodes.PASSWORDS_CLASH)
-        }
-        return errors
-    }
-
-    function validateEventInputDate(date) {
-        let today = new Date();
-        const day = String(today.getDate()).padStart(2, '0');
-        const month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        const year = today.getFullYear();
-
-        let dateSplitted = date.split('-')
-        const yearFromEvent = dateSplitted[0]
-        const monthFromEvent = dateSplitted[1]
-        const dayFromEvent = dateSplitted[2]
-
-        if ((day == dayFromEvent || day < dayFromEvent) &&
-            (month == monthFromEvent || month < monthFromEvent) &&
-            (year == yearFromEvent || year < yearFromEvent)) {
-
-            return true
-        } else {
-            return false
-        }
-    }
+    
 }

@@ -2,7 +2,8 @@ module.exports = function ({
   forumRepository,
   blogRepository,
   constants,
-  errorCodes
+  errorCodes,
+  validator
 
 }) {
 
@@ -86,11 +87,12 @@ module.exports = function ({
       }
     },
 
-    getPost(postId, callback) {
+    getPost(accountId,postId, callback) {
       forumRepository.getPost(postId, function (error, post) {
 
         if (error) {
-          callback("database error")
+          callback(errorCodes.DATABASE_ERROR)
+
         } else if (post) {
           forumRepository.getPostTags(post.Id, function (error, tags) {
             if (error) {
@@ -116,28 +118,53 @@ module.exports = function ({
 
     },
 
-    createAnswer(answer, callback) {
-      forumRepository.createAnswer(answer, function (error) {
-        callback(error)
-      })
-    },
-    createPost(accountId, accountType, post, callback) {
+    createAnswer(accountType,answer, callback) {
 
-      if (accountType == constants.ORGANIZATION && accountId == post.accountId) {
-        forumRepository.createPost(post, function (error) {
+      if(accountType){
+        const errors = validator.gettAnswerValidationErrors(answer)
 
-          if (error) {
-            callback([error])
+        if(errors.length == 0){
 
-          } else {
-            callback([])
-          }
-        })
-      } else {
+          forumRepository.createAnswer(answer, function (error) {
+
+            if ( error){
+              errors.push(errorCodes.DATABASE_ERROR)
+            }
+            callback(errors)
+          })
+
+        }else{
+          callback(errors)
+        }
+
+      }else{
         callback([errorCodes.UNAUTHORIZED_USER])
       }
-
     },
+
+    createPost(accountId, accountType, post, callback) {
+      const errors = validator.getforumPostValidationErrors(post)
+
+      if(errors.length == 0){
+        if ( accountId == post.accountId) {
+          forumRepository.createPost(post, function (error) {
+  
+            if (error) {
+              errors.push(errorCodes.DATABASE_ERROR)
+            }
+              callback(errors)
+          })
+
+        } else {
+          errors.push(errorCodes.UNAUTHORIZED_USER)
+          callback(errors)
+        }
+
+      }else{
+        callback(errors)
+      }
+    },
+
     getAnswerReplies(accountType, answerId, callback) {
       if (accountType == constants.ORGANIZATION) {
         blogRepository.getAnswerReplies(answerId, function (error, replies) {

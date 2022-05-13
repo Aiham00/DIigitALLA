@@ -1,6 +1,14 @@
 <h3>Forums inlägg </h3>
 <div class="row  g-4">
-
+{{#if errorsMessages.length}}
+  <ul>
+    {{#each errorsMessages}}
+      <div id="error-messages">
+        <li>{{this}}</li>  
+      </div>
+    {{/each}}
+  </ul>
+{{/if}}
 {{#if post}}
   <div class="row row-cols-1 row-cols-sm-1 row-cols-lg-2 g-4">
     <div class="col">

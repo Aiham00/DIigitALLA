@@ -91,7 +91,19 @@ module.exports = function({errorCodes,constants}){
                             break
                     case errorCodes.PARAGRAPH_EMPTY:
                         errors.push("Paragraf är töm")
-                            break    
+                            break   
+                    case errorCodes.MISSED_BODY:
+                        errors.push("Beskrivning är töm")
+                            break
+                    case errorCodes.LONG_BODY:
+                        errors.push("Beskrivning är förlång")
+                            break  
+                    case errorCodes.MISSED_ANSWER:
+                        errors.push("Svaret är tömt")
+                            break
+                    case errorCodes.LONG_ANSWER:
+                        errors.push("Svaret är förlångt")
+                            break  
                     default:
                     errors.push("Oväntat fel, snälla försök igen senare")
 

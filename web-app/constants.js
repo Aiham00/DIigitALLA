@@ -13,7 +13,10 @@ module.exports = function(){
             MAX_EMAIL_LENGTH        : 100,
             MAX_PHARAGRAP_LENGTH    : 2000,
             MIN_PASSWORD_LENGTH     : 8,
-            MAX_PASSWORD_LENGTH     : 64
+            MAX_PASSWORD_LENGTH     : 64,
+            MAX_TITLE_LENGTH        : 100,
+            MAX_BODY_LENGTH         :500,
+            MAX_ANSWER_LENGTH       :255
 
         },
     } 
