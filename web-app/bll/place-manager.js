@@ -35,9 +35,17 @@ module.exports = function({
     },
 
     createPlace(accountId,place,callback){
-      placeRepository.createPlace(place,function(error){
-        callback(error)
-      })
+      if(accountId == place.accountId){
+        placeRepository.createPlace(place,function(error){
+          if ( error){
+            callback(errorCodes.DATABASE_ERROR)
+          }else{
+            callback(error)
+
+          }
+        })
+      }
+
     }
   }
 

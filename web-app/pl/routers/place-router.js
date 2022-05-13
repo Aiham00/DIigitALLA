@@ -16,28 +16,6 @@ module.exports = function(
      
     const router = express.Router()
 
-    router.get('/', function(request, response){
-console.log(request.body)
-      placeManager.getAllPlaces(function(error,places){
-
-        if(error){
-          const model ={
-            errorsMessages:[error]
-          }
-          response.render('home.hbs',model)
-        }else{
-          const model = {
-            errorsMessages:[],
-            places
-          }
-console.log(places)
-          response.render('home.hbs',model)
-
-        }
-      })
-
-    })
-
     router.get('/create', function(request, response){
       const model = {
         accountId: request.session.accountId
@@ -51,6 +29,12 @@ console.log(places)
       const accountId = request.session.accountId
       placeManager.createPlace(accountId,request.body,function(error){
         if(error){
+          const model = {
+            errorsMessages:errorsTranslator.getErrorsFromTranslater([error]),
+            place:request.body
+
+          }
+          response.render('place-create.hbs', model)
 
         }else{
           response.redirect("/")

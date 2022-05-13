@@ -72,8 +72,6 @@ module.exports = function(
       forumManager.createAnswer(accountType,request.body,function(errors){
         
         if(errors.length !=0){
-          console.log(errors)
-
           const accountId = request.session.accountId
           forumManager.getPost(accountId,postId,function(error,post){
 
@@ -90,6 +88,7 @@ module.exports = function(
               const model = {
                 errorsMessages: errorsTranslator.getErrorsFromTranslater(errors),
                 accountId,
+                answer: request.body.answer,
                 post
               }
               response.render('forum-post-view.hbs',getForumLayoutModel(model))

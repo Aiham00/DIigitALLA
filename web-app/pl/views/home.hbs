@@ -1,4 +1,13 @@
 <h3>Home</h3>
+{{#if errorsMessages.length}}
+  <ul>
+    {{#each errorsMessages}}
+      <div id="error-messages">
+        <li>{{this}}</li>  
+      </div>
+    {{/each}}
+  </ul>
+{{/if}}
 <form action="/" method="GET" id="place-search-form">
     <div class="row">
         <div class="col">
