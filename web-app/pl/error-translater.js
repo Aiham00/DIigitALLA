@@ -73,7 +73,10 @@ module.exports = function({errorCodes,constants}){
                             break
                     case errorCodes.NO_ACCOUNT:
                         errors.push("Inget konto har hitats")
-                            break       
+                            break   
+                    case errorCodes.ACCOUNT_TYPE_OUT_OF_RANGE:
+                        errors.push("Välj KontoTyp")
+                            break    
                     default:
                     errors.push("Oväntat fel, snälla försök igen senare")
 

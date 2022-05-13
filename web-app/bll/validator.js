@@ -33,6 +33,9 @@ module.exports = function ({ errorCodes,constants }) {
             if (accountSignupModel.email.length < constants.validationValues.MIN_EMAIL_LENGTH ) {
                 validationErrors.push(errorCodes.EMAIL_SHORT)
             }
+            if (!parseInt(accountSignupModel.accountType)) {
+                validationErrors.push(errorCodes.ACCOUNT_TYPE_OUT_OF_RANGE)
+            }
             if (accountSignupModel.description.length > constants.validationValues.MAX_PARAGRAPH_LENGTH) {
                 validationErrors.push(errorCodes.DESCRIPTON_LONG)
             }

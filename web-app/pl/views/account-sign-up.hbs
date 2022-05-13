@@ -15,15 +15,7 @@
 
   <h3>Registration</h3>
 
-  {{#if errorsMessages.length}}
-    <ul>
-      {{#each errorsMessages}}
-        <div id="error-messages">
-          <li>{{this}}</li>  
-        </div>
-      {{/each}}
-    </ul>
-  {{/if}}
+
 
   <div class="col">
     <div class="row">
@@ -34,7 +26,16 @@
             <a href="/" class="btn btn-primary">Tillbaka till startsidan</a>
         </div>
       </div>        
-    </div>   
+    </div>
+    {{#if errorsMessages.length}}
+      <ul>
+        {{#each errorsMessages}}
+          <div id="error-messages">
+            <li>{{this}}</li>  
+          </div>
+        {{/each}}
+      </ul>
+    {{/if}}   
     <div class="row">
       <form action="/auth/signup" method="post" id="signup-form" class="row gy-2 gx-3 align-items-center">
         <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2">

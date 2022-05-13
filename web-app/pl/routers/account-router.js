@@ -209,11 +209,12 @@ module.exports = function (
 
   router.get('/my-account', function(request, response){
     const accountId = request.session.accountId 
-    const isActive = 1
-    accountManager.getAccount(accountId,accountId,isActive,function(error,account){
+    const accountType = sessionHandler.getSessionAuthentication(request.session) 
+
+    accountManager.getAccount(accountId,accountId,accountType,function(error,account){
       if(error){
         const model ={
-          errorsMessages:[error]
+          errorsMessages: errorsTranslator.getErrorsFromTranslater([error])
         }
         response.render('account-view.hbs',model)
 
@@ -237,8 +238,8 @@ module.exports = function (
         const model ={
           errorsMessages: errorsTranslator.getErrorsFromTranslater([error])
         }
-        response.render('account-view.hbs',model)
-        
+        response.render('inactive-accounts.hbs',model)
+
       } else {
         const model ={
           errorsMessages:[],
@@ -258,7 +259,7 @@ module.exports = function (
     accountManager.getAccount(id,accountId,accountType,function(error,account){
       if(error){
         const model ={
-          errorsMessages:[error]
+          errorsMessages: errorsTranslator.getErrorsFromTranslater([error])
         }
         response.render('account-view.hbs',model)
 
