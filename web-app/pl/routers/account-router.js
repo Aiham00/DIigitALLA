@@ -120,25 +120,25 @@ module.exports = function (
   })
 
   router.get('/delete/:id', function (request, response) {
-    const id = request.params.id
+    const accountId = request.params.id
     const model={
-      id,
+       accountId
     }
     response.render('account-delete.hbs',model)
   })
 
   router.get('/activate/:id', function (request, response) {
-    const id = request.params.id
+    const accountId = request.params.id
     const model={
-      id
+      accountId
     }
     response.render('account-activate.hbs',model)
   })
 
   router.get('/decactivate/:id', function (request, response) {
-    const id = request.params.id
+    const accountId = request.params.id
     const model={
-      id
+      accountId
     }
     response.render('account-decactivate.hbs',model)
   })
@@ -152,7 +152,7 @@ module.exports = function (
       if (error) {
         const model={
           errorsMessages:errorsTranslator.getErrorsFromTranslater([error]),
-          account:request.body
+          accountId:request.body.accountId
         }
         response.render('account-delete.hbs',model)
       } else {
@@ -165,9 +165,16 @@ module.exports = function (
   router.post('/activate', function (request, response) {
     const accountId = request.body.accountId
     const accountType = sessionHandler.getSessionAuthentication(request.session) 
+
     accountManager.activateAccount(accountId,accountType, function (error) {
+
       if (error) {
-console.log(error)
+        const model={
+          errorsMessages:errorsTranslator.getErrorsFromTranslater([error]),
+          accountId
+
+        }
+        response.render('account-activate.hbs',model)
 
       } else {
         response.redirect('/auth/'+accountId)
@@ -179,10 +186,17 @@ console.log(error)
   router.post('/decactivate', function (request, response) {
     const accountId = request.body.accountId
     const accountType = sessionHandler.getSessionAuthentication(request.session) 
-    accountManager.decactivateAccount(accountId,accountType, function (error) {
-      if (error) {
-console.log(error)
 
+    accountManager.decactivateAccount(accountId,accountType, function (error) {
+
+      if (error) {
+        const model={
+          errorsMessages:errorsTranslator.getErrorsFromTranslater([error]),
+          accountId
+
+        }
+        response.render('account-decactivate.hbs',model)
+        
       } else {
         response.redirect('/auth/inactive-accounts/'+accountId)
 

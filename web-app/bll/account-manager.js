@@ -138,25 +138,41 @@ module.exports = function({
         },
 
           deleteAccount(accountId,accountType,account,callback){
+
             if(accountId ==account.accountId || accountType == constants.accountType.ADMIN){
               accountRepository.deleteAccount(accountId,function(error){
                 callback(error)
               })
             }else{
+
               callback(errorCodes.UNAUTHORIZED_USER)
             }
           },
 
           activateAccount(accountId,accountType,callback){
-            accountRepository.activateAccount(accountId,function(error){
-              callback(error)
-            })
+
+            if(accountType == constants.accountType.ADMIN){
+              accountRepository.activateAccount(accountId,function(error){
+                callback(error)
+              })
+
+            }else{
+              callback(errorCodes.UNAUTHORIZED_USER)
+            }
+
           },
 
           decactivateAccount(accountId,accountType,callback){
-            accountRepository.decactivateAccount(accountId,function(error){
-              callback(error)
-            })
+
+            if(accountType == constants.accountType.ADMIN){
+              accountRepository.decactivateAccount(accountId,function(error){
+                callback(error)
+              })
+
+            }else{
+              callback(errorCodes.UNAUTHORIZED_USER)
+            }
+
           }
       }
 
