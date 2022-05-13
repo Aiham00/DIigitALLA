@@ -109,6 +109,7 @@
     max-width: 540px;
 }
 #v-list-forum{
+    max-width: 240px;
     margin-left: 1rem;
     margin-top: 6rem;
 }

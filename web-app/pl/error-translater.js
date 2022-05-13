@@ -66,7 +66,7 @@ module.exports = function({errorCodes,constants}){
                         errors.push("Fel lösenord. Försök igen")
                             break
                     case errorCodes.ADMIN_NEEDED:
-                        errors.push("Du är inte behörig att se den här komponenten, vänligen logga in som Admin")
+                        errors.push("Du behöver att logga in som Admin för at förtsätta")
                             break
                     case errorCodes.INACTVE_ACCOUNT:
                         errors.push("Kontot har inte activerats ännu")
@@ -76,6 +76,9 @@ module.exports = function({errorCodes,constants}){
                             break   
                     case errorCodes.ACCOUNT_TYPE_OUT_OF_RANGE:
                         errors.push("Välj KontoTyp")
+                            break
+                    case errorCodes.UNAUTHORIZED_USER_POST:
+                        errors.push("Du behöver att logga in för at förtsätta")
                             break    
                     default:
                     errors.push("Oväntat fel, snälla försök igen senare")

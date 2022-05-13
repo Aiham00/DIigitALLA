@@ -1,4 +1,13 @@
 <h3>Skriv Blogg </h3>
+{{#if errorsMessages.length}}
+  <ul>
+    {{#each errorsMessages}}
+      <div id="error-messages">
+        <li>{{this}}</li>  
+      </div>
+    {{/each}}
+  </ul>
+{{/if}}
 <form action="/blogs/create" method="post" id="loginForm" class="row gy-2 gx-3 align-items-center">
   <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-4">
     <div class="col col-md-9">
@@ -22,26 +31,56 @@
               <option value="5">Projektresultat</option>
               <option value="6">Övrigt</option>
             </select>
-            <div class="form-floating">
-              <input type="hidden" name="paragraph"></input>
-              <textarea class="form-control" placeholder="Leave a comment here" id="signup-description" name="paragraph"></textarea>
-              <label for="signup-description">Paragraf</label>
-            </div> 
-            <div class="form-floating mb-3">
-              <input type="hidden" name="linkTitle">
-              <input type="text" class="form-control form-control-lg" id="link-title" placeholder="e" name="linkTitle">
-              <label for="link-title" class=" col-form-label-lg">
-                Länk titel
-              </label>
-            </div>
-            <div class="form-floating mb-3">
-              <input type="hidden" name="link">
-              <input type="text" class="form-control form-control-lg" id="link" placeholder="e" name="link">
-              <label for="link-title" class=" col-form-label-lg">
-                Länk 
-              </label>
-            </div>
-          </div>
+              {{#if paragraphs.length}}
+                <input type="hidden" name="paragraph"></input>
+                <input type="hidden" name="linkTitle">
+                <input type="hidden" name="link">
+
+                {{#each paragraphs}}
+                  <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="signup-description" name="paragraph">
+                      {{this.paragraph}}
+                    </textarea>
+                    <label for="signup-description">Paragraf</label>
+                  </div> 
+                  <div class="form-floating mb-3">
+                    
+                    <input type="text" class="form-control form-control-lg" id="link-title" placeholder="e" name="linkTitle" value="{{this.linkTitle}}">
+                    <label for="link-title" class=" col-form-label-lg">
+                      Länk titel
+                    </label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control form-control-lg" id="link" placeholder="e" name="link" value="{{this.link}}">
+                    <label for="link-title" class=" col-form-label-lg">
+                      Länk 
+                    </label>
+                  </div>
+                </div>
+                {{/each}}
+              {{else}}
+                <div class="form-floating">
+                  <input type="hidden" name="paragraph"></input>
+                  <textarea class="form-control" placeholder="Leave a comment here" id="signup-description" name="paragraph"></textarea>
+                  <label for="signup-description">Paragraf</label>
+                </div> 
+                <div class="form-floating mb-3">
+                  <input type="hidden" name="linkTitle">
+                  <input type="text" class="form-control form-control-lg" id="link-title" placeholder="e" name="linkTitle">
+                  <label for="link-title" class=" col-form-label-lg">
+                    Länk titel
+                  </label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="hidden" name="link">
+                  <input type="text" class="form-control form-control-lg" id="link" placeholder="e" name="link">
+                  <label for="link-title" class=" col-form-label-lg">
+                    Länk 
+                  </label>
+                </div>
+              </div>
+              {{/if}}
+
 
         </div>
         <div class="card-footer bg-transparent border-success">
@@ -58,9 +97,14 @@
     </div>
   </div>
 </form>
-
 <script>
-
+/*tinymce.init({
+    selector: 'textarea#editor',
+    skin: 'bootstrap',
+    plugins: 'lists, link, image, media',
+    toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+    menubar: false,
+    });*/
     document.addEventListener("DOMContentLoaded", function () {
       const paragraphscontainer = document.querySelector("#paragraphs-container")
       const addParagraphLink = document.querySelector("#add-paragraph-link")
@@ -70,7 +114,7 @@
           const col = document.createElement('div')
           col.classList.add("col")
           col.innerHTML = `<div class="form-floating">
-              <textarea class="form-control" placeholder="Leave a comment here" id="signup-Textarea" name="paragraph"></textarea>
+              <textarea class="form-control" placeholder="Leave a comment here" id="signup-description" name="paragraph"></textarea>
               <label for="signup-Textarea">Paragraf</label>
             </div> 
             <div class="form-floating mb-3">

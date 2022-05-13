@@ -22,8 +22,10 @@ module.exports = function(){
     WRONG_PASSWORD                : 'WRONG_PASSWORD',
     ADMIN_NEEDED                  : "ADMIN_NEEDED",
     INACTVE_ACCOUNT               : "INACTVE_ACCOUNT",
-    NO_ACCOUNT                    : "NO_ACCOUNT"
-
+    NO_ACCOUNT                    : "NO_ACCOUNT",
+    UNAUTHORIZED_USER_POST        : "UNAUTHORIZED_USER_POST",
+    MISSED_TITLE                  : "MISSED_TITLE",
+    LONG_TITLE                    : "LONG_TITLE"
 
   }
   return errorCodes

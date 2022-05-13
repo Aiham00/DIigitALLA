@@ -1,5 +1,13 @@
 <h3> Blogs </h3>
-
+{{#if errorsMessages.length}}
+  <ul>
+    {{#each errorsMessages}}
+      <div id="error-messages">
+        <li>{{this}}</li>  
+      </div>
+    {{/each}}
+  </ul>
+{{/if}}
   <nav class="navbar sticky-top navbar-light bg-light">
     <div class="container-fluid">
       <div class="container">

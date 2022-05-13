@@ -25,6 +25,7 @@ module.exports = function(
             errorsMessages:[error]
           }
           response.render('accounts-entry.hbs',getForumLayoutModel(model))
+          
         }else{
           const model = {
             errorsMessages:[],

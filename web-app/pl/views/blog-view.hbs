@@ -1,4 +1,13 @@
 
+{{#if errorsMessages.length}}
+  <ul>
+    {{#each errorsMessages}}
+      <div id="error-messages">
+        <li>{{this}}</li>  
+      </div>
+    {{/each}}
+  </ul>
+{{/if}} 
 
 {{#if blog}}
 <h3>{{blog.BlogTitle}} </h3>
@@ -18,7 +27,7 @@
 
 
               {{#each blog.paragraphs}}
-               <p>
+               <p  style="white-space: pre-line">
                 {{this.Body}} <a href="{{this.Link}}" > {{this.LinkTitle}}</a>
               </p>
               {{/each}}
@@ -37,7 +46,7 @@
                     <div class="form-floating">
                       <input type="hidden" value="{{blog.BlogId}}" name="blogId">
                       <input type="hidden" value="{{accountId}}" name="accountId">
-                      <textarea class="form-control" placeholder="Leave a comment here" id="answer-Textarea" name="comment"></textarea>
+                      <textarea class="form-control" placeholder="Leave a comment here" id="answer-Textarea" name="comment">{{comment}}</textarea>
                       <label for="answer-Textarea">Skriv Kommentar!</label>
                     </div> 
                     <div class="card-footer bg-transparent border-success">

@@ -2,6 +2,8 @@ module.exports = function ({ errorCodes,constants }) {
 
     return {
         validateAccountInformation(accountSignupModel) {
+console.log("fffffg")
+
             const validationErrors = []
             if (accountSignupModel.firstName.length < constants.validationValues.MIN_NAME_LENGTH) {
                 validationErrors.push(errorCodes.FIRST_NAME_SHORT)
@@ -35,6 +37,8 @@ module.exports = function ({ errorCodes,constants }) {
             }
             if (!parseInt(accountSignupModel.accountType)) {
                 validationErrors.push(errorCodes.ACCOUNT_TYPE_OUT_OF_RANGE)
+console.log("ct")
+
             }
             if (accountSignupModel.description.length > constants.validationValues.MAX_PARAGRAPH_LENGTH) {
                 validationErrors.push(errorCodes.DESCRIPTON_LONG)
@@ -67,18 +71,21 @@ module.exports = function ({ errorCodes,constants }) {
         },
 
 
-        validateCreateEvent(event) {
+        getBlogValidationErrors(blog) {
             const validationErrors = []
 
-            if (event.title.length == 0) {
+            if (blog.title.length == 0) {
                 validationErrors.push(errorCodes.MISSED_TITLE)
+            }else if(blog.title.length >100){
+                validationErrors.push(errorCodes.LONG_TITLE)
             }
-
-            const validStartDate = validateEventInputDate(event.startDate)
-            const validateEndDate = validateEventInputDate(event.endDate)
+   /*         for(let i = 1; i < blog.paragraph.length; i++ ){
+            }
+            const validStartDate = validateEventInputDate(blog.startDate)
+            const validateEndDate = validateEventInputDate(blog.endDate)
             if (!(validStartDate && validateEndDate)) {
                 validationErrors.push(errorCodes.INVALID_DATE)
-            }
+            }*/
             return validationErrors
         },
 
