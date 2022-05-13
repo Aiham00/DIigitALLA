@@ -32,6 +32,7 @@ module.exports = function (
           errorsMessages: [],
           accounts
         }
+
         response.render('accounts.hbs',model)
 
       }

@@ -9,7 +9,6 @@ module.exports = function({
       return {
 
         getAllAccounts(accountId, accountType, callback){
-
           if(accountType){
             accountRepository.getAllAccounts(function(error,accounts){
 

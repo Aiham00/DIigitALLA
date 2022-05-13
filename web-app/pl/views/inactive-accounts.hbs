@@ -10,36 +10,34 @@
   </ul>
 {{/if}}
 
-{{#if session.isOrganization}}
-  <div class="row row-cols-1 row-cols-sm-1 row-cols-lg-2 g-4">
-    {{#if accounts.length}}
-      {{#each accounts}}
-        <div class="col">
-          <div id="account-contact-inactiv" class="card mb-3 justify-content-md-center" >
-            <div class="row g-0">
-              <div class="col-md-4">
-                <a href="/auth/inactive-accounts/{{this.AccountId}}"><img id = "bli-medlem-image" src="/images/account.png" class="img-fluid" alt="Bli medlem image"></a>
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <ul>
-                    <li><a href="/auth/inactive-accounts/{{this.AccountId}}">{{this.Organization}}</a></li>
-                    <li>{{this.FirstName}} {{this.LastName}}</li>
-                    <li><a href="mailto:{{this.Email}}">{{this.Email}}</a></li>
-                    <li>{{this.Phone}}</li>
-                    <li>#{{this.TypeName}}</li>
-                  </ul>
-                </div>
+<div class="row row-cols-1 row-cols-sm-1 row-cols-lg-2 g-4">
+  {{#if accounts.length}}
+    {{#each accounts}}
+      <div class="col">
+        <div id="account-contact-inactiv" class="card mb-3 justify-content-md-center" >
+          <div class="row g-0">
+            <div class="col-md-4">
+              <a href="/auth/inactive-accounts/{{this.AccountId}}"><img id = "bli-medlem-image" src="/images/account.png" class="img-fluid" alt="Bli medlem image"></a>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <ul>
+                  <li><a href="/auth/inactive-accounts/{{this.AccountId}}">{{this.Organization}}</a></li>
+                  <li>{{this.FirstName}} {{this.LastName}}</li>
+                  <li><a href="mailto:{{this.Email}}">{{this.Email}}</a></li>
+                  <li>{{this.Phone}}</li>
+                  <li>#{{this.TypeName}}</li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
-        {{/each}}
+      </div>
+      {{/each}}
     {{else}}
       <p>Inga konto</p>
     {{/if}}
   </div>
-{{/if}}
 </div>
 
 <script>
