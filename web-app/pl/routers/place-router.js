@@ -28,10 +28,10 @@ module.exports = function(
     router.post('/create', function(request, response){
       const accountId = request.session.accountId
       const error = true
-      placeManager.createPlace(accountId,request.body,function(error){
-        if(error){
+      placeManager.createPlace(accountId,request.body,function(errors){
+        if(errors.length != 0){
           const model = {
-            errorsMessages:errorsTranslator.getErrorsFromTranslater([error]),
+            errorsMessages:errorsTranslator.getErrorsFromTranslater(errors),
             place:request.body,
             accountId:request.body.accountId
 

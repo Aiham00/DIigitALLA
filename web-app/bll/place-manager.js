@@ -1,7 +1,8 @@
 module.exports = function({
   placeRepository,
   constants,
-  errorCodes
+  errorCodes,
+  validator
   
 }){
 
@@ -10,8 +11,9 @@ module.exports = function({
     getAllPlaces(callback){
       placeRepository.getAllPlaces(function(error,places){
 
-        if ( error){
-          callback("database error")
+        if (error){
+          callback(errorCodes.DATABASE_ERROR)
+
         }else {
           callback(error,places)
 
@@ -33,11 +35,10 @@ module.exports = function({
   
           }
         })
+
       }else{
         callback(errorCodes.UNAUTHORIZED_USER)
       }
-
-
     },
 
     getPlacesSearchResult(query,callback){
@@ -46,29 +47,34 @@ module.exports = function({
 
         if ( error){
           callback(errorCodes.DATABASE_ERROR)
+
         }else {
           callback(error,places)
 
         }
       })
-
     },
 
     createPlace(accountId,place,callback){
+
       if(accountId == place.accountId){
-        placeRepository.createPlace(place,function(error){
-          if ( error){
-            callback(errorCodes.DATABASE_ERROR)
-          }else{
-            callback(error)
+        const errors = validator.getPlaceValidationErrors(place)
+        if(errors.length == 0){
+          placeRepository.createPlace(place,function(error){
 
-          }
-        })
+            if ( error){
+              errors.push(errorCodes.DATABASE_ERROR)  
+            }
+              callback(errors)
+
+          })
+        }else{
+          callback(errors)
+        }
+
+      }else{
+        callback([errorCodes.UNAUTHORIZED_USER])
       }
-
     }
   }
-
-
-
 }

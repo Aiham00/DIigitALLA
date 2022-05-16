@@ -29,10 +29,10 @@ module.exports = function({errorCodes,constants}){
                     case errorCodes.ORG_NAME_LONG:
                         errors.push("Organisationnamn måste vara max "+constants.validationValues.MAX_NAME_LENGTH+" tecken")
                             break
-                    case errorCodes.MOBILE_SHORT:
+                    case errorCodes.PHONE_SHORT:
                         errors.push("TelefonNummer måste vara minst "+constants.validationValues.MIN_PHONE_LENGTH+" tecken")
                             break
-                    case errorCodes.MOBILE_LONG:
+                    case errorCodes.PHONE_LONG:
                     errors.push("TelefonNummer måste vara max "+constants.validationValues.MAX_PHONE_LENGTH+" tecken")
                         break
                     case errorCodes.EMAIL_LONG:
@@ -48,7 +48,7 @@ module.exports = function({errorCodes,constants}){
                         errors.push("Verksamhets beskrivning måste vara max "+constants.validationValues.MAX_INTEREST_LENGTH+" tecken")
                             break
                     case errorCodes.PASSWORD_LONG:
-                    errors.push("Lösenord måste vara max "+constants.validationValues.MAX_PASSWORD_LENGTH+" tecken")
+                        errors.push("Lösenord måste vara max "+constants.validationValues.MAX_PASSWORD_LENGTH+" tecken")
                         break
                     case errorCodes.PASSWORD_SHORT:
                         errors.push("Lösenord måste vara minst "+constants.validationValues.MIN_PASSWORD_LENGTH+" tecken")
@@ -84,10 +84,10 @@ module.exports = function({errorCodes,constants}){
                         errors.push("Titeln är töm")
                             break
                     case errorCodes.LONG_TITLE:
-                        errors.push("Titeln är förlång")
+                        errors.push("Titeln måste vara max "+constants.validationValues.MAX_TITLE_LENGTH+" tecken")
                             break 
                     case errorCodes.PARAGRAPH_LONG:
-                        errors.push("Paragraf är förlång")
+                        errors.push("Paragraf måste vara max "+constants.validationValues.MAX_PHARAGRAP_LENGTH+" tecken")
                             break
                     case errorCodes.PARAGRAPH_EMPTY:
                         errors.push("Paragraf är töm")
@@ -96,13 +96,55 @@ module.exports = function({errorCodes,constants}){
                         errors.push("Beskrivning är töm")
                             break
                     case errorCodes.LONG_BODY:
-                        errors.push("Beskrivning är förlång")
+                        errors.push("Beskrivning måste vara max "+constants.validationValues.MAX_BODY_LENGTH+" tecken")
                             break  
                     case errorCodes.MISSED_ANSWER:
                         errors.push("Svaret är tömt")
                             break
                     case errorCodes.LONG_ANSWER:
-                        errors.push("Svaret är förlångt")
+                        errors.push("Svaret måste vara max "+constants.validationValues.MAX_ANSWER_LENGTH+" tecken")
+                            break 
+                    case errorCodes.LAT_SHORT:
+                        errors.push("Latitud måste vara minst "+constants.validationValues.MIN_LATLNG_LENGTH+" tecken")
+                            break  
+                    case errorCodes.LAT_LONG:
+                        errors.push("Latitud måste vara max "+constants.validationValues.MAX_LATLNG_LENGTH+" tecken ")
+                            break
+                    case errorCodes.LNG_SHORT:
+                        errors.push("Longitud måste vara minst "+constants.validationValues.MIN_LATLNG_LENGTH+" tecken")
+                            break    
+                    case errorCodes.LNG_LONG:
+                        errors.push("Longitud måste vara max "+constants.validationValues.MAX_LATLNG_LENGTH+" tecken")
+                            break
+                    case errorCodes.PLACE_TYPE_SHORT:
+                        errors.push("Typ av hjälp måste vara minst "+constants.validationValues.MIN_PLACE_TYPE_LENGTH+" tecken")
+                            break
+                    case errorCodes.PLACE_TYPE_LONG:
+                        errors.push("Typ av hjälp måste vara max "+constants.validationValues.MAX_PLACE_TYPE_LENGTH+" tecken")
+                            break
+                    case errorCodes.LINK_LONG:
+                        errors.push("Länk måste vara max "+constants.validationValues.MAX_LINK_LENGTH+" tecken")
+                            break   
+                    case errorCodes.NOTE_LONG:
+                        errors.push("Anteckning måste vara max "+constants.validationValues.MAX_NOTE_LENGTH+" tecken")
+                            break
+                    case errorCodes.ADDRESS_SHORT:
+                        errors.push("Adress måste vara minst "+constants.validationValues.MIN_ADDRESS_LENGTH+" tecken")
+                            break  
+                    case errorCodes.ADDRESS_LONG:
+                        errors.push("Adress måste vara max "+constants.validationValues.MAX_ADDRESS_LENGTH+" tecken")
+                            break
+                    case errorCodes.KOMMUN_LONG:
+                        errors.push("Kommun måste vara max "+constants.validationValues.MAX_NAME_LENGTH+" tecken")
+                            break
+                    case errorCodes.KOMMUN_SHORT:
+                        errors.push("Kommun måste vara minst "+constants.validationValues.MIN_NAME_LENGTH+" tecken")
+                            break
+                    case errorCodes.NAME_LONG:
+                        errors.push("Namn måste vara max "+constants.validationValues.MAX_NAME_LENGTH+" tecken")
+                            break
+                    case errorCodes.NAME_SHORT:
+                        errors.push("Namn måste vara minst "+constants.validationValues.MIN_NAME_LENGTH+" tecken")
                             break  
                     default:
                     errors.push("Oväntat fel, snälla försök igen senare")

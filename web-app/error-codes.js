@@ -7,8 +7,8 @@ module.exports = function(){
     ORG_NAME_SHORT                : 'ORG_NAME_SHORT',
     ORG_NAME_LONG                 : 'ORG_NAME_LONG',
     DATABASE_ERROR                : 'DATABASE_ERROR',
-    MOBILE_SHORT                  : 'MOBILE_SHORT',
-    MOBILE_LONG                   : 'MOBILE_LONG',
+    PHONE_SHORT                   : 'PHONE_SHORT',
+    PHONE_LONG                    : 'PHONE_LONG',
     EMAIL_LONG                    : 'EMAIL_LONG',
     EMAIL_SHORT                   : 'EMAIL_SHORT',
     UNAUTHORIZED_USER             : 'UNAUTHORIZED_USER',
@@ -32,7 +32,22 @@ module.exports = function(){
     LONG_BODY                     : "LONG_BODY",
     MISSED_BODY                   : "MISSED_BODY",
     LONG_ANSWER                   : "LONG_ANSWER",
-    MISSED_ANSWER                 : "MISSED_ANSWER"
+    MISSED_ANSWER                 : "MISSED_ANSWER",
+    LAT_SHORT                     : "LAT_SHORT",
+    LAT_LONG                      : "LAT_LONG",
+    LNG_SHORT                     : "LNG_SHORT",
+    LNG_LONG                      : "LNG_LONG",
+    PLACE_TYPE_SHORT              : "PLACE_TYPE_SHORT",
+    PLACE_TYPE_LONG               : "PLACE_TYPE_LONG",
+    LINK_LONG                     : "LINK_LONG",
+    NOTE_LONG                     : "NOTE_LONG",
+    ADDRESS_LONG                  : "ADDRESS_LONG",
+    ADDRESS_SHORT                 : "ADDRESS_SHORT",
+    KOMMUN_LONG                   : "KOMMUN_LONG",
+    KOMMUN_SHORT                  : "KOMMUN_SHORT",
+    NAME_SHORT                    : "NAME_SHORT",
+    NAME_LONG                     : "NAME_LONG"
+
   }
   return errorCodes
 }
