@@ -19,49 +19,49 @@
         <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2">
           <div class="col">
             <div class="form-floating mb-3">
-              <input type="text" class="form-control form-control-lg" id="place-create-name" placeholder="e" name="name">
+              <input type="text" class="form-control form-control-lg" id="place-create-name" placeholder="e" name="name" value="{{place.name}}">
               <label for="place-create-name" class=" col-form-label-lg">
                 StälleNamn
               </label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control form-control-lg" id="place-create-lat" placeholder="e" name="lat">
+              <input type="text" class="form-control form-control-lg" id="place-create-lat" placeholder="e" name="lat"value="{{place.lat}}">
               <label for="place-create-lat" class=" col-form-label-lg">
                 Latitud
               </label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control form-control-lg" id="place-create-lng" placeholder="e" name="lng">
+              <input type="text" class="form-control form-control-lg" id="place-create-lng" placeholder="e" name="lng" value="{{place.lng}}">
               <label for="place-create-lng" class=" col-form-label-lg">
                 Longitud
               </label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control form-control-lg" id="place-create-Type" placeholder="e" name="type">
+              <input type="text" class="form-control form-control-lg" id="place-create-Type" placeholder="e" name="type"value="{{place.type}}">
               <label for="place-create-Type" class=" col-form-label-lg">
                 Typ av hjälp
               </label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control form-control-lg" id="place-create-link" placeholder="e" name="link">
+              <input type="text" class="form-control form-control-lg" id="place-create-link" placeholder="e" name="link" value="{{place.link}}">
               <label for="place-create-link" class=" col-form-label-lg">
                 Länk
               </label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control form-control-lg" id="place-create-address" placeholder="e" name="address">
+              <input type="text" class="form-control form-control-lg" id="place-create-address" placeholder="e" name="address"value="{{place.address}}">
               <label for="place-create-address" class=" col-form-label-lg">
                 Adress
               </label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control form-control-lg" id="place-create-kommun" placeholder="e" name="kommun">
+              <input type="text" class="form-control form-control-lg" id="place-create-kommun" placeholder="e" name="kommun" value="{{place.kommun}}">
               <label for="place-create-kommun" class=" col-form-label-lg">
                 Kommun
               </label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control form-control-lg" id="place-create-phone" placeholder="e" name="phone">
+              <input type="text" class="form-control form-control-lg" id="place-create-phone" placeholder="e" name="phone" value="{{place.phone}}">
               <label for="place-create-phone" class=" col-form-label-lg">
                 Telefonnummer
               </label>
@@ -73,25 +73,23 @@
           </div>
           <div class="col">
             <h5>Öppettider</h5>
-            <div class="row">
               <div class="form-floating mb-3">
-                <input type="text" class="form-control form-control-lg" id="place-create-note" placeholder="e" name="note">
+                <input type="text" class="form-control form-control-lg" id="place-create-note" placeholder="e" name="note" value="{{place.note}}">
                 <label for="place-create-note" class=" col-form-label-lg">
                   Anteckning
                 </label>
               </div>
-            </div>
 
             <div class="row">
               <div class="col">
                 <div class="form-floating mb-3">
-                  <input id="mon-from" type="time" class="form-control form-control-lg" name="monFrom">
+                  <input id="mon-from" type="time" class="form-control form-control-lg" name="monFrom" value="{{place.monFrom}}">
                   <label for="mon-from" class=" col-form-label-lg">Måndag från</label>
                 </div> 
               </div>
               <div class="col">
                 <div class="form-floating mb-3">
-                  <input id="mon-to" type="time" class="form-control form-control-lg" name="monTo">
+                  <input id="mon-to" type="time" class="form-control form-control-lg" name="monTo" value="{{place.monTo}}">
                   <label for="mon-to" class=" col-form-label-lg">Måndag till</label>
                 </div> 
               </div>
@@ -100,13 +98,13 @@
             <div class="row">
               <div class="col">
                 <div class="form-floating mb-3">
-                  <input id="tue-from" type="time" class="form-control form-control-lg" name="tueFrom">
+                  <input id="tue-from" type="time" class="form-control form-control-lg" name="tueFrom" value="{{place.tueFrom}}">
                   <label for="tue-from" class=" col-form-label-lg">Tisdag från</label>
                 </div> 
               </div>
               <div class="col">
                 <div class="form-floating mb-3">
-                  <input id="tue-to" type="time" class="form-control form-control-lg" name="tueTo">
+                  <input id="tue-to" type="time" class="form-control form-control-lg" name="tueTo" value="{{place.tueTo}}">
                   <label for="tue-to" class=" col-form-label-lg">Tisdag till</label>
                 </div> 
               </div>
@@ -115,13 +113,13 @@
             <div class="row">
               <div class="col">
                 <div class="form-floating mb-3">
-                  <input id="wed-from" type="time" class="form-control form-control-lg" name="wedFrom">
+                  <input id="wed-from" type="time" class="form-control form-control-lg" name="wedFrom" value="{{place.wedFrom}}">
                   <label for="wed-from" class=" col-form-label-lg">Onsdag från</label>
                 </div> 
               </div>
               <div class="col">
                 <div class="form-floating mb-3">
-                  <input id="wed-to" type="time" class="form-control form-control-lg" name="wedTo">
+                  <input id="wed-to" type="time" class="form-control form-control-lg" name="wedTo" value="{{place.wedTo}}">
                   <label for="wed-to" class=" col-form-label-lg">Onsdag till</label>
                 </div> 
               </div>
@@ -130,13 +128,13 @@
             <div class="row">
               <div class="col">
                 <div class="form-floating mb-3">
-                  <input id="thu-from" type="time" class="form-control form-control-lg" name="thuFrom">
+                  <input id="thu-from" type="time" class="form-control form-control-lg" name="thuFrom" value="{{place.thuFrom}}">
                   <label for="thu-from" class=" col-form-label-lg">Torsdag från</label>
                 </div> 
               </div>
               <div class="col">
                 <div class="form-floating mb-3">
-                  <input id="thu-to" type="time" class="form-control form-control-lg" name="thuTo">
+                  <input id="thu-to" type="time" class="form-control form-control-lg" name="thuTo" value="{{place.thuTo}}">
                   <label for="thu-to" class=" col-form-label-lg">Torsdag till</label>
                 </div> 
               </div>
@@ -145,13 +143,13 @@
             <div class="row">
               <div class="col">
                 <div class="form-floating mb-3">
-                  <input id="fri-from" type="time" class="form-control form-control-lg" name="friFrom">
+                  <input id="fri-from" type="time" class="form-control form-control-lg" name="friFrom" value="{{place.friFrom}}">
                   <label for="fri-from" class=" col-form-label-lg">Fredag från</label>
                 </div> 
               </div>
               <div class="col">
                 <div class="form-floating mb-3">
-                  <input id="fri-to" type="time" class="form-control form-control-lg" name="friTo">
+                  <input id="fri-to" type="time" class="form-control form-control-lg" name="friTo" value="{{place.friTo}}">
                   <label for="fri-to" class=" col-form-label-lg">Fredag till</label>
                 </div> 
               </div>
@@ -160,13 +158,13 @@
             <div class="row">
               <div class="col">
                 <div class="form-floating mb-3">
-                  <input id="sat-from" type="time" class="form-control form-control-lg" name="satFrom">
+                  <input id="sat-from" type="time" class="form-control form-control-lg" name="satFrom" value="{{place.satFrom}}">
                   <label for="sat-from" class=" col-form-label-lg">Lördag från</label>
                 </div> 
               </div>
               <div class="col">
                 <div class="form-floating mb-3">
-                  <input id="sat-to" type="time" class="form-control form-control-lg" name="satTo">
+                  <input id="sat-to" type="time" class="form-control form-control-lg" name="satTo" value="{{place.satTo}}">
                   <label for="sat-to" class=" col-form-label-lg">Lördag till</label>
                 </div> 
               </div>
@@ -175,13 +173,13 @@
             <div class="row">
               <div class="col">
                 <div class="form-floating mb-3">
-                  <input id="sun-from" type="time" class="form-control form-control-lg" name="sunFrom">
+                  <input id="sun-from" type="time" class="form-control form-control-lg" name="sunFrom" value="{{place.sunFrom}}">
                   <label for="sun-from" class=" col-form-label-lg">Söndag från</label>
                 </div> 
               </div>
               <div class="col">
                 <div class="form-floating mb-3">
-                  <input id="sun-to" type="time" class="form-control form-control-lg" name="sunTo">
+                  <input id="sun-to" type="time" class="form-control form-control-lg" name="sunTo" value="{{place.sunTo}}">
                   <label for="sun-to" class=" col-form-label-lg">Söndag till</label>
                 </div> 
               </div>

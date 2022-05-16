@@ -19,6 +19,20 @@ module.exports = function({
         })
     },
 
+    getMyPlaces(accountId,callback){
+      const query =  `SELECT PlaceId,HelpType,PlaceName,Lat,Lng,Link,Address,Kommun,Place.Phone,Organization,Email,Note,
+          MonFrom,MonTo,TueFrom,TueTo,WedFrom,WedTo,ThuFrom,ThuTo,FriFrom,FriTo,SatFrom,SatTo,SunFrom,SunTo
+          from Place
+          JOIN Account on Place.AccountId = Account.AccountId
+          JOIN OpenTime on OpenTime.OpenTimeId = Place.OpenTimeId
+          WHERE Account.AccountId = ?`
+
+      const values = [accountId]
+      db.all(query, values, function(error,places){
+          callback(error,places)
+      })
+    },
+
     createPlace(place,callback){
       const query =  `INSERT INTO OpenTime 
       ( MonFrom,MonTo,TueFrom,TueTo,WedFrom,WedTo,ThuFrom,ThuTo,FriFrom,FriTo,SatFrom,SatTo,SunFrom,SunTo,Note)

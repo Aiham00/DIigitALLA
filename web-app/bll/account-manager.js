@@ -69,11 +69,9 @@ module.exports = function({
 
             }else if(account){
               
-              if(accountType == constants.accountType.ADMIN){
-                callback(error,account)
+              if(accountType == constants.accountType.ADMIN ||accountType == constants.accountType.ORGANIZATION){
 
-              }else if(accountType == constants.accountType.ORGANIZATION ){
-                if ( account.isActive){
+                if ( account.IsActive){
                   if (accountId == id){
                     account["isMin"]="true"
                     callback(error,account)

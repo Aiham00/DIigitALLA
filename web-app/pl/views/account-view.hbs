@@ -17,6 +17,8 @@
     {{#if account.isMin}}
     <a href="/auth/update/{{account.AccountId}}" id="apdate-account" class="btn btn-primary"><h5> Uppdatera</h5></a> 
     <a href="/place/create" class="btn btn-primary"><h5> Lägg till ett ställe</h5></a> 
+    <a href="/place/my-places" class="btn btn-primary"><h5> Mina ställe</h5></a> 
+
     {{else}}
       {{#if session.isAdmin}}
         <a href="/auth/delete/{{account.AccountId}}" class="btn btn-primary"><h5> Ta bort</h5></a> 

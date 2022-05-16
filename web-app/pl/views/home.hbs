@@ -35,14 +35,21 @@
         </div>
     </div>
 </form>
+{{#if session.accountId}}
+    <div class="col g-4">
+        <a class="btn btn-primary" href="/place/create" id="place-create">
+            Lägg till ett ställe
+        </a>      
+    </div>
+{{/if}}
 <nav class="navbar fixed-bottom navbar-light bg-light"  id="show-places-list-bar">
-  <div class="container-fluid">
-    <a class="btn btn-primary hidden" id="show-places-list-btn" href="#">Hide</a>
-  </div>
+    <div class="container-fluid">
+        <a class="btn btn-primary hidden" id="show-places-list-btn" href="#">Hide</a>
+    </div>
 </nav>
 
 
-  <div id="map" class="container-fluid"></div>
+<div id="map" class="container-fluid"></div>
 
 <div id="list-places" class="list-group">
 
@@ -123,28 +130,30 @@
 
             // Set icon image
             marker.setIcon(`https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png`);
-            let mon = "<li>Måndag: stängt </li>" 
-            if(props.MonFrom.length != 0){mon =  "<li>Måndag: "+props.MonFrom + " - "+ props.MonTo +"</li>"}
-            let tue = "<li>Tisdag: closed </li>" 
-            if(props.TueFrom.length != 0){tue =  "<li>Tisdag: "+props.TueFrom + " - "+ props.TueTo +"</li>"}
-            let wed = "<li>Onsdag: closed </li>" 
-            if(props.WedFrom.length != 0){wed =  "<li>Onsdag: "+props.WedFrom + " - "+ props.WedTo +"</li>"}
-            let thu = "<li>Torsdag: closed </li>" 
-            if(props.ThuFrom.length != 0){thu =  "<li>Torsdag: "+props.ThuFrom + " - "+ props.ThuTo +"</li>"}
-            let fri = "<li>Fredag: closed </li>" 
-            if(props.FriFrom.length != 0){fri =  "<li>Fredag: "+props.FriFrom + " - "+ props.FriTo +"</li>"}
-            let sat = "<li>Lördag: closed </li>" 
-            if(props.SatFrom.length != 0){sat =  "<li>Lördag: "+props.SatFrom + " - "+ props.SatTo +"</li>"}
-            let sun = "<li>Söndag: closed </li>" 
-            if(props.SunFrom.length != 0){sun =  "<li>Söndag: "+props.SunFrom + " - "+ props.SunTo +"</li>"}
-
+            let mon = "<li>Måndag: <span id='open-time-closed'>Stängt </span></li>" 
+            if(props.MonFrom.length != 0){mon =  "<li>Måndag: <span id='open-time-open'>"+props.MonFrom + " - "+ props.MonTo +" </span></li>"}
+            let tue = "<li>Tisdag: <span id='open-time-closed'>Stängt </span></li>" 
+            if(props.TueFrom.length != 0){tue =  "<li>Tisdag: <span id='open-time-open'>"+props.TueFrom + " - "+ props.TueTo +"</span></li>"}
+            let wed = "<li>Onsdag: <span id='open-time-closed'>Stängt </span></li>" 
+            if(props.WedFrom.length != 0){wed =  "<li>Onsdag: <span id='open-time-open'>"+props.WedFrom + " - "+ props.WedTo +"</span></li>"}
+            let thu = "<li>Torsdag: <span id='open-time-closed'>Stängt </span></li>" 
+            if(props.ThuFrom.length != 0){thu =  "<li>Torsdag: <span id='open-time-open'>"+props.ThuFrom + " - "+ props.ThuTo +"</span></li>"}
+            let fri = "<li>Fredag: <span id='open-time-closed'>Stängt </span></li>" 
+            if(props.FriFrom.length != 0){fri =  "<li>Fredag: <span id='open-time-open'>"+props.FriFrom + " - "+ props.FriTo +"</span></li>"}
+            let sat = "<li>Lördag: <span id='open-time-closed'>Stängt </span></li>" 
+            if(props.SatFrom.length != 0){sat =  "<li>Lördag: <span id='open-time-open'>"+props.SatFrom + " - "+ props.SatTo +"</span></li>"}
+            let sun = "<li>Söndag: <span id='open-time-closed'>Stängt </span></li>" 
+            if(props.SunFrom.length != 0){sun =  "<li>Söndag: <span id='open-time-open'>"+props.SunFrom + " - "+ props.SunTo +"</span></li>"}
+            let note = ""
+            if(props.Note){note = props.Note}
             function openInfoWindow(){
                 if(infoWindow){
                     infoWindow.close()
                 }
 
-                infoWindow = new google.maps.InfoWindow({
-                content: "<h6>"+props.PlaceName+"</h6> <p> Typ av hjälp</p> <ul> Öppettidder" + mon +
+                infoWindow = new google.maps.InfoWindow({ content: 
+                " <h6> "+props.PlaceName+" </h6> <p> Typ av hjälp: " + props.HelpType +
+                "</p> <p id='open-time-note'> " + note + "</p> <ul> Öppettidder" + mon +
                     tue + wed + thu + fri + sat + sun + "</ul> <p>Telefonnummer: " + props.Phone + "</p><p> Adress: " +
                         props.Address + "</p> <p>" + props.Kommun + '</p> <p><a href ="' + props.Link + '">Gå till maps</a></p>'
             });
@@ -161,7 +170,8 @@
             anchor.classList.add("list-group-item" )
             anchor.classList.add("list-group-item-action")
             anchor.setAttribute('href', "#")
-            anchor.innerHTML = "gghhhhh"
+            anchor.innerHTML = "<div class='row'><div class='col'> " +props.PlaceName+" </div><div class='col'> "
+                +props.HelpType+" </div></div>"
 
             anchor.addEventListener('click', function (event) {
                 openInfoWindow()

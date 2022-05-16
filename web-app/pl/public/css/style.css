@@ -113,3 +113,15 @@
     margin-left: 1rem;
     margin-top: 6rem;
 }
+#place-create{
+    margin-top: 1rem;
+}
+#open-time-open{
+    color: green;
+}
+#open-time-closed{
+    color: red;
+}
+#open-time-note{
+    color: blue;
+}

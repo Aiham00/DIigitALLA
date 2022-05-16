@@ -1,0 +1,48 @@
+<h3>Mina ställe </h3>
+
+<div class="row  g-4">
+{{#if errorsMessages.length}}
+  <ul>
+    {{#each errorsMessages}}
+      <div id="error-messages">
+        <li>{{this}}</li>  
+      </div>
+    {{/each}}
+  </ul>
+{{/if}}
+
+<div class="row row-cols-1 row-cols-sm-1 row-cols-lg-3 g-4">
+  {{#if places.length}}
+    {{#each places}}
+      <div class="col">
+        <div id="account-contact" class="card mb-3 justify-content-md-center" >
+          <div class="row g-0">
+            <div class="card-body">
+              <h6>{{this.PlaceName}}</h6>
+                <p> Typ av hjälp: {{this.HelpType}}</p>
+                <p id="open-time-note">{{this.Note}}</p>
+                <ul> Öppettidder 
+                  <li>Måndag: {{#if this.MonFrom}} <span id="open-time-open">{{this.MonFrom}} - {{this.MonTo}} {{else}} <span id="open-time-closed">Stängt {{/if}}</span></li>
+                  <li>Tisdag: {{#if this.TueFrom}} <span id="open-time-open">{{this.TueFrom}} - {{this.TueTo}} {{else}} <span id="open-time-closed">Stängt {{/if}}</span> </li>
+                  <li>Onsdag: {{#if this.WedFrom}} <span id="open-time-open">{{this.WedFrom}} - {{this.WedTo}} {{else}} <span id="open-time-closed">Stängt {{/if}}</span> </li>
+                  <li>Torsdag:{{#if this.ThuFrom}} <span id="open-time-open">{{this.ThuFrom}} - {{this.ThuTo}} {{else}} <span id="open-time-closed">Stängt {{/if}}</span></li>
+                  <li>Fredag: {{#if this.FriFrom}} <span id="open-time-open">{{this.FriFrom}} - {{this.FriTo}} {{else}} <span id="open-time-closed">Stängt {{/if}}</span></li>
+                  <li>Lördag: {{#if this.SatFrom}} <span id="open-time-open">{{this.SatFrom}} - {{this.SatTo}} {{else}} <span id="open-time-closed">Stängt {{/if}}</span></li>
+                  <li>Söndag: {{#if this.SunFrom}} <span id="open-time-open">{{this.SunFrom}} - {{this.SunTo}} {{else}} <span id="open-time-closed">Stängt {{/if}}</span></li>
+                </ul>
+                <p>Telefonnummer: {{this.Phone}} </p>
+                <p>Adress: {{this.Address}} </p>
+                <p>{{this.Kommun}}</p> 
+                <p><a href ="{{this.Link}}">Gå till maps</a></p>
+                <a href="/place/delete/{{this.PlaceId}}" class="btn btn-primary"><h5> Ta bort ställe</h5></a> 
+                <a href="/place/update/{{this.PlaceId}}" class="btn btn-primary"><h5> Uppdatera ställe</h5></a> 
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  {{else}}
+    <p>Inga konto</p>
+  {{/if}}
+  </div>
+</div>

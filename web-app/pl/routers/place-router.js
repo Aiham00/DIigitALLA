@@ -8,9 +8,9 @@ return model
 }
 module.exports = function(
     {
-        sessionHandler,
-        forumManager,
-        placeManager
+
+        placeManager,
+        errorsTranslator
 
     }){
      
@@ -27,11 +27,13 @@ module.exports = function(
 
     router.post('/create', function(request, response){
       const accountId = request.session.accountId
+      const error = true
       placeManager.createPlace(accountId,request.body,function(error){
         if(error){
           const model = {
             errorsMessages:errorsTranslator.getErrorsFromTranslater([error]),
-            place:request.body
+            place:request.body,
+            accountId:request.body.accountId
 
           }
           response.render('place-create.hbs', model)
@@ -40,6 +42,28 @@ module.exports = function(
           response.redirect("/")
         }
 
+      })
+    })
+
+    router.get('/my-places', function (request, response) {
+      const accountId = request.session.accountId
+  
+      placeManager.getMyPlaces(accountId, function (error,places) {
+  
+        if (error) {
+          const model = {
+            errorsMessages: errorsTranslator.getErrorsFromTranslater([error])
+          }
+          response.render('my-places.hbs',model)
+  
+        } else {
+          const model ={
+            errorsMessages: [],
+            places
+          }
+          response.render('my-places.hbs',model)
+  
+        }
       })
     })
 
